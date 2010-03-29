@@ -1,0 +1,7 @@
+Flex Pilot
+
+A library for doing easy testing automation of Flash and Flex
+applications. Includes a locator/lookup mechanism, eventing,
+and an AS3 test-runner.
+
+
