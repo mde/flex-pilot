@@ -14,16 +14,18 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill.events {
-  import flash.events.TextEvent;
+package org.flex_pilot.events {
+  import mx.events.ListEvent;
+  import mx.controls.listClasses.IListItemRenderer;
   
-  public class WMTextEvent extends TextEvent {
-    public function WMTextEvent(type:String,
+  public class FPListEvent extends ListEvent {
+    public function FPListEvent(type:String,
         bubbles:Boolean = false, cancelable:Boolean = false,
-        text:String = "") {
-      super(type, bubbles, cancelable, text);
+        columnIndex:int = -1, rowIndex:int = -1,
+        reason:String = null, itemRenderer:IListItemRenderer = null) {
+      super(type, bubbles, cancelable, columnIndex, rowIndex,
+          reason, itemRenderer);
     }
   }
 }
-
 

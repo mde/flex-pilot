@@ -14,18 +14,20 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill.events {
-  import flash.events.FocusEvent;
-  import flash.display.InteractiveObject;
+package org.flex_pilot.events {
   
-  public class WMFocusEvent extends FocusEvent {
-    public function WMFocusEvent(type:String,
+  import flash.events.KeyboardEvent;
+  
+  public class FPKeyboardEvent extends KeyboardEvent {
+    public function FPKeyboardEvent(type:String,
         bubbles:Boolean = true, cancelable:Boolean = false,
-        relatedObject:InteractiveObject = null,
-        shiftKey:Boolean = false, keyCode:uint = 0) {
-      super(type, bubbles, cancelable, relatedObject,
-          shiftKey, keyCode);
+        charCode:uint = 0, keyCode:uint = 0,
+        keyLocation:uint = 0, ctrlKey:Boolean = false,
+        altKey:Boolean = false, shiftKey:Boolean = false) {
+      super(type, bubbles, cancelable, charCode, keyCode,
+          keyLocation, ctrlKey, altKey, shiftKey);
     }
   }
 }
+
 

@@ -14,16 +14,16 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill.events {
+package org.flex_pilot.events {
   
   import flash.events.MouseEvent;
   import flash.display.InteractiveObject;
   
-  public class WMMouseEvent extends MouseEvent {
+  public class FPMouseEvent extends MouseEvent {
     private var fakeStageX:Number;
     private var fakeStageY:Number;
 
-    public function WMMouseEvent(type:String,
+    public function FPMouseEvent(type:String,
         bubbles:Boolean = false, cancelable:Boolean = false,
         localX:Number = NaN, localY:Number = NaN, 
         relatedObject:InteractiveObject = null,

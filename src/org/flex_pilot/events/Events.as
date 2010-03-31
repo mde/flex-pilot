@@ -14,8 +14,8 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill.events {
-  import org.windmill.events.*;
+package org.flex_pilot.events {
+  import org.flex_pilot.events.*;
   import flash.events.*
   import mx.events.*
 
@@ -78,7 +78,7 @@ package org.windmill.events {
         ['delta', 0]
       ];
       var p:Object = Events.normalizeParams(defaults, args);
-      var ev:WMMouseEvent = new WMMouseEvent(type, p.bubbles,
+      var ev:FPMouseEvent = new FPMouseEvent(type, p.bubbles,
           p.cancelable, p.localX, p.localY,
           p.relatedObject, p.ctrlKey, p.altKey, p.shiftKey,
           p.buttonDown, p.delta);
@@ -106,7 +106,7 @@ package org.windmill.events {
         ['text', '']
       ];
       var p:Object = Events.normalizeParams(defaults, args);
-      var ev:WMTextEvent = new WMTextEvent(type, p.bubbles,
+      var ev:FPTextEvent = new FPTextEvent(type, p.bubbles,
           p.cancelable, p.text);
       obj.dispatchEvent(ev);
     }
@@ -122,7 +122,7 @@ package org.windmill.events {
         ['keyCode', 0]
       ];
       var p:Object = Events.normalizeParams(defaults, args);
-      var ev:WMFocusEvent = new WMFocusEvent(type, p.bubbles,
+      var ev:FPFocusEvent = new FPFocusEvent(type, p.bubbles,
           p.cancelable, p.relatedObject, p.shiftKey, p.keyCode);
       obj.dispatchEvent(ev);
     }
@@ -141,7 +141,7 @@ package org.windmill.events {
         ['shiftKey', false]
       ];
       var p:Object = Events.normalizeParams(defaults, args);
-      var ev:WMKeyboardEvent = new WMKeyboardEvent(type, p.bubbles,
+      var ev:FPKeyboardEvent = new FPKeyboardEvent(type, p.bubbles,
           p.cancelable, p.charCode, p.keyCode, p.keyLocation,
           p.ctrlKey, p.altKey, p.shiftKey);
       obj.dispatchEvent(ev);
@@ -158,7 +158,7 @@ package org.windmill.events {
         ['itemRenderer', null]
       ];
       var p:Object = Events.normalizeParams(defaults, args);
-      var ev:WMListEvent = new WMListEvent(type, p.bubbles,
+      var ev:FPListEvent = new FPListEvent(type, p.bubbles,
           p.cancelable, p.columnIndex, p.rowIndex, p.reason,
           p.itemRenderer);
       obj.dispatchEvent(ev);

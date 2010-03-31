@@ -14,25 +14,25 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill {
+package org.flex_pilot {
   import flash.display.Sprite;
   import flash.display.Stage;
-  import org.windmill.Windmill;
-  import org.windmill.WMAssert;
-  import org.windmill.WMWait;
-  import org.windmill.astest.ASTest;
+  import org.flex_pilot.FlexPilot;
+  import org.flex_pilot.FPAssert;
+  import org.flex_pilot.FPWait;
+  import org.flex_pilot.astest.ASTest;
   public class TestCase extends Sprite {
-    public var windmill:* = Windmill;
-    public var asserts:* = WMAssert; 
-    public var waits:* = WMWait; 
+    public var flex_pilot:* = FlexPilot;
+    public var asserts:* = FPAssert; 
+    public var waits:* = FPWait; 
     public var controller:* = ASTest.wrappedControllerMethods; 
     // Reference to either an Application (Flex)
     // or the Stage (Flash)
-    public var context:* = Windmill.getContext();
+    public var context:* = FlexPilot.getContext();
     // Get a reference to the Stage in the base class
     // before the tests actually load so tests can all
     // reference it
-    private var fakeStage:Stage = Windmill.getStage();
+    private var fakeStage:Stage = FlexPilot.getStage();
     override public function get stage():Stage {
       return fakeStage;
     }

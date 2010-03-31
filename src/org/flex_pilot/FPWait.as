@@ -14,14 +14,14 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill {
-  import org.windmill.Windmill;
-  import org.windmill.WMLogger;
-  import org.windmill.WMLocator;
-  import org.windmill.astest.ASTest;
+package org.flex_pilot {
+  import org.flex_pilot.FlexPilot;
+  import org.flex_pilot.FPLogger;
+  import org.flex_pilot.FPLocator;
+  import org.flex_pilot.astest.ASTest;
   import flash.utils.*;
 
-  public class WMWait {
+  public class FPWait {
     // Simple wait function -- puts ASTest into waiting
     // mode, calls a function on setTimeout to take it
     // back out of waiting mode
@@ -36,11 +36,11 @@ package org.windmill {
     // from a test function (params.test)
     // All other waits should simply define a test function
     // and hand off to this
-    // Default timeout (Windmill.config.timeout) is 20 seconds --
+    // Default timeout (FlexPilot.config.timeout) is 20 seconds --
     // can be overridden with params.timeout
     public static function forCondition(params:Object,
         callback:Function = null):void {
-      var timeout:int = Windmill.config.timeout;
+      var timeout:int = FlexPilot.config.timeout;
       if (params.timeout) {
         if (!isNaN(parseInt(params.timeout, 10))) {
           timeout = params.timeout;
@@ -112,11 +112,11 @@ package org.windmill {
     public static function forDisplayObject(params:Object,
         callback:Function = null):void {
       var func:Function = function ():Boolean {
-        var obj:* = WMLocator.lookupDisplayObject(params);
+        var obj:* = FPLocator.lookupDisplayObject(params);
         return !!obj
       }
       params.test = func;
-      return WMWait.forCondition(params, callback);
+      return FPWait.forCondition(params, callback);
     }
   }
 }

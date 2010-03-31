@@ -14,12 +14,12 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill {
-  import org.windmill.WMLocator;
-  import org.windmill.WMLogger;
+package org.flex_pilot {
+  import org.flex_pilot.FPLocator;
+  import org.flex_pilot.FPLogger;
   import flash.utils.getQualifiedClassName;
 
-  public dynamic class WMAssert {
+  public dynamic class FPAssert {
 
     public static var assertTemplates:Object = {
       assertTrue: {
@@ -99,8 +99,8 @@ package org.windmill {
     };
 
     public static function init():void {
-      for (var p:String in WMAssert.assertTemplates) {
-        WMAssert[p] = WMAssert.createAssert(p);
+      for (var p:String in FPAssert.assertTemplates) {
+        FPAssert[p] = FPAssert.createAssert(p);
       }
     }
 
@@ -137,7 +137,7 @@ package org.windmill {
         // The actual assert method, e.g, 'equals'
         var meth:String = args.shift();
         // The assert object
-        var asrt:Object = WMAssert.assertTemplates[meth]; 
+        var asrt:Object = FPAssert.assertTemplates[meth]; 
         // The assert expresion
         var expr:Function = asrt.expr;
         // Validate the args passed
@@ -165,7 +165,7 @@ package org.windmill {
     }
 
     public static function assertDisplayObject(params:Object):Boolean {
-      var obj:* = WMLocator.lookupDisplayObject(params);
+      var obj:* = FPLocator.lookupDisplayObject(params);
       if (!!obj) {
         return true;
       }
@@ -176,26 +176,26 @@ package org.windmill {
     }
 
     public static function assertProperty(params:Object):Boolean {
-      return WMAssert.doBaseAssert(params);
+      return FPAssert.doBaseAssert(params);
     }
 
     public static function assertText(params:Object):Boolean {
-      return WMAssert.assertTextGeneric(params, true);
+      return FPAssert.assertTextGeneric(params, true);
     }
 
     public static function assertTextIn(params:Object):Boolean {
-      return WMAssert.assertTextGeneric(params, false);
+      return FPAssert.assertTextGeneric(params, false);
     }
     
     private static function assertTextGeneric(params:Object,
         exact:Boolean):Boolean {
-      return WMAssert.doBaseAssert(params, {
+      return FPAssert.doBaseAssert(params, {
         attrName: ['htmlText', 'label'],
         preMatchProcess: function (str:String):String {
           return str.replace(/^\s*|\s*$/g, '');
         },
-        matchType: exact ? WMAssert.matchTypes.EXACT :
-            WMAssert.matchTypes.CONTAINS
+        matchType: exact ? FPAssert.matchTypes.EXACT :
+            FPAssert.matchTypes.CONTAINS
       });
     }
     
@@ -204,9 +204,9 @@ package org.windmill {
     private static function doBaseAssert(params:Object,
         opts:Object = null):Boolean {
       // Ref to the object to do the lookup on
-      var obj:* = WMLocator.lookupDisplayObject(params);
+      var obj:* = FPLocator.lookupDisplayObject(params);
       // Exact vs. 'in' (contains) match
-      var matchType:String = WMAssert.matchTypes.EXACT;
+      var matchType:String = FPAssert.matchTypes.EXACT;
       var attrName:String;
       var expectedVal:String;
       // Explicitly passing in the attr name, or a list of
@@ -278,11 +278,11 @@ package org.windmill {
       // Check for a match
       var ret:Boolean = false;
       var errMsg:String;
-      if (matchType == WMAssert.matchTypes.EXACT) {
+      if (matchType == FPAssert.matchTypes.EXACT) {
         ret = attrVal == expectedVal;
         errMsg = 'Expected "' + expectedVal + '", got "' + attrVal + '"';
       }
-      else if (matchType == WMAssert.matchTypes.CONTAINS) {
+      else if (matchType == FPAssert.matchTypes.CONTAINS) {
         ret = attrVal.indexOf(expectedVal) > -1;
         errMsg = '"' + attrVal + '" did not contain "' + expectedVal + '"';
       }

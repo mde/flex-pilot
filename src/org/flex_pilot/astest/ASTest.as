@@ -14,12 +14,12 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill.astest {
-  import org.windmill.Windmill;
-  import org.windmill.WMLocator;
-  import org.windmill.WMController;
-  import org.windmill.WMWait;
-  import org.windmill.WMLogger;
+package org.flex_pilot.astest {
+  import org.flex_pilot.FlexPilot;
+  import org.flex_pilot.FPLocator;
+  import org.flex_pilot.FPController;
+  import org.flex_pilot.FPWait;
+  import org.flex_pilot.FPLogger;
   import flash.utils.*;
   import flash.external.ExternalInterface;
 
@@ -52,18 +52,18 @@ package org.windmill.astest {
     public static var wrappedControllerMethods:Object = {};
 
     public static function init():void {
-      var methodNames:Array = Windmill.packages.controller.methodNames;
+      var methodNames:Array = FlexPilot.packages.controller.methodNames;
       // Returns a controller action wrapped in a wait for the
       // desired DisplayObject -- action is passed as a callback
-      // to WMWait.forDisplayObject
+      // to FPWait.forDisplayObject
       var wrapAutoWait:Function = function (key:String):Function {
         return function (params:Object):void {
-          WMWait.forDisplayObject(params, function ():void {
-            WMController[key](params);
+          FPWait.forDisplayObject(params, function ():void {
+            FPController[key](params);
           });
         }
       }
-      // For each controller-action method in WMController,
+      // For each controller-action method in FPController,
       // create an auto-wait-wrapped version to call from the
       // AS tests. 'controller' in the TestCase base class
       // points to wrappedControllerMethods
@@ -164,10 +164,10 @@ package org.windmill.astest {
         res = ExternalInterface.call('wm_asTestResult', data);
         if (!res) {
           if (data.error) {
-            WMLogger.log('FAILURE: ' + data.error.message);
+            FPLogger.log('FAILURE: ' + data.error.message);
           }
           else {
-            WMLogger.log('SUCCESS');
+            FPLogger.log('SUCCESS');
           }
         }
         ASTest.previousTest = null;
@@ -194,7 +194,7 @@ package org.windmill.astest {
         };
         res = ExternalInterface.call('wm_asTestStart', data);
         if (!res) {
-          WMLogger.log('Running ' + test.className + '.' + test.methodName + ' ...');
+          FPLogger.log('Running ' + test.className + '.' + test.methodName + ' ...');
         }
 
         // Run the test

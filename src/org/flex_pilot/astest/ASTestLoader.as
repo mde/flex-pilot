@@ -14,8 +14,8 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill.astest {
-  import org.windmill.WMLogger;
+package org.flex_pilot.astest {
+  import org.flex_pilot.FPLogger;
   import flash.display.Loader;
   import flash.display.LoaderInfo;
   import flash.net.URLRequest;
@@ -52,7 +52,7 @@ package org.windmill.astest {
         // Catch any error that occurs during async load
         loader.contentLoaderInfo.addEventListener(
             IOErrorEvent.IO_ERROR, function (e:IOErrorEvent):void {
-          WMLogger.log('Could not load ' + url);
+          FPLogger.log('Could not load ' + url);
         });
         // Handle successful load
         loader.contentLoaderInfo.addEventListener(

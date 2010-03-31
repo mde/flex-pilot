@@ -14,31 +14,31 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill {
-  import org.windmill.events.*;
-  import org.windmill.WMLocator;
+package org.flex_pilot {
+  import org.flex_pilot.events.*;
+  import org.flex_pilot.FPLocator;
   import flash.events.*
   import mx.events.*
   import flash.utils.*;
   import flash.geom.Point;
 
-  public class WMController {
-    public function WMController():void {}
+  public class FPController {
+    public function FPController():void {}
     
 		public static function mouseOver(params:Object):void {
-      var obj:* = WMLocator.lookupDisplayObject(params);
+      var obj:* = FPLocator.lookupDisplayObject(params);
       Events.triggerMouseEvent(obj, MouseEvent.MOUSE_OVER);
       Events.triggerMouseEvent(obj, MouseEvent.ROLL_OVER);
     }
 
     public static function mouseOut(params:Object):void {
-      var obj:* = WMLocator.lookupDisplayObject(params);
+      var obj:* = FPLocator.lookupDisplayObject(params);
       Events.triggerMouseEvent(obj, MouseEvent.MOUSE_OUT);
       Events.triggerMouseEvent(obj, MouseEvent.ROLL_OUT);
     }
 
     public static function click(params:Object):void {
-      var obj:* = WMLocator.lookupDisplayObject(params);
+      var obj:* = FPLocator.lookupDisplayObject(params);
       // Give it focus
       Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
       // Down, (TextEvent.LINK,) up, click
@@ -47,7 +47,7 @@ package org.windmill {
       // If this is a link, do the TextEvent hokey-pokey
       // All events fire on the containing DisplayObject
       if ('link' in params) {
-        var link:String = WMLocator.locateLinkHref(params.link,
+        var link:String = FPLocator.locateLinkHref(params.link,
           obj.htmlText);
         Events.triggerTextEvent(obj, TextEvent.LINK, {
             text: link });
@@ -58,10 +58,10 @@ package org.windmill {
 
     // Click alias functions
     public static function check(params:Object):void {
-      return WMController.click(params);
+      return FPController.click(params);
     }
     public static function radio(params:Object):void {
-      return WMController.click(params);
+      return FPController.click(params);
     }
 
     public static function dragDropElemToElem(params:Object):void {
@@ -73,7 +73,7 @@ package org.windmill {
           break;
         }
       }
-      var dest:* = WMLocator.lookupDisplayObject(destParams);
+      var dest:* = FPLocator.lookupDisplayObject(destParams);
       var destCoords:Point = new Point(0, 0);
       destCoords = dest.localToGlobal(destCoords);
       params.coords = '(' + destCoords.x + ',' + destCoords.y + ')';
@@ -81,9 +81,9 @@ package org.windmill {
     }
 
     public static function dragDropToCoords(params:Object):void {
-      var obj:* = WMLocator.lookupDisplayObject(params);
+      var obj:* = FPLocator.lookupDisplayObject(params);
       var startCoordsLocal:Point = new Point(0, 0);
-      var endCoordsAbs:Point = WMController.parseCoords(params.coords);
+      var endCoordsAbs:Point = FPController.parseCoords(params.coords);
       // Convert local X/Y to global
       var startCoordsAbs:Point = obj.localToGlobal(startCoordsLocal);
       // Move mouse over to the dragged obj
@@ -169,7 +169,7 @@ package org.windmill {
     }
 
     public static function doubleClick(params:Object):void {
-      var obj:* = WMLocator.lookupDisplayObject(params);
+      var obj:* = FPLocator.lookupDisplayObject(params);
       // Give it focus
       Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
       // First click
@@ -179,7 +179,7 @@ package org.windmill {
       // If this is a link, do the TextEvent hokey-pokey
       // All events fire on the containing DisplayObject
       if ('link' in params) {
-        var link:String = WMLocator.locateLinkHref(params.link,
+        var link:String = FPLocator.locateLinkHref(params.link,
           obj.htmlText);
         Events.triggerTextEvent(obj, TextEvent.LINK, {
             text: link });
@@ -201,7 +201,7 @@ package org.windmill {
 
     public static function type(params:Object):void {
       // Look up the item to write to
-      var obj:* = WMLocator.lookupDisplayObject(params);
+      var obj:* = FPLocator.lookupDisplayObject(params);
       // Text to type out
       var str:String = params.text;
       // Char
@@ -233,7 +233,7 @@ package org.windmill {
 
     public static function select(params:Object):void {
       // Look up the item to write to
-      var obj:* = WMLocator.lookupDisplayObject(params);
+      var obj:* = FPLocator.lookupDisplayObject(params);
       var sel:* = obj.selectedItem;
       var item:*;
       // Give the item focus
@@ -279,7 +279,7 @@ package org.windmill {
     }
     public static function getTextValue(params:Object):String {
       // Look up the item where we want to get the property
-        var obj:* = WMLocator.lookupDisplayObject(params);
+        var obj:* = FPLocator.lookupDisplayObject(params);
         var attrs:Object=['htmlText', 'label'];
         var res:String = 'undefined';
         var attr:String;
@@ -294,7 +294,7 @@ package org.windmill {
       
     public static function getPropertyValue(params:Object, opts:Object = null):String {
       // Look up the item where we want to get the property
-        var obj:* = WMLocator.lookupDisplayObject(params);
+        var obj:* = FPLocator.lookupDisplayObject(params);
         var attrName:String;
         var attrVal:String = 'undefined';
         if (opts){
@@ -314,7 +314,7 @@ package org.windmill {
       
     public static function getObjectCoords(params:Object):String {
         // Look up the item which coords we want to get
-        var obj:* = WMLocator.lookupDisplayObject(params);
+        var obj:* = FPLocator.lookupDisplayObject(params);
         var destCoords:Point = new Point(0, 0);
         destCoords = obj.localToGlobal(destCoords);
         var coords:String = '(' + String(destCoords.x) + ',' + String(destCoords.y) + ')';

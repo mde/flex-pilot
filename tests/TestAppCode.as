@@ -30,7 +30,7 @@ package {
   import flash.display.Sprite;
   import flash.geom.Point;
   import flash.external.ExternalInterface;
-  import org.windmill.WMBootstrap;
+  import org.flex_pilot.FPBootstrap;
 
   public class TestAppCode extends MovieClip {
 
@@ -53,7 +53,7 @@ package {
       var panel:Panel = new Panel();
       context.addChild(panel);
       panel.id = 'mainPanel';
-      panel.title = "Windmill Flash Tests";
+      panel.title = "FlexPilot Flash Tests";
 
       // TextArea
       var txtArea:TextArea = new TextArea();
@@ -117,7 +117,7 @@ package {
 
       context.doubleClickEnabled = true;
 
-      WMBootstrap.init(context);
+      FPBootstrap.init(context);
       /*
       // Focus
       stg.addEventListener(FocusEvent.FOCUS_IN, evHandler);
@@ -145,15 +145,15 @@ package {
 
 
       /*
-      org.windmill.WMController.click({
+      org.flex_pilot.FPController.click({
         label: 'Howdy'
       });
 
-      org.windmill.WMController.click({
+      org.flex_pilot.FPController.click({
         link: 'This is a test link'
       });
 
-      org.windmill.WMController.type({
+      org.flex_pilot.FPController.type({
         name: 'testText',
         text: 'Howdy, sir.'
       });

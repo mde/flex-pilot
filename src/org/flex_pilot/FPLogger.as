@@ -14,17 +14,17 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill {
+package org.flex_pilot {
   import flash.external.ExternalInterface;
 
-  public class WMLogger {
+  public class FPLogger {
     public static var modes:Object = {
       TRACE: 'trace',
       BROWSER: 'browser'
     };
     public static var mode:String = modes.BROWSER;
     public static function log(msg:*):void {
-      if (WMLogger.mode == modes.BROWSER) {
+      if (FPLogger.mode == modes.BROWSER) {
         ExternalInterface.call("console.log", msg);
       }
       else {

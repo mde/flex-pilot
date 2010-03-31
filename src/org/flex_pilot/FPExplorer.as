@@ -14,11 +14,11 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill {
-  import org.windmill.Windmill;
-  import org.windmill.WMLocator;
-  import org.windmill.WMLogger;
-  import org.windmill.WMRecorder;
+package org.flex_pilot {
+  import org.flex_pilot.FlexPilot;
+  import org.flex_pilot.FPLocator;
+  import org.flex_pilot.FPLogger;
+  import org.flex_pilot.FPRecorder;
   import flash.display.Stage;
   import flash.display.Sprite;
   import flash.events.MouseEvent;
@@ -26,7 +26,7 @@ package org.windmill {
   import flash.geom.Rectangle;
   import flash.external.ExternalInterface;
 
-  public class WMExplorer {
+  public class FPExplorer {
     // Sprite which gets superimposed on the moused-over element
     // and provides the border effect
     private static var borderSprite:Sprite = new Sprite();
@@ -45,13 +45,13 @@ package org.windmill {
       }
 
       // Stop the recorder if it's going
-      WMRecorder.stop();
+      FPRecorder.stop();
       running = true;
 
-      var stage:Stage = Windmill.getStage();
+      var stage:Stage = FlexPilot.getStage();
       var spr:Sprite = borderSprite;
       // Add the border-sprite to the stage
-      spr.name = 'windmillBorderSprite';
+      spr.name = 'flex_pilotBorderSprite';
       stage.addChild(spr);
       // Highlight every element, create locator chain on mouseover
       stage.addEventListener(MouseEvent.MOUSE_OVER, select, false);
@@ -64,7 +64,7 @@ package org.windmill {
 
     public static function stop(e:MouseEvent = null):void {
       if (!running) { return; }
-      var stage:Stage = Windmill.getStage();
+      var stage:Stage = FlexPilot.getStage();
       
       stage.removeChild(borderSprite);
       stage.removeEventListener(MouseEvent.MOUSE_OVER, select);
@@ -79,7 +79,7 @@ package org.windmill {
       
       var res:* = ExternalInterface.call('wm_explorerStopped');
       if (!res) {
-        WMLogger.log('(Windmill Flash bridge not found.)');
+        FPLogger.log('(FlexPilot Flash bridge not found.)');
       }
     }
 
@@ -87,7 +87,7 @@ package org.windmill {
     // expression for it
     public static function select(e:MouseEvent):void {
       var targ:* = e.target;
-      if ('name' in targ && targ.name == 'windmillBorderSprite') {
+      if ('name' in targ && targ.name == 'flex_pilotBorderSprite') {
         return;
       }
       // Bordered sprite for highlighting
@@ -110,11 +110,11 @@ package org.windmill {
       if (strictLocators is Boolean) {
         args.push(strictLocators);
       }
-      var expr:String = WMLocator.generateLocator.apply(WMLocator, args);
+      var expr:String = FPLocator.generateLocator.apply(FPLocator, args);
       if (expr && expr.length) {
         var res:* = ExternalInterface.call('wm_explorerSelect', expr);
         if (!res) {
-          WMLogger.log('Locator chain: ' + expr);
+          FPLogger.log('Locator chain: ' + expr);
         }
       }
       else {

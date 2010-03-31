@@ -14,7 +14,7 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill {
+package org.flex_pilot {
   import flash.display.Loader;
   import flash.net.URLRequest;
   import flash.events.Event;
@@ -22,12 +22,12 @@ package org.windmill {
   import flash.system.SecurityDomain;
   import flash.system.LoaderContext;
 
-  public class WMBootstrap {
-    public static var windmillLibPath:String = '/flash/org/windmill/Windmill.swf';
+  public class FPBootstrap {
+    public static var flex_pilotLibPath:String = '/flash/org/flex_pilot/FlexPilot.swf';
     public static var wm:*;
     public static function init(context:*, domains:* = null):void {
       var loader:Loader = new Loader();
-      var url:String = WMBootstrap.windmillLibPath;
+      var url:String = FPBootstrap.flex_pilotLibPath;
       var req:URLRequest = new URLRequest(url);
       var con:LoaderContext = new LoaderContext(false,
           ApplicationDomain.currentDomain,
@@ -35,7 +35,7 @@ package org.windmill {
       loader.contentLoaderInfo.addEventListener(
           Event.COMPLETE, function ():void {
         wm = ApplicationDomain.currentDomain.getDefinition(
-            "org.windmill.Windmill") as Class;
+            "org.flex_pilot.FlexPilot") as Class;
         wm.init({ context: context, domains: domains });
       });
       loader.load(req, con);

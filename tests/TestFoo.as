@@ -1,5 +1,5 @@
 package {
-  import org.windmill.TestCase;
+  import org.flex_pilot.TestCase;
   public class TestFoo extends TestCase {
     public var order:Array = ['testClick', 'testClickTimeout', 'testWaitCondition', 'testWaitConditionTimeout',
         'testWaitSleep', 'testAssertDisplayObject', 'testWaitDisplayObject', 'testAssertEqualsString',

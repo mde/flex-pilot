@@ -24,7 +24,7 @@ package util {
    * Replacement for AS3 Sprite startDrag/stopDrag
    * using only DOM events.
    * This allows the drag/drop action to be automated
-   * using Windmill or other automation frameworks
+   * using FlexPilot or other automation frameworks
    * that rely on simulated user events
    */
   public class DOMEventDrag {

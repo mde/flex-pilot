@@ -14,13 +14,13 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill {
-  import org.windmill.Windmill;
-  import org.windmill.WMLogger;
+package org.flex_pilot {
+  import org.flex_pilot.FlexPilot;
+  import org.flex_pilot.FPLogger;
   import flash.display.DisplayObject;
   import flash.display.DisplayObjectContainer;
 
-  public class WMLocator {
+  public class FPLocator {
     // Stupid AS3 doesn't iterate over Object keys
     // in insertion order
     // null for the finder func means use the default
@@ -28,9 +28,9 @@ package org.windmill {
     private static var locatorMap:Array = [
       ['name', null],
       ['id', null],
-      ['link', WMLocator.findLink],
+      ['link', FPLocator.findLink],
       ['label', null],
-      ['htmlText', WMLocator.findHTML],
+      ['htmlText', FPLocator.findHTML],
       ['automationName', null]
     ];
     private static var locatorMapObj:Object = {};
@@ -49,17 +49,17 @@ package org.windmill {
     ];
 
     public static function init():void {
-      for each (var arr:Array in WMLocator.locatorMap) {
-        WMLocator.locatorMapObj[arr[0]] = arr[1];
+      for each (var arr:Array in FPLocator.locatorMap) {
+        FPLocator.locatorMapObj[arr[0]] = arr[1];
       }
-      WMLocator.locatorMapCreated = true;
+      FPLocator.locatorMapCreated = true;
     }
 
     public static function lookupDisplayObjectBool(
         params:Object):Boolean {
         
         var res:DisplayObject;
-        res = WMLocator.lookupDisplayObject(params);
+        res = FPLocator.lookupDisplayObject(params);
         if (res){
           return true;
         }
@@ -69,9 +69,9 @@ package org.windmill {
     public static function lookupDisplayObject(
         params:Object):DisplayObject {
         var res:DisplayObject;
-        res = lookupDisplayObjectForContext(params, Windmill.getContext());
-        if (!res && Windmill.contextIsApplication()) {
-          res = lookupDisplayObjectForContext(params, Windmill.getStage());
+        res = lookupDisplayObjectForContext(params, FlexPilot.getContext());
+        if (!res && FlexPilot.contextIsApplication()) {
+          res = lookupDisplayObjectForContext(params, FlexPilot.getStage());
         }
         
         return res;
@@ -81,12 +81,12 @@ package org.windmill {
         params:Object, obj:*):DisplayObject {
       var locators:Array = [];
       var queue:Array = [];
-      var checkWMLocatorChain:Function = function (
+      var checkFPLocatorChain:Function = function (
           item:*, pos:int):DisplayObject {
-        var map:Object = WMLocator.locatorMapObj;
+        var map:Object = FPLocator.locatorMapObj;
         var loc:Object = locators[pos];
         // If nothing specific exists for that attr, use the basic one
-        var finder:Function = map[loc.attr] || WMLocator.findBySimpleAttr;
+        var finder:Function = map[loc.attr] || FPLocator.findBySimpleAttr;
         var next:int = pos + 1;
         if (!!finder(item, loc.attr, loc.val)) {
           // Move to the next locator in the chain
@@ -104,7 +104,7 @@ package org.windmill {
             var index:int = 0;
             while (index < count) {
               var kid:DisplayObject = item.getChildAt(index);
-              var res:DisplayObject = checkWMLocatorChain(kid, next);
+              var res:DisplayObject = checkFPLocatorChain(kid, next);
               if (res) {
                 return res;
               }
@@ -114,8 +114,8 @@ package org.windmill {
         }
         return null;
       };
-      var str:String = normalizeWMLocator(params);
-      locators = parseWMLocatorChainExpresson(str);
+      var str:String = normalizeFPLocator(params);
+      locators = parseFPLocatorChainExpresson(str);
       queue.push(obj);
       while (queue.length) {
         // Otherwise grab the next item in the queue
@@ -130,7 +130,7 @@ package org.windmill {
             index++;
           }
         }
-        var res:DisplayObject = checkWMLocatorChain(item, 0);
+        var res:DisplayObject = checkFPLocatorChain(item, 0);
         // If this is a full match, we're done
         if (res) {
           return res;
@@ -139,7 +139,7 @@ package org.windmill {
       return null;
     }
 
-    private static function parseWMLocatorChainExpresson(
+    private static function parseFPLocatorChainExpresson(
         exprStr:String):Array {
       var locators:Array = [];
       var expr:Array = exprStr.split('/');
@@ -154,15 +154,15 @@ package org.windmill {
       return locators;
     }
 
-    private static function normalizeWMLocator(params:Object):String {
+    private static function normalizeFPLocator(params:Object):String {
       if ('chain' in params) {
         return params.chain;
       }
       else {
-        var map:Object = WMLocator.locatorMap;
+        var map:Object = FPLocator.locatorMap;
         var attr:String;
         var val:*;
-        // WMLocators have an order of precedence -- ComboBox will
+        // FPLocators have an order of precedence -- ComboBox will
         // have a name/id, and its sub-options will have label
         // Make sure to do name-/id-based lookups first, label last
         for each (var item:Array in map) {
@@ -197,7 +197,7 @@ package org.windmill {
         obj:*, attr:String, val:*):Boolean {
       var res:Boolean = false;
       if ('htmlText' in obj) {
-        var text:String = WMLocator.cleanHTML(obj.htmlText);
+        var text:String = FPLocator.cleanHTML(obj.htmlText);
         return val == text;
       }
       return res;
@@ -211,7 +211,7 @@ package org.windmill {
       var linkPlain:String = '';
       while (!!(res = pat.exec(htmlText))) {
         // Remove HTML tags and linebreaks; and trim
-        linkPlain = WMLocator.cleanHTML(res[2]);
+        linkPlain = FPLocator.cleanHTML(res[2]);
         if (linkPlain == linkText) {
           var evPat:RegExp = /href="event:(.*?)"/i;
           var arr:Array = evPat.exec(res[1]);
@@ -233,7 +233,7 @@ package org.windmill {
 
     // Generates a chained-locator expression for the clicked-on item
     public static function generateLocator(item:*, ...args):String {
-      var strictLocators:Boolean = Windmill.config.strictLocators;
+      var strictLocators:Boolean = FlexPilot.config.strictLocators;
       if (args.length) {
         strictLocators = args[0];
       }
@@ -297,7 +297,7 @@ package org.windmill {
         return !!validLookup;
       };
       // Attrs to look for, ordered by priority
-      var locatorPriority:Array = WMLocator.locatorLookupPriority;
+      var locatorPriority:Array = FPLocator.locatorLookupPriority;
       do {
         // Try looking up a value for each attribute in order
         // of preference
@@ -307,7 +307,7 @@ package org.windmill {
             // Prepend onto the locator expression, then check to
             // see if the chain still results in a valid lookup
             attrVal = attr == 'htmlText' ?
-                WMLocator.cleanHTML(item[attr]) : item[attr];
+                FPLocator.cleanHTML(item[attr]) : item[attr];
             exprArr.unshift(attr + ':' + attrVal);
             // If this chain looks up an object correct, keeps going
             if (isValidLookup(exprArr)) {
@@ -321,8 +321,8 @@ package org.windmill {
           }
         }
         item = item.parent;
-      } while (item.parent && !(item.parent == Windmill.getContext() ||
-          item.parent == Windmill.getStage()))
+      } while (item.parent && !(item.parent == FlexPilot.getContext() ||
+          item.parent == FlexPilot.getStage()))
       if (exprArr.length) {
         expr = exprArr.join('/');
         return expr;

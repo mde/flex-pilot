@@ -14,11 +14,11 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
  limitations under the License.
 */
 
-package org.windmill {
-  import org.windmill.Windmill;
-  import org.windmill.WMLogger;
-  import org.windmill.WMLocator;
-  import org.windmill.WMExplorer;
+package org.flex_pilot {
+  import org.flex_pilot.FlexPilot;
+  import org.flex_pilot.FPLogger;
+  import org.flex_pilot.FPLocator;
+  import org.flex_pilot.FPExplorer;
   import flash.utils.*;
   import flash.display.Stage;
   import flash.display.DisplayObject;
@@ -31,7 +31,7 @@ package org.windmill {
   import mx.controls.List;
   import flash.external.ExternalInterface;
 
-  public class WMRecorder {
+  public class FPRecorder {
     // Remember the last event type so we know when to
     // output the stored string from a sequence of keyDown events
     private static var lastEventType:String;
@@ -53,19 +53,19 @@ package org.windmill {
     private static var listItems:Array = [];
     private static var running:Boolean = false;
 
-    public function WMRecorder():void {}
+    public function FPRecorder():void {}
 
     public static function start():void {
       // Stop the explorer if it's going
-      WMExplorer.stop();
+      FPExplorer.stop();
 
       var recurseAttach:Function = function (item:*):void {
         // Otherwise recursively check the next link in
         // the locator chain
         var count:int = 0;
         if (item is ComboBox || item is List) {
-          WMRecorder.listItems.push(item);
-          item.addEventListener(ListEvent.CHANGE, WMRecorder.handleEvent);
+          FPRecorder.listItems.push(item);
+          item.addEventListener(ListEvent.CHANGE, FPRecorder.handleEvent);
         }
         if (item is DisplayObjectContainer) {
           count = item.numChildren;
@@ -79,33 +79,33 @@ package org.windmill {
           }
         }
       }
-      recurseAttach(Windmill.getContext());
-      var stage:Stage = Windmill.getStage();
-      stage.addEventListener(MouseEvent.CLICK, WMRecorder.handleEvent);
-      stage.addEventListener(MouseEvent.DOUBLE_CLICK, WMRecorder.handleEvent);
-      stage.addEventListener(TextEvent.LINK, WMRecorder.handleEvent);
-      stage.addEventListener(KeyboardEvent.KEY_DOWN, WMRecorder.handleEvent);
+      recurseAttach(FlexPilot.getContext());
+      var stage:Stage = FlexPilot.getStage();
+      stage.addEventListener(MouseEvent.CLICK, FPRecorder.handleEvent);
+      stage.addEventListener(MouseEvent.DOUBLE_CLICK, FPRecorder.handleEvent);
+      stage.addEventListener(TextEvent.LINK, FPRecorder.handleEvent);
+      stage.addEventListener(KeyboardEvent.KEY_DOWN, FPRecorder.handleEvent);
 
-      WMRecorder.running = true;
+      FPRecorder.running = true;
     }
 
     public static function stop():void {
-      if (!WMRecorder.running) { return; }
-      var stage:Stage = Windmill.getStage();
-      stage.removeEventListener(MouseEvent.CLICK, WMRecorder.handleEvent);
-      stage.removeEventListener(MouseEvent.DOUBLE_CLICK, WMRecorder.handleEvent);
-      stage.removeEventListener(TextEvent.LINK, WMRecorder.handleEvent);
-      stage.removeEventListener(KeyboardEvent.KEY_DOWN, WMRecorder.handleEvent);
-      var list:Array = WMRecorder.listItems;
+      if (!FPRecorder.running) { return; }
+      var stage:Stage = FlexPilot.getStage();
+      stage.removeEventListener(MouseEvent.CLICK, FPRecorder.handleEvent);
+      stage.removeEventListener(MouseEvent.DOUBLE_CLICK, FPRecorder.handleEvent);
+      stage.removeEventListener(TextEvent.LINK, FPRecorder.handleEvent);
+      stage.removeEventListener(KeyboardEvent.KEY_DOWN, FPRecorder.handleEvent);
+      var list:Array = FPRecorder.listItems;
       for each (var item:* in list) {
-        item.removeEventListener(ListEvent.CHANGE, WMRecorder.handleEvent);
+        item.removeEventListener(ListEvent.CHANGE, FPRecorder.handleEvent);
       }
     }
 
     private static function handleEvent(e:*):void {
       var targ:* = e.target;
-      var _this:* = WMRecorder;
-      var chain:String = WMLocator.generateLocator(targ);
+      var _this:* = FPRecorder;
+      var chain:String = FPLocator.generateLocator(targ);
 
       switch (e.type) {
         // Keyboard input -- append to the stored string reference
@@ -153,12 +153,12 @@ package org.windmill {
       // keyboard events
       _this.lastEventType = e.type;
 
-      //WMLogger.log(e.toString());
-      //WMLogger.log(e.target.toString());
+      //FPLogger.log(e.toString());
+      //FPLogger.log(e.target.toString());
     }
 
     private static function resetRecentTarget(t:String, e:*):void  {
-      var _this:* = WMRecorder;
+      var _this:* = FPRecorder;
       // Remember this target, avoid multiple clicks on it
       _this.recentTarget[t] = e.target;
       // Cancel any old setTimeout still hanging around
@@ -174,7 +174,7 @@ package org.windmill {
 
     private static function generateAction(t:String, targ:*,
         opts:Object = null):void {
-      var chain:String = WMLocator.generateLocator(targ);
+      var chain:String = FPLocator.generateLocator(targ);
       var res:Object = {
         method: t,
         chain: chain
@@ -206,8 +206,8 @@ package org.windmill {
       
       var r:* = ExternalInterface.call('wm_recorderAction', res);
       if (!r) {
-        WMLogger.log(res);
-        WMLogger.log('(Windmill Flash bridge not found.)');
+        FPLogger.log(res);
+        FPLogger.log('(FlexPilot Flash bridge not found.)');
       }
     }
 

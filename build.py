@@ -11,12 +11,12 @@ MXMLC_PATH = 'mxmlc -debug -verbose-stacktraces -incremental=true -compiler.stri
 # For replacing .as with .swf
 as_re = re.compile('\.as$|\.mxml$')
 
-def windmill():
-    cmd = MXMLC_PATH + ' -source-path=. ./org/windmill/Windmill.as -o ./org/windmill/Windmill.swf'
+def flex_pilot():
+    cmd = MXMLC_PATH + ' -source-path=./src ./src/org/flex_pilot/FlexPilot.as -o ./org/flex_pilot/FlexPilot.swf'
     os.system(cmd)
 
 def bootstrap():
-    cmd = MXMLC_PATH + ' -source-path=. ./org/windmill/WMBootstrap.as -o ./org/windmill/WMBootstrap.swf'
+    cmd = MXMLC_PATH + ' -source-path=./src ./src/org/flex_pilot/FPBootstrap.as -o ./org/flex_pilot/FPBootstrap.swf'
     os.system(cmd)
 
 def clean():
@@ -31,22 +31,22 @@ def clean():
 def parse_opts():
     parser = optparse.OptionParser()
     parser.add_option('-t', '--target', dest='target',
-            help='build TARGET (windmill/bootstrap/all/clean, default is all)',
-            metavar='TARGET', choices=('windmill', 'bootstrap', 'all', 'clean'), default='all')
+            help='build TARGET (flex_pilot/bootstrap/all/clean, default is all)',
+            metavar='TARGET', choices=('flex_pilot', 'bootstrap', 'all', 'clean'), default='all')
     opts, args = parser.parse_args()
     return opts, args
 
 def main(o, a):
     target = o.target
     # Build only the AS tests into loadable swfs
-    if target == 'windmill':
-        windmill()
+    if target == 'flex_pilot':
+        flex_pilot()
     # Build only the test app we use to run the tests against
     elif target == 'bootstrap':
         bootstrap()
     # Build everything, natch
     elif target == 'all':
-        windmill()
+        flex_pilot()
         bootstrap()
     # Clean out any swfs in the directory
     elif target == 'clean':

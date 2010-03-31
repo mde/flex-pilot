@@ -2,21 +2,21 @@
   "source-path":
     ".",
   "output":
-    "windmill.swc",
+    "flex_pilot.swc",
   "include-classes":
     [
-      "org.windmill.Windmill",
-      "org.windmill.WMController",
-      "org.windmill.WMLocator",
-      "org.windmill.WMLogger",
-      "org.windmill.WMExplorer",
-      "org.windmill.WMRecorder",
-      "org.windmill.WMAssert",
-      "org.windmill.events.Events",
-      "org.windmill.events.WMFocusEvent",
-      "org.windmill.events.WMKeyboardEvent",
-      "org.windmill.events.WMListEvent",
-      "org.windmill.events.WMMouseEvent",
-      "org.windmill.events.WMTextEvent"
+      "org.flex_pilot.FlexPilot",
+      "org.flex_pilot.FPController",
+      "org.flex_pilot.FPLocator",
+      "org.flex_pilot.FPLogger",
+      "org.flex_pilot.FPExplorer",
+      "org.flex_pilot.FPRecorder",
+      "org.flex_pilot.FPAssert",
+      "org.flex_pilot.events.Events",
+      "org.flex_pilot.events.FPFocusEvent",
+      "org.flex_pilot.events.FPKeyboardEvent",
+      "org.flex_pilot.events.FPListEvent",
+      "org.flex_pilot.events.FPMouseEvent",
+      "org.flex_pilot.events.FPTextEvent"
     ]
 }
