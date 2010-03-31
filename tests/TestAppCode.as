@@ -30,9 +30,7 @@ package {
   import flash.display.Sprite;
   import flash.geom.Point;
   import flash.external.ExternalInterface;
-  import util.SortedDict;
   import org.windmill.WMBootstrap;
-  import org.windmill.WMLogger;
 
   public class TestAppCode extends MovieClip {
 
@@ -50,34 +48,7 @@ package {
     public function init(ctxt:Application):void {
       context = ctxt;
       stg = context.stage;
-      
-      var d:SortedDict = new SortedDict();
-      d.addItem('itemA', {
-        foo: 'a',
-        bar: 'c'
-      });
-      d.addItem('itemB', {
-        foo: 'b',
-        bar: 'b'
-      });
-      d.addItem('itemC', {
-        foo: 'c',
-        bar: 'a'
-      });
-      var compFoo:Function = function (a:Object, b:Object):int {
-        return a.foo > b.foo ? 1 : -1;
-      };
-      var compBar:Function = function (a:Object, b:Object):int {
-        return a.bar > b.bar ? 1 : -1;
-      };
-      d.sort(compFoo);
-      d.each(function (key:String, val:Object):void {
-        trace(key + ', foo: ' + val.foo);
-      });
-      d.sort(compBar);
-      d.each(function (key:String, val:Object):void {
-        trace(key + ', bar: ' + val.bar);
-      });
+
       // Panel
       var panel:Panel = new Panel();
       context.addChild(panel);

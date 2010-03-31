@@ -6,13 +6,13 @@ import re
 import shutil
 
 # Location of compiler
-MXMLC_PATH = 'mxmlc -debug -verbose-stacktraces -incremental=true -compiler.strict -compiler.show-actionscript-warnings'
+MXMLC_PATH = 'mxmlc -debug -verbose-stacktraces -incremental=true -compiler.strict -compiler.show-actionscript-warnings -static-link-runtime-shared-libraries=true'
 
 # For replacing .as with .swf
 as_re = re.compile('\.as$|\.mxml$')
 
 def app():
-    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../../flash ./TestApp.mxml -o ./TestApp.swf'
+    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestApp.mxml -o ./TestApp.swf'
     print cmd
     os.system(cmd)
 
@@ -24,7 +24,7 @@ def tests():
                     swf_file = as_re.sub('.swf', as_file)
                     # Compile this biyatch
                     # -----------------------
-                    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../../flash ' + as_file + ' -o ' + swf_file
+                    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ' + as_file + ' -o ' + swf_file
                     #print cmd
                     os.system(cmd)
 
