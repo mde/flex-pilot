@@ -118,11 +118,11 @@ package org.flex_pilot {
           packages[key].methodNames.push(item.@name.toXMLString());
         }
         // Expose public packages via ExternalInterface
-        // 'dragDropOnCoords' becomes 'wm_dragDropOnCoords'
+        // 'dragDropOnCoords' becomes 'fp_dragDropOnCoords'
         // The exposed method is wrapped in a try/catch
         // that returns the Error obj to JS instead of throwing
         for each (methodName in packages[key].methodNames) {
-          ExternalInterface.addCallback('wm_' + methodName,
+          ExternalInterface.addCallback('fp_' + methodName,
               genExtFunc(packages[key].packageRef[methodName]));
         }
       }
@@ -135,7 +135,7 @@ package org.flex_pilot {
       // through the same list that used to build them
       var asserts:* = FPAssert;
       for (methodName in asserts.assertTemplates) {
-        ExternalInterface.addCallback('wm_' + methodName,
+        ExternalInterface.addCallback('fp_' + methodName,
             genExtFunc(asserts[methodName]));
 
       }
@@ -151,7 +151,7 @@ package org.flex_pilot {
         lookupFlash: FPLocator.lookupDisplayObjectBool
       }
       for (methodName in miscMethods) {
-        ExternalInterface.addCallback('wm_' + methodName,
+        ExternalInterface.addCallback('fp_' + methodName,
             genExtFunc(miscMethods[methodName]));
       }
 
