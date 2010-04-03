@@ -204,7 +204,7 @@ package org.flex_pilot {
         break;
       }
       
-      var r:* = ExternalInterface.call('wm_recorderAction', res);
+      var r:* = ExternalInterface.call('fp_recorderAction', res);
       if (!r) {
         FPLogger.log(res);
         FPLogger.log('(FlexPilot Flash bridge not found.)');

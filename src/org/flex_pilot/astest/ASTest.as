@@ -161,7 +161,7 @@ package org.flex_pilot.astest {
         }
         
         // Report via ExternalInterface, or log results
-        res = ExternalInterface.call('wm_asTestResult', data);
+        res = ExternalInterface.call('fp_asTestResult', data);
         if (!res) {
           if (data.error) {
             FPLogger.log('FAILURE: ' + data.error.message);
@@ -192,7 +192,7 @@ package org.flex_pilot.astest {
             methodName: test.methodName
           }
         };
-        res = ExternalInterface.call('wm_asTestStart', data);
+        res = ExternalInterface.call('fp_asTestStart', data);
         if (!res) {
           FPLogger.log('Running ' + test.className + '.' + test.methodName + ' ...');
         }

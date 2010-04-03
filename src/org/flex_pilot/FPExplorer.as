@@ -77,7 +77,7 @@ package org.flex_pilot {
       // Pass off to annihilateEvent to prevent the app from responding
       annihilateEvent(e);
       
-      var res:* = ExternalInterface.call('wm_explorerStopped');
+      var res:* = ExternalInterface.call('fp_explorerStopped');
       if (!res) {
         FPLogger.log('(FlexPilot Flash bridge not found.)');
       }
@@ -112,7 +112,7 @@ package org.flex_pilot {
       }
       var expr:String = FPLocator.generateLocator.apply(FPLocator, args);
       if (expr && expr.length) {
-        var res:* = ExternalInterface.call('wm_explorerSelect', expr);
+        var res:* = ExternalInterface.call('fp_explorerSelect', expr);
         if (!res) {
           FPLogger.log('Locator chain: ' + expr);
         }
