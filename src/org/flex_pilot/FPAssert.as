@@ -17,6 +17,7 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
 package org.flex_pilot {
   import org.flex_pilot.FPLocator;
   import org.flex_pilot.FPLogger;
+  import org.flex_pilot.FPStrip;
   import flash.utils.getQualifiedClassName;
 
   public dynamic class FPAssert {
@@ -192,7 +193,7 @@ package org.flex_pilot {
       return FPAssert.doBaseAssert(params, {
         attrName: ['htmlText', 'label'],
         preMatchProcess: function (str:String):String {
-          return str.replace(/^\s*|\s*$/g, '');
+          return FPStrip.strip(str.replace(/^\s*|\s*$/g, ''));
         },
         matchType: exact ? FPAssert.matchTypes.EXACT :
             FPAssert.matchTypes.CONTAINS
