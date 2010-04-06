@@ -35,6 +35,7 @@ package org.flex_pilot {
     // Remember the last event type so we know when to
     // output the stored string from a sequence of keyDown events
     private static var lastEventType:String;
+    private static var lastEventLocator:String;
     // Remember recent target -- used to detect double-click
     // and to throw away click events on text items that have
     // already spawned a 'link' TextEvent.
@@ -122,7 +123,14 @@ package org.flex_pilot {
           // If the last event was a keyDown, write out the string
           // that's been saved from the sequence of keyboard events
           if (_this.lastEventType == KeyboardEvent.KEY_DOWN) {
-            _this.generateAction('type', targ, { text: _this.keyDownString });
+            var locate:* = targ;
+            //If we have a prebuild last locator, use it
+            //Since the current isn't actually the node we want
+            //it's the following node that generated the onchange
+            if (_this.lastEventLocator){
+                locate = _this.lastEventLocator;
+            }
+            _this.generateAction('type', locate, { text: _this.keyDownString });
             // Empty out string storage
             _this.keyDownString = '';
           }
@@ -152,6 +160,7 @@ package org.flex_pilot {
       // Remember the last event type for saving sequences of
       // keyboard events
       _this.lastEventType = e.type;
+      _this.lastEventLocator = FPLocator.generateLocator(targ);
 
       //FPLogger.log(e.toString());
       //FPLogger.log(e.target.toString());
@@ -174,7 +183,13 @@ package org.flex_pilot {
 
     private static function generateAction(t:String, targ:*,
         opts:Object = null):void {
-      var chain:String = FPLocator.generateLocator(targ);
+      var chain:String;
+      //Type actions send an already build locator string
+      if (typeof(targ) == 'object'){
+          chain = FPLocator.generateLocator(targ);
+      }
+      else { chain = targ; }
+
       var res:Object = {
         method: t,
         chain: chain
