@@ -111,7 +111,11 @@ package org.flex_pilot {
       switch (e.type) {
         // Keyboard input -- append to the stored string reference
         case KeyboardEvent.KEY_DOWN:
-          _this.keyDownString += String.fromCharCode(e.charCode);
+          // If we don't ignore 0 we get a translation error
+          // as it generates a non unicode character
+          if (e.charCode != 0) {
+            _this.keyDownString += String.fromCharCode(e.charCode);
+          }
           break;
         // ComboBox changes
         case ListEvent.CHANGE:
@@ -190,11 +194,27 @@ package org.flex_pilot {
       }
       else { chain = targ; }
 
+      //Figure out what kind of displayObj were dealing with
+      var classInfo:XML = describeType(targ);
+      classInfo =  describeType(targ);
+      var objType:String = classInfo.@name.toString();
+
       var res:Object = {
         method: t,
         chain: chain
       };
       var params:Object = {};
+
+      //if we have a flex accordion
+      if (objType.indexOf('Accordion') != -1){
+        if (objType.indexOf('AccordionHeader') != -1){
+          params.label = targ.label;
+        }
+        else {
+          params.label = targ.getHeaderAt(0).label;
+        }
+      }
+
       var p:String;
       for (p in opts) {
         params[p] = opts[p]

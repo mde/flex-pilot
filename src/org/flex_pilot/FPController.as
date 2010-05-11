@@ -25,7 +25,7 @@ package org.flex_pilot {
   public class FPController {
     public function FPController():void {}
     
-		public static function mouseOver(params:Object):void {
+  public static function mouseOver(params:Object):void {
       var obj:* = FPLocator.lookupDisplayObject(params);
       Events.triggerMouseEvent(obj, MouseEvent.MOUSE_OVER);
       Events.triggerMouseEvent(obj, MouseEvent.ROLL_OVER);
@@ -39,21 +39,38 @@ package org.flex_pilot {
 
     public static function click(params:Object):void {
       var obj:* = FPLocator.lookupDisplayObject(params);
-      // Give it focus
-      Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
-      // Down, (TextEvent.LINK,) up, click
-      Events.triggerMouseEvent(obj, MouseEvent.MOUSE_DOWN, {
-          buttonDown: true });
-      // If this is a link, do the TextEvent hokey-pokey
-      // All events fire on the containing DisplayObject
-      if ('link' in params) {
-        var link:String = FPLocator.locateLinkHref(params.link,
-          obj.htmlText);
-        Events.triggerTextEvent(obj, TextEvent.LINK, {
-            text: link });
+
+      //Figure out what kind of displayObj were dealing with
+      var classInfo:XML = describeType(obj);
+      classInfo =  describeType(obj);
+      var objType:String = classInfo.@name.toString();
+
+      //if we have an accordion
+      if (objType.indexOf('Accordion') != -1){
+        for(var i:int = 0; i < obj.numChildren; i++) {
+          var atb:Object = obj.getHeaderAt(i) as Object;
+          if (atb.label == params.label) {
+            Events.triggerMouseEvent(atb, MouseEvent.CLICK);
+          }
+        }
       }
-      Events.triggerMouseEvent(obj, MouseEvent.MOUSE_UP);
-      Events.triggerMouseEvent(obj, MouseEvent.CLICK);
+      else {
+        // Give it focus
+        Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
+        // Down, (TextEvent.LINK,) up, click
+        Events.triggerMouseEvent(obj, MouseEvent.MOUSE_DOWN, {
+            buttonDown: true });
+        // If this is a link, do the TextEvent hokey-pokey
+        // All events fire on the containing DisplayObject
+        if ('link' in params) {
+          var link:String = FPLocator.locateLinkHref(params.link,
+            obj.htmlText);
+          Events.triggerTextEvent(obj, TextEvent.LINK, {
+              text: link });
+        }
+        Events.triggerMouseEvent(obj, MouseEvent.MOUSE_UP);
+        Events.triggerMouseEvent(obj, MouseEvent.CLICK);
+      }
     }
 
     // Click alias functions
@@ -91,8 +108,8 @@ package org.flex_pilot {
         stageX: startCoordsAbs.x,
         stageY: startCoordsAbs.y
       });
-			Events.triggerMouseEvent(obj, MouseEvent.ROLL_OVER);
-			Events.triggerMouseEvent(obj, MouseEvent.MOUSE_OVER);
+      Events.triggerMouseEvent(obj, MouseEvent.ROLL_OVER);
+      Events.triggerMouseEvent(obj, MouseEvent.MOUSE_OVER);
       // Give it focus
       Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
       // Down, (TextEvent.LINK,) up, click

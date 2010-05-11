@@ -25,7 +25,7 @@ package {
   import flash.net.URLRequest;
   import flash.display.Stage;
   import flash.display.Sprite;
-	import flash.geom.Rectangle;
+  import flash.geom.Rectangle;
   import util.DOMEventDrag;
   import flash.display.Sprite;
   import flash.geom.Point;
@@ -117,47 +117,8 @@ package {
 
       context.doubleClickEnabled = true;
 
+      FPBootstrap.flex_pilotLibPath = 'FlexPilot.swf';
       FPBootstrap.init(context);
-      /*
-      // Focus
-      stg.addEventListener(FocusEvent.FOCUS_IN, evHandler);
-      stg.addEventListener(FocusEvent.FOCUS_OUT, evHandler);
-      // Keyboard
-      stg.addEventListener(KeyboardEvent.KEY_DOWN, evHandler);
-      stg.addEventListener(KeyboardEvent.KEY_UP, evHandler);
-      // Mouse
-      stg.addEventListener(MouseEvent.MOUSE_DOWN, evHandler);
-      stg.addEventListener(MouseEvent.MOUSE_UP, evHandler);
-      //stg.addEventListener(MouseEvent.MOUSE_MOVE, evHandler);
-      stg.addEventListener(MouseEvent.DOUBLE_CLICK, evHandler);
-      stg.addEventListener(MouseEvent.CLICK, evHandler);
-      // Text
-      stg.addEventListener(TextEvent.TEXT_INPUT, evHandler);
-      stg.addEventListener(TextEvent.LINK, evHandler);
-      // ComboBox
-      box.addEventListener(ListEvent.CHANGE, evHandler);
-      box.addEventListener(ListEvent.ITEM_ROLL_OVER, evHandler);
-      box.addEventListener(ListEvent.ITEM_ROLL_OUT, evHandler);
-      box.addEventListener(DropdownEvent.OPEN, evHandler);
-      box.addEventListener(DropdownEvent.CLOSE, evHandler);
-      box.addEventListener(ScrollEvent.SCROLL, evHandler);
-      */
-
-
-      /*
-      org.flex_pilot.FPController.click({
-        label: 'Howdy'
-      });
-
-      org.flex_pilot.FPController.click({
-        link: 'This is a test link'
-      });
-
-      org.flex_pilot.FPController.type({
-        name: 'testText',
-        text: 'Howdy, sir.'
-      });
-      */
 
     }
     private function evHandler(e:Event):void {

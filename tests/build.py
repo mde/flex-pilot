@@ -16,6 +16,11 @@ def app():
     print cmd
     os.system(cmd)
 
+def accordion():
+    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestAccordion.mxml -o ./TestAccordion.swf'
+    print cmd
+    os.system(cmd)
+
 def tests():
     for root, dirs, file_list in os.walk('./'):
             for file in file_list:
@@ -53,9 +58,12 @@ def main(o, a):
     # Build only the test app we use to run the tests against
     elif target == 'app':
         app()
+    elif target == 'accordion':
+        accordion()
     # Build everything, natch
     elif target == 'all':
         app()
+        accordion()
         tests()
     # Clean out any swfs in the directory
     elif target == 'clean':

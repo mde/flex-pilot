@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!-- containers\navigators\AccordionButtonNav.mxml -->
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" applicationComplete="init();">
+
+    <mx:Accordion id="accordion1" height="250">
+        <mx:Script>
+            <![CDATA[
+              import org.flex_pilot.FPBootstrap;
+              private function init():void {
+                FPBootstrap.flex_pilotLibPath = 'FlexPilot.swf';
+                FPBootstrap.init(stage);
+              }
+            ]]>
+        </mx:Script>
+        <mx:Form id="shippingAddress" label="1. Shipping Address">
+
+            <mx:FormItem id="sfirstNameItem" label="First Name">
+                <mx:TextInput id="sfirstName"/>
+            </mx:FormItem>
+
+        </mx:Form>
+
+        <mx:Form id="billingAddress" label="2. Billing Address">
+            <mx:Button id="backButton" 
+                label="Back" 
+                click="accordion1.selectedIndex=0;"/>
+            <mx:Button id="nextButton" 
+                label="Next" 
+                click="accordion1.selectedIndex=2;"/>
+        </mx:Form>
+
+        <mx:Form id="creditCardInfo" label="3. Credit Card Information">
+        </mx:Form>
+
+    </mx:Accordion>
+</mx:Application>

@@ -8,7 +8,7 @@
       var testApp;
       function init() {
         var html = '';
-        var swfName = 'TestApp.swf';
+        var swfName = 'TestAccordion.swf';
         if (document.all) {
           html = '<object type="application/x-shockwave-flash"' +
           '    width="100%" height="100%" id="testApp">' +
@@ -25,9 +25,9 @@
         document.getElementById('testAppContainer').innerHTML = html;
         testApp = document.getElementById('testApp')
       }
-      function wmClick(p) {
+      /*function wmClick(p) {
         testApp.wm_click(p);
-      }
+      }*/
       window.onload = init;
   </script>
   <style type="text/css">
