@@ -45,16 +45,7 @@ package org.flex_pilot {
       classInfo =  describeType(obj);
       var objType:String = classInfo.@name.toString();
 
-      //if we have an accordion
-      if (objType.indexOf('Accordion') != -1){
-        for(var i:int = 0; i < obj.numChildren; i++) {
-          var atb:Object = obj.getHeaderAt(i) as Object;
-          if (atb.label == params.label) {
-            Events.triggerMouseEvent(atb, MouseEvent.CLICK);
-          }
-        }
-      }
-      else {
+      function doTheClick(obj:*):void {
         // Give it focus
         Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
         // Down, (TextEvent.LINK,) up, click
@@ -71,6 +62,17 @@ package org.flex_pilot {
         Events.triggerMouseEvent(obj, MouseEvent.MOUSE_UP);
         Events.triggerMouseEvent(obj, MouseEvent.CLICK);
       }
+
+      //if we have an accordion
+      if (objType.indexOf('Accordion') != -1){
+        for(var i:int = 0; i < obj.numChildren; i++) {
+          var atb:Object = obj.getHeaderAt(i) as Object;
+          if (atb.label == params.label) {
+            doTheClick(atb);
+          }
+        }
+      }
+      else { doTheClick(obj); }
     }
 
     // Click alias functions
@@ -187,33 +189,52 @@ package org.flex_pilot {
 
     public static function doubleClick(params:Object):void {
       var obj:* = FPLocator.lookupDisplayObject(params);
-      // Give it focus
-      Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
-      // First click
-      // Down, (TextEvent.LINK,) up, click
-      Events.triggerMouseEvent(obj, MouseEvent.MOUSE_DOWN, {
-          buttonDown: true });
-      // If this is a link, do the TextEvent hokey-pokey
-      // All events fire on the containing DisplayObject
-      if ('link' in params) {
-        var link:String = FPLocator.locateLinkHref(params.link,
-          obj.htmlText);
-        Events.triggerTextEvent(obj, TextEvent.LINK, {
-            text: link });
+      
+      //Figure out what kind of displayObj were dealing with
+      var classInfo:XML = describeType(obj);
+      classInfo =  describeType(obj);
+      var objType:String = classInfo.@name.toString();
+
+      function doTheDoubleClick(obj:*):void {
+          // Give it focus
+          Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
+          // First click
+          // Down, (TextEvent.LINK,) up, click
+          Events.triggerMouseEvent(obj, MouseEvent.MOUSE_DOWN, {
+              buttonDown: true });
+          // If this is a link, do the TextEvent hokey-pokey
+          // All events fire on the containing DisplayObject
+          if ('link' in params) {
+            var link:String = FPLocator.locateLinkHref(params.link,
+              obj.htmlText);
+            Events.triggerTextEvent(obj, TextEvent.LINK, {
+                text: link });
+          }
+          Events.triggerMouseEvent(obj, MouseEvent.MOUSE_UP);
+          Events.triggerMouseEvent(obj, MouseEvent.CLICK);
+          // Second click
+          // Down, (TextEvent.LINK,) up, double click
+          Events.triggerMouseEvent(obj, MouseEvent.MOUSE_DOWN, {
+              buttonDown: true });
+          // TextEvent hokey-pokey, reprise
+          if ('link' in params) {
+            Events.triggerTextEvent(obj, TextEvent.LINK, {
+                text: link });
+          }
+          Events.triggerMouseEvent(obj, MouseEvent.MOUSE_UP);
+          Events.triggerMouseEvent(obj, MouseEvent.DOUBLE_CLICK);
       }
-      Events.triggerMouseEvent(obj, MouseEvent.MOUSE_UP);
-      Events.triggerMouseEvent(obj, MouseEvent.CLICK);
-      // Second click
-      // Down, (TextEvent.LINK,) up, double click
-      Events.triggerMouseEvent(obj, MouseEvent.MOUSE_DOWN, {
-          buttonDown: true });
-      // TextEvent hokey-pokey, reprise
-      if ('link' in params) {
-        Events.triggerTextEvent(obj, TextEvent.LINK, {
-            text: link });
+
+      //if we have an accordion
+      if (objType.indexOf('Accordion') != -1){
+        for(var i:int = 0; i < obj.numChildren; i++) {
+          var atb:Object = obj.getHeaderAt(i) as Object;
+          if (atb.label == params.label) {
+            doTheDoubleClick(atb);
+          }
+        }
       }
-      Events.triggerMouseEvent(obj, MouseEvent.MOUSE_UP);
-      Events.triggerMouseEvent(obj, MouseEvent.DOUBLE_CLICK);
+      else { doTheDoubleClick(obj); }
     }
 
     public static function type(params:Object):void {
