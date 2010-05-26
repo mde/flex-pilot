@@ -26,6 +26,7 @@ package org.flex_pilot {
   import flash.display.Stage;
   import flash.display.DisplayObject;
   import flash.external.ExternalInterface;
+  import com.adobe.serialization.json.JSON;
 
   public class FlexPilot extends Sprite {
     public static var config:Object = {
@@ -99,6 +100,16 @@ package org.flex_pilot {
       var genExtFunc:Function = function (func:Function):Function {
         return function (...args):* {
           try {
+            for (var arg:* in args){
+              // Terrible hack working around half baked
+              // ExternalInterface support provided by
+              // Safari on Windows
+              // takes json strings and turns them into objects
+              if (args[arg] is String){
+                var o : Object = JSON.decode(args[arg]);
+                args[arg] = o;
+              }
+            }
             return func.apply(null, args);
           }
           catch (e:Error) {
