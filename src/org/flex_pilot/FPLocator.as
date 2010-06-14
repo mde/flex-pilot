@@ -19,6 +19,7 @@ package org.flex_pilot {
   import org.flex_pilot.FPLogger;
   import flash.display.DisplayObject;
   import flash.display.DisplayObjectContainer;
+  import flash.utils.*;
 
   public class FPLocator {
     // Stupid AS3 doesn't iterate over Object keys
@@ -57,7 +58,7 @@ package org.flex_pilot {
 
     public static function lookupDisplayObjectBool(
         params:Object):Boolean {
-        
+
         var res:DisplayObject;
         res = FPLocator.lookupDisplayObject(params);
         if (res){
@@ -73,14 +74,16 @@ package org.flex_pilot {
         if (!res && FlexPilot.contextIsApplication()) {
           res = lookupDisplayObjectForContext(params, FlexPilot.getStage());
         }
-        
+
         return res;
     }
 
     public static function lookupDisplayObjectForContext(
         params:Object, obj:*):DisplayObject {
+
       var locators:Array = [];
       var queue:Array = [];
+
       var checkFPLocatorChain:Function = function (
           item:*, pos:int):DisplayObject {
         var map:Object = FPLocator.locatorMapObj;
@@ -114,8 +117,10 @@ package org.flex_pilot {
         }
         return null;
       };
+
       var str:String = normalizeFPLocator(params);
       locators = parseFPLocatorChainExpresson(str);
+
       queue.push(obj);
       while (queue.length) {
         // Otherwise grab the next item in the queue
@@ -136,6 +141,7 @@ package org.flex_pilot {
           return res;
         }
       }
+      throw new Error("The chain '" + str +"' was not found.")
       return null;
     }
 
@@ -179,6 +185,19 @@ package org.flex_pilot {
     // Default locator for all basic key/val attr matches
     private static function findBySimpleAttr(
         obj:*, attr:String, val:*):Boolean {
+      //if we receive a simple attr with an asterix
+      //we create a regex allowing for wildcard strings
+      if (val.indexOf("*") != -1) {
+        if (attr in obj) {
+          //repalce wildcards with any character match
+          var valRegExp:String = val.replace(new RegExp("\\*", "g"), "(.*)");
+          //force a beginning and end
+          valRegExp = "^"+valRegExp +"$";
+          var wildcard:RegExp = new RegExp(valRegExp);
+          var result:Object = wildcard.exec(obj[attr]);
+          return !!(result != null);
+        }
+      }
       return !!(attr in obj && obj[attr] == val);
     }
 
