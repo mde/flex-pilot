@@ -6,7 +6,7 @@ import re
 import shutil
 
 # Location of compiler
-MXMLC_PATH = 'mxmlc -debug -verbose-stacktraces -incremental=true -compiler.strict -compiler.show-actionscript-warnings -static-link-runtime-shared-libraries=true'
+MXMLC_PATH = 'mxmlc -debug -verbose-stacktraces -incremental=true -compiler.strict -compiler.show-actionscript-warnings -static-link-runtime-shared-libraries=true -define=FP::complete,false'
 
 # For replacing .as with .swf
 as_re = re.compile('\.as$|\.mxml$')
@@ -18,6 +18,11 @@ def app():
 
 def accordion():
     cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestAccordion.mxml -o ./TestAccordion.swf'
+    print cmd
+    os.system(cmd)
+
+def fptestapp():
+    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./FlexPilotTest.mxml -o ./FlexPilotTest.swf'
     print cmd
     os.system(cmd)
 
@@ -64,6 +69,7 @@ def main(o, a):
     elif target == 'all':
         app()
         accordion()
+        fptestapp()
         tests()
     # Clean out any swfs in the directory
     elif target == 'clean':

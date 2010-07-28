@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" backgroundGradientColors="[#222222, #222222]" xmlns:components="components.*" creationComplete="application1_creationCompleteHandler(event)">
+	
+	<mx:Style source="style/darkroom.css"/>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import org.flex_pilot.FPBootstrap;
+			
+			
+			/*  Collapse : Expand Top Panel */
+			public function sizeTopPanel():void
+			{
+				if (topPanel.height<=2) {
+					topPanel.height=32;
+				}
+				else if (topPanel.height>=2){
+					topPanel.height=2;
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				
+				trace("intializing");
+				FPBootstrap.flex_pilotLibPath='FlexPilot.swf';
+				FPBootstrap.init(this);
+			}
+			
+		]]>
+	</mx:Script>
+	
+	
+	<mx:VBox horizontalCenter="0" verticalCenter="0" backgroundColor="#000000" verticalGap="0" paddingTop="2" borderStyle="solid" borderThickness="0" dropShadowEnabled="true" shadowDirection="center" width="100%" height="100%">
+		
+		
+		<mx:VBox width="100%" height="10" verticalAlign="middle" horizontalAlign="center">
+			<mx:Button width="20" height="8" click="sizeTopPanel();" styleName="collapseUp" toggle="true"/>
+		</mx:VBox>
+		
+		<!-- Start Top Panel Area -->
+		
+		<mx:HBox width="100%" verticalAlign="middle" id="topPanel" resizeEffect="Resize" paddingBottom="0" paddingLeft="14" paddingRight="14">
+			<mx:Image source="images/logo.png" width="27" height="30"/>
+			<mx:Spacer width="{topPanel.width/2-90}"/>
+			<mx:Label text="FlexPilot" width="80" fontWeight="bold" fontFamily="Verdana" styleName="appTitle" fontSize="16" textDecoration="none" fontStyle="normal"/>
+			<mx:Spacer width="100%" height="100%"/>
+			
+			<mx:LinkBar id="navBar" styleName="sectionLinks" verticalAlign="middle" dataProvider="{innerContentStack}"/>
+		</mx:HBox>
+		
+		<mx:ViewStack id="innerContentStack" width="100%" height="100%">
+			
+			<components:Home label="Home"/>
+			<components:TestSamples label="Sample Test Cases" />
+			<components:Components label="Flex Components" />
+			
+		</mx:ViewStack>
+		
+		
+		
+		
+	</mx:VBox>
+	
+	
+	
+	
+	
+</mx:Application>
