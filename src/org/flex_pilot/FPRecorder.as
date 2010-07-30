@@ -857,17 +857,17 @@ package org.flex_pilot {
           break;
         case 'type':
           break;
-	    	case 'sliderChange':
-    			params.value=targ.value;
-    			break;
-    		case 'dateChange':
-    			params.value=targ.selectedDate.time;
-			
-    			break;
-    		case 'itemDragDrop' :
-    			// storing the information about the start of drag . . .
-    			res.start=draggerParams;
-			  break;
+        case 'sliderChange':
+            params.value=targ.value;
+            break;
+        case 'dateChange':
+            params.value=targ.selectedDate.time;
+        
+            break;
+        case 'itemDragDrop' :
+            // storing the information about the start of drag . . .
+            res.start=draggerParams;
+          break;
 	
       }
 	  

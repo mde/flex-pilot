@@ -55,20 +55,7 @@ package org.flex_pilot {
       classInfo =  describeType(obj);
       var objType:String = classInfo.@name.toString();
 
-<<<<<<< HEAD
-      //if we have an accordion
-      if (objType.indexOf('mx.containers::Accordion') != -1){
-        for(var i:int = 0; i < obj.numChildren; i++) {
-          var atb:Object = obj.getHeaderAt(i) as Object;
-          if (atb.label == params.label) {
-            Events.triggerMouseEvent(atb, MouseEvent.CLICK);
-          }
-        }
-      }
-      else {
-=======
       function doTheClick(obj:*):void {
->>>>>>> e209f5edff16e1b867864a9212fb576f4173147e
         // Give it focus
         Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
         // Down, (TextEvent.LINK,) up, click
@@ -87,11 +74,11 @@ package org.flex_pilot {
       }
 
       //if we have an accordion
-      if (objType.indexOf('Accordion') != -1){
+      if (objType.indexOf('mx.containers::Accordion') != -1){
         for(var i:int = 0; i < obj.numChildren; i++) {
           var atb:Object = obj.getHeaderAt(i) as Object;
           if (atb.label == params.label) {
-            doTheClick(atb);
+            Events.triggerMouseEvent(atb, MouseEvent.CLICK);
           }
         }
       }
