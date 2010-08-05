@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" backgroundGradientColors="[#222222, #222222]" xmlns:components="components.*" creationComplete="application1_creationCompleteHandler(event)">
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" backgroundGradientColors="[#222222, #222222]" xmlns:components="components.*" creationComplete="application1_creationCompleteHandler(event)" width="100%" height="100%">
 	
 	<mx:Style source="style/darkroom.css"/>
 	
@@ -38,7 +38,7 @@
 	</mx:Script>
 	
 	
-	<mx:VBox horizontalCenter="0" verticalCenter="0" backgroundColor="#000000" verticalGap="0" paddingTop="2" borderStyle="solid" borderThickness="0" dropShadowEnabled="true" shadowDirection="center" width="100%" height="100%">
+	<mx:VBox backgroundColor="#000000" verticalGap="0" borderStyle="solid" borderThickness="0" dropShadowEnabled="true" shadowDirection="center" width="100%" height="100%">
 		
 		
 		<mx:VBox width="100%" height="10" verticalAlign="middle" horizontalAlign="center">

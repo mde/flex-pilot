@@ -124,7 +124,7 @@ package org.flex_pilot {
 	];
 	
 	
-	FP::complete{
+	FP::complete  {
 	typesAllowed=[['change' , [Slider,ListBase , ComboBox , AdvancedListBase,DateChooser , DateField]] ,
 		['columnStretch' , [DataGrid , AdvancedDataGridBaseEx]] ,
 		['headerRelease', [DataGrid , AdvancedDataGridBaseEx]] ,
@@ -185,7 +185,7 @@ package org.flex_pilot {
 		  
         }
 		
-		FP::complete{
+		FP::complete  {
 		if (item is AdvancedListBase) {
 			FPRecorder.listItems.push(item);
 			
@@ -260,7 +260,7 @@ package org.flex_pilot {
 		}
 		
 		
-		FP::complete{
+		FP::complete  {
 		if(item is AdvancedDataGrid){
 			FPRecorder.adgItems.push(item);
 			
@@ -284,7 +284,7 @@ package org.flex_pilot {
 		}
 		
 		
-		FP::complete{
+		FP::complete  {
 		if(item is AdvancedDataGridBaseEx){
 			
 			FPRecorder.adgBaseExItems.push(item);
@@ -423,7 +423,7 @@ package org.flex_pilot {
 	  
 	  list=FPRecorder.adgItems;
 	  
-	  FP::complete{
+	  FP::complete  {
 	  for(i= 0 ; i<list.length;i++){
 		  item=list[i];
 		  item.removeEventListener(AdvancedDataGridEvent.ITEM_CLOSE , FPRecorder.handleEvent);
@@ -435,7 +435,7 @@ package org.flex_pilot {
 	  
 	  list=FPRecorder.adgBaseExItems;
 	  
-	  FP::complete{
+	  FP::complete  {
 	  for(i = 0 ; i<list.length;i++){
 		  item=list[i];
 		  item.removeEventListener(AdvancedDataGridEvent.COLUMN_STRETCH , FPRecorder.handleEvent);
@@ -466,7 +466,7 @@ package org.flex_pilot {
 	  
 	  var condTest:Boolean=true;
 	  
-	  FP::complete{
+	  FP::complete  {
 	  
 	  switch(true){
 		  
@@ -822,7 +822,7 @@ package org.flex_pilot {
         case 'select':
           var sel:* = targ.selectedItem;
 		      var labelField:String;
-    		  FP::complete{ 
+    		  FP::complete  { 
       		  if (targ is AdvancedDataGridBase || targ is DataGridBase) {
       		    try{
         			  res.selectedItem=targ.dataProvider[targ.selectedIndex];
@@ -839,7 +839,7 @@ package org.flex_pilot {
       		  }
       		}
 		
-      		if (!FP::complete){
+      		if (!FP::complete)  {
       			if(targ is DataGridBase){
       				try{
       					res.selectedItem=targ.dataProvider[targ.selectedIndex];
@@ -854,20 +854,21 @@ package org.flex_pilot {
       					targ.labelField : 'label';
       				params.label = sel[labelField];
       			}
+				}
           break;
         case 'type':
           break;
-        case 'sliderChange':
-            params.value=targ.value;
-            break;
-        case 'dateChange':
-            params.value=targ.selectedDate.time;
-        
-            break;
-        case 'itemDragDrop' :
-            // storing the information about the start of drag . . .
-            res.start=draggerParams;
-          break;
+	    	case 'sliderChange':
+    			params.value=targ.value;
+    			break;
+    		case 'dateChange':
+    			params.value=targ.selectedDate.time;
+			
+    			break;
+    		case 'itemDragDrop' :
+    			// storing the information about the start of drag . . .
+    			res.start=draggerParams;
+			  break;
 	
       }
 	  

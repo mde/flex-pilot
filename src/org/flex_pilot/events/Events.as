@@ -30,7 +30,7 @@ package org.flex_pilot.events {
   import util.DataGridUtil;
   import util.IndexChangeUtil;
   
-  FP::complete{
+  FP::complete  {
   import util.AdvancedDataGridUtil;
   import mx.controls.AdvancedDataGrid;
   }

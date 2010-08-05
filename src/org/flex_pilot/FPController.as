@@ -27,7 +27,7 @@ package org.flex_pilot {
   import org.flex_pilot.FPLocator;
   import org.flex_pilot.events.*;
   
-  FP::complete{
+  FP::complete  {
 	  import mx.controls.AdvancedDataGrid;  
   }
 
@@ -55,8 +55,8 @@ package org.flex_pilot {
       classInfo =  describeType(obj);
       var objType:String = classInfo.@name.toString();
 
-      function doTheClick(obj:*):void {
-        // Give it focus
+     function doTheClick(obj:*):void {
+       // Give it focus
         Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
         // Down, (TextEvent.LINK,) up, click
         Events.triggerMouseEvent(obj, MouseEvent.MOUSE_DOWN, {
@@ -74,11 +74,11 @@ package org.flex_pilot {
       }
 
       //if we have an accordion
-      if (objType.indexOf('mx.containers::Accordion') != -1){
+      if (objType.indexOf('Accordion') != -1){
         for(var i:int = 0; i < obj.numChildren; i++) {
           var atb:Object = obj.getHeaderAt(i) as Object;
           if (atb.label == params.label) {
-            Events.triggerMouseEvent(atb, MouseEvent.CLICK);
+            doTheClick(atb);
           }
         }
       }
@@ -524,49 +524,49 @@ package org.flex_pilot {
 		Events.triggerDataGridEvent(obj , FPDataGridEvent.SORT_DESCENDING ,params);
 	}
 	
-	FP::complete{
+	FP::complete  {
   	public static function adgItemOpen(params:Object):void{
   		var obj:*= FPLocator.lookupDisplayObject(params);
   		Events.triggerAdvancedDataGridEvent(obj , AdvancedDataGridEvent.ITEM_OPENING ,params);
   	}
 	}
 	
-	FP::complete{
+	FP::complete  {
   	public static function adgItemClose(params:Object):void{
   		var obj:*= FPLocator.lookupDisplayObject(params);
   		Events.triggerAdvancedDataGridEvent(obj , AdvancedDataGridEvent.ITEM_OPENING ,params);
   	}
 	}
 	
-	FP::complete{
+	FP::complete  {
   	public static function adgColumnStretch(params:Object):void{
   		var obj:*= FPLocator.lookupDisplayObject(params);
   		Events.triggerAdvancedDataGridEvent(obj , AdvancedDataGridEvent.COLUMN_STRETCH ,params);
   	}
 	}
 	
-	FP::complete{
+	FP::complete  {
   	public static function adgHeaderShift(params:Object):void{
   		var obj:*= FPLocator.lookupDisplayObject(params);
   		Events.triggerIndexChangedEvent(obj , IndexChangedEvent.HEADER_SHIFT , params);
   	}
 	}
 	
-	FP::complete{
+	FP::complete  {
   	public static function adgSort(params:Object):void{
   		var obj:*= FPLocator.lookupDisplayObject(params);
   		Events.triggerAdvancedDataGridEvent(obj , AdvancedDataGridEvent.HEADER_RELEASE ,params);
   	}
 	}
 	
-	FP::complete{
+	FP::complete  {
   	public static function adgHeaderRelease(params:Object):void{
   		var obj:*= FPLocator.lookupDisplayObject(params);
   		Events.triggerAdvancedDataGridEvent(obj , AdvancedDataGridEvent.HEADER_RELEASE ,params);
   	}
 	}
 	
-	FP::complete{
+	FP::complete  {
   	public static function adgSortAscending(params:Object):void{
   		var obj:*= FPLocator.lookupDisplayObject(params);
   		params.params.dir=false;
@@ -574,7 +574,7 @@ package org.flex_pilot {
   	}
 	}
 	
-	FP::complete{
+	FP::complete  {
   	public static function adgSortDescending(params:Object):void{
   		var obj:*= FPLocator.lookupDisplayObject(params);
   		params.params.dir=true;
@@ -582,7 +582,7 @@ package org.flex_pilot {
   	}
 	}
 	
-	FP::complete{
+	FP::complete  {
   	public static function adgItemEdit(params:Object):void{
   		var obj:*= FPLocator.lookupDisplayObject(params);
   		Events.triggerAdvancedDataGridEvent(obj , AdvancedDataGridEvent.ITEM_EDIT_END , params);			

@@ -15,11 +15,14 @@
           '  <param name="quality" value="high">' +
           '  <param name="bgcolor" value="#ffffff">' +
           '</object>';
+		  
+		  
         }
         else {
           html = '<embed id="FlexPilotTest" height="100%" width="100%"' +
           '    name="FlexPilotTest" src="' + swfName + '"' +
           '    type="application/x-shockwave-flash"/>';
+		  
         }
         document.getElementById('FlexPilotTestContainer').innerHTML = html;
         FlexPilotTest = document.getElementById('FlexPilotTest')
