@@ -21,24 +21,39 @@ package org.flex_pilot {
   import flash.system.ApplicationDomain;
   import flash.system.SecurityDomain;
   import flash.system.LoaderContext;
+  
 
   public class FPBootstrap {
-    public static var flex_pilotLibPath:String = '/flash/org/flex_pilot/FlexPilot.swf';
+    public static var flex_pilotLibPath:String = 'FlexPilot.swf';
     public static var wm:*;
     public static function init(context:*, domains:* = null):void {
       var loader:Loader = new Loader();
       var url:String = FPBootstrap.flex_pilotLibPath;
       var req:URLRequest = new URLRequest(url);
+	  
+	  //FlexPilot.init({ context: context, domains: domains });
+	  
+	  
+	  
       var con:LoaderContext = new LoaderContext(false,
           ApplicationDomain.currentDomain,
           SecurityDomain.currentDomain);
+	  
+
       loader.contentLoaderInfo.addEventListener(
           Event.COMPLETE, function ():void {
+			  
+			  
+			  
+			  
         wm = ApplicationDomain.currentDomain.getDefinition(
             "org.flex_pilot.FlexPilot") as Class;
         wm.init({ context: context, domains: domains });
+			  
       });
+	  
       loader.load(req, con);
+	  
     }
   }
 }

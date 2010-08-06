@@ -1,4 +1,4 @@
-﻿/*
+﻿﻿/*
 Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
 
  Licensed under the Apache License, Version 2.0 (the "License");

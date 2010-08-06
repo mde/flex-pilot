@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:components="components.*" creationComplete="vbox1_creationCompleteHandler(event)" >
+
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			
+			import mx.events.FlexEvent;
+			
+			import org.flex_pilot.FPBootstrap;
+
+			protected function vbox1_creationCompleteHandler(event:FlexEvent):void
+			{
+				
+				
+				
+			}
+
+
+			protected function grid1_creationCompleteHandler(event:FlexEvent):void
+			{
+				FP::complete{
+					grid1.addChildAt(new adgComponent , grid1.getChildren().length);
+					
+				}
+				
+				
+			}
+
+		]]>
+	</mx:Script>
+	
+
+	
+	<mx:Grid id="grid1" width="100%" height="100%" creationComplete="grid1_creationCompleteHandler(event)">
+		
+		<mx:GridRow>
+			
+		<mx:GridItem>
+			
+			<mx:VBox borderThickness="1" borderStyle="solid" width="100%" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+				<mx:Label text="Sliders" styleName="appTitle"  fontWeight="bold"/>
+				<mx:HBox width="100%" height="100%">
+					<mx:HSlider id="hslid1" width="200" height="100%" />
+					<mx:Label text="selected value : {hslid1.value}"  styleName="windowTitle" fontSize="13"/>
+				</mx:HBox>
+				
+				<mx:HBox width="100%" height="100%" verticalAlign="middle">
+					<mx:VSlider id="vslid1" width="100" height="100%" />
+					<mx:Label text="selected value : {vslid1.value}"  styleName="windowTitle" fontSize="13"/>
+				</mx:HBox>
+				
+				
+			</mx:VBox>
+			
+		</mx:GridItem>
+			
+			
+		
+		<mx:GridItem>
+			
+			<mx:VBox borderThickness="1" borderStyle="solid" width="100%" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+				
+				<mx:Label text="Date Chooser and Fields" styleName="appTitle" fontWeight="bold"/>
+				<mx:Label text=" selected date : {dateChooser1.selectedDate}" styleName="windowTitle" fontSize="13"/>
+				<mx:HBox>
+					<mx:DateChooser id="dateChooser1" fontSize="14" initialize="{dateChooser1.selectedDate=new Date;}"/>
+					
+				</mx:HBox>
+				
+			</mx:VBox>
+			
+		</mx:GridItem>
+			
+		</mx:GridRow>
+		
+		<mx:GridRow>
+			<mx:GridItem>
+				
+				<mx:VBox borderThickness="1" borderStyle="solid" width="100%" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+					
+					<mx:Label text="DataGrids" styleName="appTitle" fontWeight="bold"/>
+					
+					<mx:HBox>
+						
+						<mx:VBox borderThickness="1" borderStyle="solid" width="100%" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+							
+							<mx:DataGrid id="srcgrid" 
+										 allowMultipleSelection="true" 
+										 dragEnabled="true" 
+										 dropEnabled="true" 
+										 dragMoveEnabled="true" creationComplete="{
+										 srcgrid.dataProvider = new ArrayCollection([
+										 {Artist:'Carole King', Album:'Tapestry', Price:11.99},
+										 {Artist:'Paul Simon', Album:'Graceland', Price:10.99},
+										 {Artist:'Original Cast', Album:'Camelot', Price:12.99},
+										 {Artist:'The Beatles', Album:'The White Album', Price:11.99}
+										 ]);
+										 
+										 destgrid.dataProvider = new ArrayCollection([]);
+										 }" editable="true">
+								<mx:columns>
+									<mx:DataGridColumn dataField="Artist"/>
+									<mx:DataGridColumn dataField="Album"/>
+									<mx:DataGridColumn dataField="Price" editable="true"/>
+								</mx:columns>    
+							</mx:DataGrid>
+							
+						</mx:VBox>
+						
+						
+						<mx:VBox borderThickness="1" borderStyle="solid" width="100%" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+							
+							<mx:DataGrid id="destgrid" 
+										 allowMultipleSelection="true" 
+										 dragEnabled="true" 
+										 dropEnabled="true" 
+										 creationComplete="{
+										 destgrid.dataProvider=new ArrayCollection;}">
+								<mx:columns>
+									<mx:DataGridColumn dataField="Artist"/>
+									<mx:DataGridColumn dataField="Album"/>
+									<mx:DataGridColumn dataField="Price"/>
+								</mx:columns>    
+							</mx:DataGrid>
+							
+						</mx:VBox>
+						
+			
+			
+		</mx:HBox>
+			
+					
+				</mx:VBox>
+				
+				</mx:GridItem>
+			
+			<mx:GridItem>
+				<mx:VBox borderThickness="1" borderStyle="solid" width="100%" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+					<mx:Label text="ComboBox and TextField" styleName="appTitle"  fontWeight="bold"/>
+					<mx:ComboBox id="comboBox1"> 
+						<mx:ArrayCollection>
+							<mx:Object label="The Big Bang Theory"/>
+							<mx:Object label="House M.D"/>
+							<mx:Object label="Malcolm in the Middle"/>
+						</mx:ArrayCollection>
+					</mx:ComboBox>
+					
+					<mx:FormItem label="Answer">
+						<mx:TextInput id="textInput1" width="60" fontSize="14" />
+					</mx:FormItem>
+				</mx:VBox>
+			</mx:GridItem>
+			
+	
+		</mx:GridRow>
+		
+		
+		
+		
+	</mx:Grid>
+	
+	
+		
+</mx:VBox>

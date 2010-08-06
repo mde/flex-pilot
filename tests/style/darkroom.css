@@ -1,0 +1,1374 @@
+/*
+///////////////////////////////////////////////////////////////////////////////
+//
+//  Darkroom theme by Juan Sanchez. Based on instructions from Adobe and
+//	inspired by Adobe Lightroom. For more themes check out http://www.scalenine.com
+//
+///////////////////////////////////////////////////////////////////////////////
+*/
+
+@font-face {
+    src: url(myriad.swf);
+    fontFamily: "Myriad Pro";
+    fontStyle: normal;
+    fontWeight: normal;
+}
+
+@font-face {
+    src: url(myriad.swf);
+    fontFamily: "Myriad Pro Bold";
+    fontStyle: normal;
+    fontWeight: normal;
+}
+
+
+
+/*
+//------------------------------
+//  Global
+//------------------------------
+*/
+
+global
+{
+	/* themeColor	*/
+	themeColor: #666666;
+	fontFamily: "Myriad Pro";
+	fontWeight: normal;
+	fontSize:11;
+	color:#ffffff;
+	textRollOverColor:#666666;
+	textSelectedColor:#1e1e1e;
+	disabledColor:#1e1e1e;
+}
+
+/*
+//------------------------------
+//  Accordion
+//------------------------------
+*/
+Accordion
+{
+	borderStyle:solid;
+	borderColor:#000000;
+	borderThickness:1;
+	backgroundColor:#3e3e3e;
+	fontWeight:normal;
+	fontSize:11;
+	/*backgroundImage: Embed(source="darkroom.swf", symbol="lightGrey_Bg");
+	backgroundSize:"100%";*/
+	color: #aaaaaa;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	disabledColor:#111111;
+}
+
+/*
+//------------------------------
+//  AccordionHeader
+//------------------------------
+*/
+AccordionHeader
+{
+
+	disabledSkin: Embed(source="darkroom.swf", symbol="AccordionHeader_disabledSkin");
+	downSkin: Embed(source="darkroom.swf", symbol="AccordionHeader_downSkin");
+	overSkin: Embed(source="darkroom.swf", symbol="AccordionHeader_overSkin");
+	selectedDisabledSkin: Embed(source="darkroom.swf", symbol="AccordionHeader_disabledSkin");
+	selectedDownSkin: Embed(source="darkroom.swf", symbol="AccordionHeader_downSkin");
+	selectedOverSkin: Embed(source="darkroom.swf", symbol="AccordionHeader_overSkin");
+	selectedUpSkin: Embed(source="darkroom.swf", symbol="AccordionHeader_selectedSkin");
+	upSkin: Embed(source="darkroom.swf", symbol="AccordionHeader_upSkin");
+	color: #aaaaaa;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#444444;
+	disabledColor:#111111;
+	selectedColor:#ffffff;
+}
+
+/*
+//------------------------------
+//  Application
+//------------------------------
+*/
+Application
+{
+	backgroundColors: #000000,#3f3f3f;
+	backgroundSize: "100%";
+}
+
+/*
+//------------------------------
+//  Backgrounds
+//------------------------------
+*/
+.darkGreyBg
+{
+	backgroundImage: Embed(source="darkroom.swf", symbol="darkGrey_Bg");
+	backgroundSize: "100%";
+	borderStyle:none;
+}
+
+.darkGreyInsetBg
+{
+	backgroundImage: Embed(source="darkroom.swf", symbol="darkGreyInset_Bg");
+	backgroundSize: "100%";
+	borderStyle:none;
+}
+
+.darkGreyShadowBg
+{
+    backgroundImage: Embed(source="darkroom.swf", symbol="darkGreyShadow_Bg");
+	backgroundSize: "100%";
+	borderStyle:none;
+}
+
+.lightGreyBg
+{
+	backgroundImage: Embed(source="darkroom.swf", symbol="lightGrey_Bg");
+	backgroundSize: "100%";
+	borderStyle:none;
+}
+
+.lightGreyBevelBg
+{
+	backgroundImage: Embed(source="darkroom.swf", symbol="lightGreyBevel_Bg");
+	backgroundSize: "100%";
+	borderStyle:none;
+}
+
+.centerLightGreyBg
+{
+	backgroundImage: Embed(source="darkroom.swf", symbol="centerLightGrey_Bg");
+	backgroundSize: "100%";
+	borderStyle:none;
+}
+
+.sortBarBg
+{
+	backgroundImage: Embed(source="darkroom.swf", symbol="sortBarBg");
+	backgroundSize: "100%";
+	borderStyle:none;
+}
+
+.lightBoxBg
+{
+	backgroundImage: Embed(source="darkroom.swf", symbol="lightBox_Bg");
+	backgroundSize: "100%";
+	borderStyle:none;
+}
+
+.linesBg
+{
+	backgroundImage: Embed(source="darkroom.swf", symbol="lines_Bg");
+	backgroundSize: "100%";
+	borderStyle:none;
+}
+
+/*
+//------------------------------
+//  Buttons
+//------------------------------
+*/
+Button
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="Button_disabledSkin");
+	downSkin: Embed(source="darkroom.swf", symbol="Button_downSkin");
+	overSkin: Embed(source="darkroom.swf", symbol="Button_overSkin");
+	upSkin: Embed(source="darkroom.swf", symbol="Button_upSkin");
+	selectedDisabledSkin: Embed(source="darkroom.swf", symbol="Button_disabledSkin");
+	selectedDownSkin: Embed(source="darkroom.swf", symbol="Button_upSkin");
+	selectedOverSkin: Embed(source="darkroom.swf", symbol="Button_overSkin");
+	selectedUpSkin: Embed(source="darkroom.swf", symbol="Button_downSkin");
+	color: #aaaaaa;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	disabledColor:#111111;
+	fontFamily:"Myriad Pro";
+	fontWeight:normal;
+}
+
+.clearButton
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	downSkin: Embed(source="darkroom.swf", symbol="clear");
+	overSkin: Embed(source="darkroom.swf", symbol="clear");
+	upSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDisabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDownSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedOverSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedUpSkin: Embed(source="darkroom.swf", symbol="clear");
+	color: #808080;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #ffffff;
+	fontWeight: "normal";
+}
+
+.sectionButton
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	downSkin: Embed(source="darkroom.swf", symbol="clear");
+	overSkin: Embed(source="darkroom.swf", symbol="clear");
+	upSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDisabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDownSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedOverSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedUpSkin: Embed(source="darkroom.swf", symbol="clear");
+	disabledIcon: Embed(source="darkroom.swf", symbol="sectionArrowUp");
+	downIcon: Embed(source="darkroom.swf", symbol="sectionArrowUp");
+	overIcon: Embed(source="darkroom.swf", symbol="sectionArrowUp");
+	upIcon: Embed(source="darkroom.swf", symbol="sectionArrowUp");
+	selectedDisabledIcon: Embed(source="darkroom.swf", symbol="sectionArrowDown");
+	selectedDownIcon: Embed(source="darkroom.swf", symbol="sectionArrowDown");
+	selectedOverIcon: Embed(source="darkroom.swf", symbol="sectionArrowDown");
+	selectedUpIcon: Embed(source="darkroom.swf", symbol="sectionArrowDown");
+	color: #999999;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #1e1e1e;
+	fontWeight: "normal";
+	fontSize:16;
+	horizontalGap:2;
+	textAlign:left;
+}
+
+.sectionButtonRight
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	downSkin: Embed(source="darkroom.swf", symbol="clear");
+	overSkin: Embed(source="darkroom.swf", symbol="clear");
+	upSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDisabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDownSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedOverSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedUpSkin: Embed(source="darkroom.swf", symbol="clear");
+	disabledIcon: Embed(source="darkroom.swf", symbol="sectionArrowFlip");
+	downIcon: Embed(source="darkroom.swf", symbol="sectionArrowFlip");
+	overIcon: Embed(source="darkroom.swf", symbol="sectionArrowFlip");
+	upIcon: Embed(source="darkroom.swf", symbol="sectionArrowFlip");
+	selectedDisabledIcon: Embed(source="darkroom.swf", symbol="sectionArrowDown");
+	selectedDownIcon: Embed(source="darkroom.swf", symbol="sectionArrowDown");
+	selectedOverIcon: Embed(source="darkroom.swf", symbol="sectionArrowDown");
+	selectedUpIcon: Embed(source="darkroom.swf", symbol="sectionArrowDown");
+	color: #999999;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #1e1e1e;
+	fontWeight: "normal";
+	fontSize:16;
+	horizontalGap:2;
+	textAlign:right;
+	/* Set labelPlacement:left on any buttons in MXML using this style to get the icon on the right*/
+}
+
+.collapseUp
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	downSkin: Embed(source="darkroom.swf", symbol="clear");
+	overSkin: Embed(source="darkroom.swf", symbol="clear");
+	upSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDisabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDownSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedOverSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedUpSkin: Embed(source="darkroom.swf", symbol="clear");
+	disabledIcon: Embed(source="darkroom.swf", symbol="collapseArrowUp_Up");
+	downIcon: Embed(source="darkroom.swf", symbol="collapseArrowUp_Over");
+	overIcon: Embed(source="darkroom.swf", symbol="collapseArrowUp_Over");
+	upIcon: Embed(source="darkroom.swf", symbol="collapseArrowUp_Up");
+	selectedDisabledIcon: Embed(source="darkroom.swf", symbol="collapseArrowDownSelected_Up");
+	selectedDownIcon: Embed(source="darkroom.swf", symbol="collapseArrowDownSelected_Over");
+	selectedOverIcon: Embed(source="darkroom.swf", symbol="collapseArrowDownSelected_Over");
+	selectedUpIcon: Embed(source="darkroom.swf", symbol="collapseArrowDownSelected_Up");
+}
+
+.collapseDown
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	downSkin: Embed(source="darkroom.swf", symbol="clear");
+	overSkin: Embed(source="darkroom.swf", symbol="clear");
+	upSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDisabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDownSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedOverSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedUpSkin: Embed(source="darkroom.swf", symbol="clear");
+	disabledIcon: Embed(source="darkroom.swf", symbol="collapseArrowDown_Up");
+	downIcon: Embed(source="darkroom.swf", symbol="collapseArrowDown_Over");
+	overIcon: Embed(source="darkroom.swf", symbol="collapseArrowDown_Over");
+	upIcon: Embed(source="darkroom.swf", symbol="collapseArrowDown_Up");
+	selectedDisabledIcon: Embed(source="darkroom.swf", symbol="collapseArrowUpSelected_Up");
+	selectedDownIcon: Embed(source="darkroom.swf", symbol="collapseArrowUpSelected_Over");
+	selectedOverIcon: Embed(source="darkroom.swf", symbol="collapseArrowUpSelected_Over");
+	selectedUpIcon: Embed(source="darkroom.swf", symbol="collapseArrowUpSelected_Up");
+}
+
+.collapseLeft
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	downSkin: Embed(source="darkroom.swf", symbol="clear");
+	overSkin: Embed(source="darkroom.swf", symbol="clear");
+	upSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDisabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDownSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedOverSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedUpSkin: Embed(source="darkroom.swf", symbol="clear");
+	disabledIcon: Embed(source="darkroom.swf", symbol="collapseArrowLeft_Up");
+	downIcon: Embed(source="darkroom.swf", symbol="collapseArrowLeft_Over");
+	overIcon: Embed(source="darkroom.swf", symbol="collapseArrowLeft_Over");
+	upIcon: Embed(source="darkroom.swf", symbol="collapseArrowLeft_Up");
+	selectedDisabledIcon: Embed(source="darkroom.swf", symbol="collapseArrowRightSelected_Up");
+	selectedDownIcon: Embed(source="darkroom.swf", symbol="collapseArrowRightSelected_Over");
+	selectedOverIcon: Embed(source="darkroom.swf", symbol="collapseArrowRightSelected_Over");
+	selectedUpIcon: Embed(source="darkroom.swf", symbol="collapseArrowRightSelected_Up");
+	paddingLeft:0;
+	paddingRight:0;
+}
+
+.collapseRight
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	downSkin: Embed(source="darkroom.swf", symbol="clear");
+	overSkin: Embed(source="darkroom.swf", symbol="clear");
+	upSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDisabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDownSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedOverSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedUpSkin: Embed(source="darkroom.swf", symbol="clear");
+	disabledIcon: Embed(source="darkroom.swf", symbol="collapseArrowRight_Up");
+	downIcon: Embed(source="darkroom.swf", symbol="collapseArrowRight_Over");
+	overIcon: Embed(source="darkroom.swf", symbol="collapseArrowRight_Over");
+	upIcon: Embed(source="darkroom.swf", symbol="collapseArrowRight_Up");
+	selectedDisabledIcon: Embed(source="darkroom.swf", symbol="collapseArrowLeftSelected_Up");
+	selectedDownIcon: Embed(source="darkroom.swf", symbol="collapseArrowLeftSelected_Over");
+	selectedOverIcon: Embed(source="darkroom.swf", symbol="collapseArrowLeftSelected_Over");
+	selectedUpIcon: Embed(source="darkroom.swf", symbol="collapseArrowLeftSelected_Up");
+	paddingLeft:0;
+	paddingRight:0;
+}
+
+.plus
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	downSkin: Embed(source="darkroom.swf", symbol="clear");
+	overSkin: Embed(source="darkroom.swf", symbol="clear");
+	upSkin: Embed(source="darkroom.swf", symbol="clear");
+	disabledIcon: Embed(source="darkroom.swf", symbol="plusIcon_Up");
+	downIcon: Embed(source="darkroom.swf", symbol="plusIcon_Over");
+	overIcon: Embed(source="darkroom.swf", symbol="plusIcon_Over");
+	upIcon: Embed(source="darkroom.swf", symbol="plusIcon_Up");
+	paddingLeft:0;
+	paddingRight:0;
+}
+
+.toggleSwitch
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	downSkin: Embed(source="darkroom.swf", symbol="clear");
+	overSkin: Embed(source="darkroom.swf", symbol="clear");
+	upSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDisabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDownSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedOverSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedUpSkin: Embed(source="darkroom.swf", symbol="clear");
+	disabledIcon: Embed(source="darkroom.swf", symbol="toggleSwitch_Up");
+	downIcon: Embed(source="darkroom.swf", symbol="toggleSwitch_Over");
+	overIcon: Embed(source="darkroom.swf", symbol="toggleSwitch_Over");
+	upIcon: Embed(source="darkroom.swf", symbol="toggleSwitch_Up");
+	selectedDisabledIcon: Embed(source="darkroom.swf", symbol="toggleSwitchSelected_Up");
+	selectedDownIcon: Embed(source="darkroom.swf", symbol="toggleSwitchSelected_Over");
+	selectedOverIcon: Embed(source="darkroom.swf", symbol="toggleSwitchSelected_Over");
+	selectedUpIcon: Embed(source="darkroom.swf", symbol="toggleSwitchSelected_Up");
+	color: #999999;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #1e1e1e;
+	fontWeight: "normal";
+	textAlign:left;
+	/* Set labelPlacement:left on any buttons in MXML using this style to get the icon on the right*/
+}
+
+/* 
+//------------------------------ 
+//  ButtonBar 
+//------------------------------ 
+*/ 
+
+ButtonBar 
+{ 
+        buttonStyleName: "buttonBarButton"; 
+        firstButtonStyleName: "firstButtonBarButton"; 
+        lastButtonStyleName: "lastButtonBarButton";
+}
+
+ToggleButtonBar 
+{ 
+        buttonStyleName: "buttonBarButton"; 
+        firstButtonStyleName: "firstButtonBarButton"; 
+        lastButtonStyleName: "lastButtonBarButton";
+}
+
+.toolToggleBar 
+{ 
+        buttonStyleName: "toolToggleButton"; 
+        firstButtonStyleName: "toolToggleButton"; 
+        lastButtonStyleName: "toolToggleButton";
+        buttonWidth:28;
+        horizontalGap:0;
+        paddingLeft:0;
+        paddingRight:0;
+        selectedButtonTextStyleName:"selectedToolText";
+}
+       
+.selectedToolText
+{
+	color: #ffffff;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #1e1e1e;
+	fontWeight: "normal";
+        
+}
+
+/* 
+//------------------------------ 
+//  ButtonBarButtons 
+//------------------------------ 
+*/ 
+
+.firstButtonBarButton 
+{ 
+        disabledSkin: Embed(source="darkroom.swf", symbol="ButtonBar_firstDisabledSkin"); 
+        downSkin: Embed(source="darkroom.swf", symbol="ButtonBar_firstDownSkin"); 
+        overSkin: Embed(source="darkroom.swf", symbol="ButtonBar_firstOverSkin"); 
+        selectedDisabledSkin: Embed(source="darkroom.swf", symbol="ButtonBar_firstSelectedDisabledSkin"); 
+        selectedDownSkin: Embed(source="darkroom.swf", symbol="ButtonBar_firstSelectedUpSkin"); 
+        selectedOverSkin: Embed(source="darkroom.swf", symbol="ButtonBar_firstSelectedUpSkin");
+        selectedUpSkin: Embed(source="darkroom.swf", symbol="ButtonBar_firstSelectedUpSkin");
+        upSkin: Embed(source="darkroom.swf", symbol="ButtonBar_firstUpSkin");
+        color: #aaaaaa;
+		textRollOverColor: #ffffff;
+		textSelectedColor: #ffffff;
+		disabledColor:#444444;
+}
+.buttonBarButton 
+{ 
+        disabledSkin: Embed(source="darkroom.swf", symbol="ButtonBar_buttonDisabledSkin"); 
+        downSkin: Embed(source="darkroom.swf", symbol="ButtonBar_buttonDownSkin"); 
+        overSkin: Embed(source="darkroom.swf", symbol="ButtonBar_buttonOverSkin"); 
+        selectedDisabledSkin: Embed(source="darkroom.swf", symbol="ButtonBar_buttonSelectedDisabledSkin"); 
+        selectedDownSkin: Embed(source="darkroom.swf", symbol="ButtonBar_buttonSelectedUpSkin"); 
+        selectedOverSkin: Embed(source="darkroom.swf", symbol="ButtonBar_buttonSelectedUpSkin");
+        selectedUpSkin: Embed(source="darkroom.swf", symbol="ButtonBar_buttonSelectedUpSkin");
+        upSkin: Embed(source="darkroom.swf", symbol="ButtonBar_buttonUpSkin");
+        color: #aaaaaa;
+		textRollOverColor: #ffffff;
+		textSelectedColor: #ffffff;
+		disabledColor:#444444;
+}
+
+.lastButtonBarButton 
+{ 
+        disabledSkin: Embed(source="darkroom.swf", symbol="ButtonBar_lastDisabledSkin"); 
+        downSkin: Embed(source="darkroom.swf", symbol="ButtonBar_lastDownSkin"); 
+        overSkin: Embed(source="darkroom.swf", symbol="ButtonBar_lastOverSkin"); 
+        selectedDisabledSkin: Embed(source="darkroom.swf", symbol="ButtonBar_lastSelectedDisabledSkin"); 
+        selectedDownSkin: Embed(source="darkroom.swf", symbol="ButtonBar_lastSelectedUpSkin"); 
+        selectedOverSkin: Embed(source="darkroom.swf", symbol="ButtonBar_lastSelectedUpSkin");
+        selectedUpSkin: Embed(source="darkroom.swf", symbol="ButtonBar_lastSelectedUpSkin");
+        upSkin: Embed(source="darkroom.swf", symbol="ButtonBar_lastUpSkin");
+        color: #aaaaaa;
+		textRollOverColor: #ffffff;
+		textSelectedColor: #ffffff;
+		disabledColor:#444444; 
+}
+
+.toolToggleButton
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	downSkin: Embed(source="darkroom.swf", symbol="clear");
+	overSkin: Embed(source="darkroom.swf", symbol="clear");
+	upSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDisabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedDownSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedOverSkin: Embed(source="darkroom.swf", symbol="clear");
+	selectedUpSkin: Embed(source="darkroom.swf", symbol="clear");
+	color: #808080;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #1e1e1e;
+	fontWeight: "normal";
+	paddingLeft:0;
+    paddingRight:0;
+}
+
+/*
+//------------------------------
+//  CheckBox
+//------------------------------
+*/
+CheckBox
+{
+	disabledIcon: Embed(source="darkroom.swf", symbol="CheckBox_disabledIcon");
+	downIcon: Embed(source="darkroom.swf", symbol="CheckBox_downIcon");
+	overIcon: Embed(source="darkroom.swf", symbol="CheckBox_overIcon");
+	selectedDisabledIcon: Embed(source="darkroom.swf", symbol="CheckBox_selectedDisabledIcon");
+	selectedDownIcon: Embed(source="darkroom.swf", symbol="CheckBox_selectedDownIcon");
+	selectedOverIcon: Embed(source="darkroom.swf", symbol="CheckBox_selectedOverIcon");
+	selectedUpIcon: Embed(source="darkroom.swf", symbol="CheckBox_selectedUpIcon");
+	upIcon: Embed(source="darkroom.swf", symbol="CheckBox_upIcon");
+	color: #cccccc;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #1e1e1e;
+	fontSize:11;
+	fontWeight:normal;
+	fontFamily: "Myriad Pro";
+	horizontalGap:0;
+}		
+
+/*
+//------------------------------
+//  ColorPicker
+//------------------------------
+*/
+ColorPicker
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="ColorPicker_disabledSkin");
+	downSkin: Embed(source="darkroom.swf", symbol="ColorPicker_downSkin");
+	overSkin: Embed(source="darkroom.swf", symbol="ColorPicker_overSkin");
+	upSkin: Embed(source="darkroom.swf", symbol="ColorPicker_upSkin");
+	editableDisabledSkin: Embed(source="darkroom.swf", symbol="ColorPicker_disabledSkin");
+	editableDownSkin: Embed(source="darkroom.swf", symbol="ColorPicker_downSkin");
+	editableOverSkin: Embed(source="darkroom.swf", symbol="ColorPicker_overSkin");
+	editableUpSkin: Embed(source="darkroom.swf", symbol="ColorPicker_upSkin");
+}		
+
+/*
+//------------------------------
+//  ComboBox
+//------------------------------
+*/
+ComboBox
+{
+
+	disabledSkin: Embed(source="darkroom.swf", symbol="ComboBoxArrow_disabledSkin");
+	downSkin: Embed(source="darkroom.swf", symbol="ComboBoxArrow_downSkin");
+	editableDisabledSkin: Embed(source="darkroom.swf", symbol="ComboBoxArrow_editableDisabledSkin");
+	editableDownSkin: Embed(source="darkroom.swf", symbol="ComboBoxArrow_editableDownSkin");
+	editableOverSkin: Embed(source="darkroom.swf", symbol="ComboBoxArrow_editableOverSkin");
+	editableUpSkin: Embed(source="darkroom.swf", symbol="ComboBoxArrow_editableUpSkin");
+	overSkin: Embed(source="darkroom.swf", symbol="ComboBoxArrow_overSkin");
+	upSkin: Embed(source="darkroom.swf", symbol="ComboBoxArrow_upSkin");
+	color: #cccccc;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #1e1e1e;
+	dropDownStyleName: "dropDown";
+	fontSize:11;
+	fontWeight:normal;
+	fontFamily: "Myriad Pro";
+	arrowButtonWidth:12;
+	paddingRight:0;
+	paddingLeft:0;
+}
+
+/*
+//------------------------------
+//  Horizontal Divided Box
+//------------------------------
+*/
+HDividedBox {
+	dividerSkin: Embed(source="darkroom.swf",symbol="clear");
+}		
+
+/*
+//------------------------------
+//  DropDownMenus
+//------------------------------
+*/
+.dropDown {
+	branchIcon: Embed(source="darkroom.swf",symbol="Menu_branchIcon");
+	branchDisabledIcon: Embed(source="darkroom.swf",symbol="Menu_branchDisabledIcon");
+	checkIcon: Embed(source="darkroom.swf",symbol="Menu_checkIcon");
+	checkDisabledIcon: Embed(source="darkroom.swf",symbol="Menu_checkDisabledIcon");
+	radioIcon: Embed(source="darkroom.swf",symbol="Menu_radioIcon");
+	radioDisabledIcon: Embed(source="darkroom.swf",symbol="Menu_radioDisabledIcon");
+	separatorSkin: Embed(source="darkroom.swf",symbol="Menu_separatorSkin");
+	backgroundColor: #ffffff;
+	backgroundAlpha: .9;
+	borderStyle: solid;
+	borderThickness: 1;
+	borderColor: #1e1e1e;
+	cornerRadius:0;
+	color: #1e1e1e;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#1e1e1e;
+	rollOverColor: #333333;
+}
+
+/*
+//------------------------------
+//  CursorManager
+//------------------------------
+*/
+CursorManager
+{
+	busyCursor: Embed(source="darkroom.swf", symbol="BusyCursor");
+	busyCursorBackground: Embed(source="darkroom.swf",symbol="BusyCursor");
+}
+
+/*
+//------------------------------
+//  DataGrid
+//------------------------------
+*/
+DataGrid
+{
+
+	columnDropIndicatorSkin: Embed(source="darkroom.swf", symbol="DataGrid_columnDropIndicatorSkin");
+	columnResizeSkin: Embed(source="darkroom.swf", symbol="DataGrid_columnResizeSkin");
+	headerSeparatorSkin: Embed(source="darkroom.swf", symbol="DataGrid_headerSeparatorSkin");
+	sortArrowSkin: Embed(source="darkroom.swf", symbol="DataGrid_sortArrowSkin");
+	stretchCursor: Embed(source="darkroom.swf",symbol="DataGrid_stretchCursor");
+	headerStyleName: "dataGridHeader";
+	headerColors: #222222, #222222;
+	color:#aaaaaa;
+	rollOverColor: #333333;
+	selectionColor: #333333;
+	disabledColor: #1e1e1e;
+	textRollOverColor:#ffffff;
+	textSelectedColor:#ffffff;
+	selectiondDisabledColor: #1e1e1e;
+	verticalGridLines: false;
+	alternatingItemColors: #3e3e3e, #3e3e3e;
+	/*backgroundImage: Embed(source="darkroom.swf",symbol="lightGrey_Bg");
+	backgroundSize:"100%";*/
+	backgroundColor: #3e3e3e;
+	borderStyle: solid;
+	borderColor:#000000;
+	borderThickness:1;
+}
+
+/*
+//------------------------------
+//  DataGridHeader
+//------------------------------
+*/
+.dataGridHeader
+{
+	color: #aaaaaa;
+	textRollOverColor:#ffffff;
+	textSelectedColor:#ffffff;
+}
+
+/*
+//------------------------------
+//  DateChooser
+//------------------------------
+*/
+DateChooser
+{
+	headerColors: #222222, #222222;
+	cornerRadius:0;
+	borderColor:#000000;
+	backgroundColor:#3e3e3e;
+	color:#aaaaaa;
+	textRollOverColor:#ffffff;
+	textSelectedColor: #ffffff;
+	selectionColor:#222222;
+	
+	nextMonthDisabledSkin: Embed(source="darkroom.swf", symbol="DateChooser_nextMonthDisabledSkin");
+	nextMonthDownSkin: Embed(source="darkroom.swf", symbol="DateChooser_nextMonthDownSkin");
+	nextMonthOverSkin: Embed(source="darkroom.swf", symbol="DateChooser_nextMonthOverSkin");
+	nextMonthUpSkin: Embed(source="darkroom.swf", symbol="DateChooser_nextMonthUpSkin");
+	prevMonthDisabledSkin: Embed(source="darkroom.swf", symbol="DateChooser_prevMonthDisabledSkin");
+	prevMonthDownSkin: Embed(source="darkroom.swf", symbol="DateChooser_prevMonthDownSkin");
+	prevMonthOverSkin: Embed(source="darkroom.swf", symbol="DateChooser_prevMonthOverSkin");
+	prevMonthUpSkin: Embed(source="darkroom.swf", symbol="DateChooser_prevMonthUpSkin");
+	
+	nextYearDisabledSkin: Embed(source="darkroom.swf", symbol="DateChooser_nextYearDisabledSkin");
+	nextYearDownSkin: Embed(source="darkroom.swf", symbol="DateChooser_nextYearDownSkin");
+	nextYearOverSkin: Embed(source="darkroom.swf", symbol="DateChooser_nextYearOverSkin");
+	nextYearUpSkin: Embed(source="darkroom.swf", symbol="DateChooser_nextYearUpSkin");
+	prevYearDisabledSkin: Embed(source="darkroom.swf", symbol="DateChooser_prevYearDisabledSkin");
+	prevYearDownSkin: Embed(source="darkroom.swf", symbol="DateChooser_prevYearDownSkin");
+	prevYearOverSkin: Embed(source="darkroom.swf", symbol="DateChooser_prevYearOverSkin");
+	prevYearUpSkin: Embed(source="darkroom.swf", symbol="DateChooser_prevYearUpSkin");
+	
+	todayStyleName: "today";
+	
+	todayIndicatorSkin: Embed(source="darkroom.swf", symbol="DateChooser_todayIndicatorSkin");
+	rollOverIndicatorSkin: Embed(source="darkroom.swf", symbol="DateChooser_rollOverIndicatorSkin");
+	selectionIndicatorSkin: Embed(source="darkroom.swf", symbol="DateChooser_selectionIndicatorSkin");
+	
+	headerStyleName: "calendarHeader";
+	weekDayStyleName: "weekDay";
+	
+}
+
+.today {
+	color: #ffffff;
+	textRollOverColor: #aaaaaa;
+	textSelectedColor: #aaaaaa;
+	diabledColor:#2c2c2c;
+}
+
+.calendarHeader, .weekDay {
+	color: #ffffff;
+	horizontalGap:4;
+	fontWeight:normal;
+}
+
+/*
+//------------------------------
+//  DateField
+//------------------------------
+*/
+DateField
+{
+	disabledSkin: Embed(source="darkroom.swf",symbol="DateField_disabledSkin"); 
+	downSkin: Embed(source="darkroom.swf",symbol="DateField_downSkin"); 
+	overSkin: Embed(source="darkroom.swf",symbol="DateField_overSkin"); 
+	upSkin: Embed(source="darkroom.swf",symbol="DateField_upSkin");
+	cornerRadius:0;
+	borderThickness:1;
+	borderStyle:inset;
+	borderColor:#000000;
+	fontFamily: "Myriad Pro";
+	fontWeight: normal;
+	fontSize:11;
+	backgroundColor:#666666;
+	color:#eeeeee;
+	textRollOverColor:#ffffff; 
+}
+
+/*
+//------------------------------
+//  DividedBox
+//------------------------------
+*/
+DividedBox
+{
+	dividerSkin: Embed(source="darkroom.swf",symbol="DividedBox_dividerSkin");
+	horizontalCursor: Embed(source="darkroom.swf",symbol="DividedBox_horizontalCursor");
+	verticalCursor: Embed(source="darkroom.swf",symbol="DividedBox_verticalCursor");
+}
+
+/*
+//------------------------------
+//  DragManager
+//------------------------------
+*/
+DragManager
+{
+	copyCursor: Embed(source="darkroom.swf",symbol="DragManager_copyCursor");
+
+	defaultDragImageSkin: Embed(source="darkroom.swf", symbol="DragManager_defaultDragImageSkin");
+
+	linkCursor: Embed(source="darkroom.swf",symbol="DragManager_linkCursor");
+	moveCursor: Embed(source="darkroom.swf",symbol="DragManager_moveCursor");
+	rejectCursor: Embed(source="darkroom.swf",symbol="DragManager_rejectCursor");
+}
+
+/*
+//------------------------------
+//  FormItem
+//------------------------------
+*/
+FormItem
+{
+	indicatorSkin: Embed(source="darkroom.swf",symbol="FormItem_indicatorSkin");  
+}
+
+/*
+//------------------------------
+//  Image
+//------------------------------
+*/
+Image
+{
+
+	brokenImageSkin: Embed(source="darkroom.swf",symbol="Loader_brokenImageSkin");
+
+}
+
+/*
+//------------------------------
+//  Label
+//------------------------------
+*/
+Label
+{
+	color:#ffffff
+}
+
+/*
+//------------------------------
+//  LinkButton
+//------------------------------
+*/
+LinkButton
+{
+	disabledSkin: Embed(source="darkroom.swf", symbol="clear");
+	downSkin: Embed(source="darkroom.swf", symbol="clear");
+	overSkin: Embed(source="darkroom.swf", symbol="clear");
+	upSkin: Embed(source="darkroom.swf", symbol="clear");
+	color: #808080;
+	selectionColor:#aaaaaa;
+	disabledColor:#ffffff;
+	textRollOverColor: #aaaaaa;
+	textSelectedColor:#aaaaaa;
+	textDisabledColor: #1e1e1e;
+	fontWeight: "normal";
+	separatorColor: #808080;
+}
+
+.sectionLinks
+{
+	fontSize: 18;
+}		
+
+/*
+//------------------------------
+//  Loader
+//------------------------------
+*/
+Loader
+{
+	brokenImageSkin: Embed(source="darkroom.swf",symbol="Loader_brokenImageSkin");
+
+}
+
+/*
+//------------------------------
+//  Menu
+//------------------------------
+*/
+Menu
+{
+	branchIcon: Embed(source="darkroom.swf",symbol="Menu_branchIcon");
+	branchDisabledIcon: Embed(source="darkroom.swf",symbol="Menu_branchDisabledIcon");
+	checkIcon: Embed(source="darkroom.swf",symbol="Menu_checkIcon");
+	checkDisabledIcon: Embed(source="darkroom.swf",symbol="Menu_checkDisabledIcon");
+	radioIcon: Embed(source="darkroom.swf",symbol="Menu_radioIcon");
+	radioDisabledIcon: Embed(source="darkroom.swf",symbol="Menu_radioDisabledIcon");
+	separatorSkin: Embed(source="darkroom.swf",symbol="Menu_separatorSkin");
+	backgroundColor: #000000;
+	backgroundAlpha: .9;
+	borderStyle: solid;
+	borderThickness: 0;
+	borderColor: #cccccc;
+	roundedCorners:5;
+	color: #ffffff;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	rollOverColor: #cccccc;
+}
+
+/*
+//------------------------------
+//  darkMenu
+//------------------------------
+*/
+.darkMenu
+{
+	branchIcon: Embed(source="darkroom.swf",symbol="whiteBranchIcon");
+	branchDisabledIcon: Embed(source="darkroom.swf",symbol="whiteBranchIcon_Disabled");
+	checkIcon: Embed(source="darkroom.swf",symbol="whiteCheckIcon");
+	checkDisabledIcon: Embed(source="darkroom.swf",symbol="whiteCheckIcon_Disabled");
+	radioIcon: Embed(source="darkroom.swf",symbol="whiteRadioIcon");
+	radioDisabledIcon: Embed(source="darkroom.swf",symbol="whiteRadioIcon_Disabled");
+	separatorSkin: Embed(source="darkroom.swf",symbol="Menu_separatorSkin");
+	backgroundColor: #284040;
+	backgroundAlpha: .9;
+	borderStyle: solid;
+	borderThickness: 0;
+	borderColor: #cccccc;
+	roundedCorners:0;
+	color: #ffffff;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	rollOverColor: #284040;
+}
+
+/*
+//------------------------------
+//  MenuBar
+//------------------------------
+*/
+MenuBar
+{
+
+	backgroundSkin: Embed(source="darkroom.swf", symbol="MenuBar_backgroundSkin");
+	itemUpSkin: Embed(source="darkroom.swf", symbol="MenuBar_itemUpSkin");
+	itemOverSkin: Embed(source="darkroom.swf", symbol="MenuBar_itemOverSkin");
+	itemDownSkin: Embed(source="darkroom.swf", symbol="MenuBar_itemDownSkin");
+	color: #aaaaaa;
+	backgroundColor:#ffffff;
+	textSelectedColor:#ffffff;
+	textRollOverColor:#ffffff;
+	rollOverColor:#ffffff;
+	menuStyleName: "dropDown";
+}
+
+/*
+//------------------------------
+//  NumericStepper
+//------------------------------
+*/
+NumericStepper
+{
+
+	downArrowDisabledSkin: Embed(source="darkroom.swf", symbol="NumericStepperDownArrow_disabledSkin");
+	downArrowDownSkin: Embed(source="darkroom.swf", symbol="NumericStepperDownArrow_downSkin");
+	downArrowOverSkin: Embed(source="darkroom.swf", symbol="NumericStepperDownArrow_overSkin");
+	downArrowUpSkin: Embed(source="darkroom.swf", symbol="NumericStepperDownArrow_upSkin");
+	upArrowDisabledSkin: Embed(source="darkroom.swf", symbol="NumericStepperUpArrow_disabledSkin");
+	upArrowDownSkin: Embed(source="darkroom.swf", symbol="NumericStepperUpArrow_downSkin");
+	upArrowOverSkin: Embed(source="darkroom.swf", symbol="NumericStepperUpArrow_overSkin");
+	upArrowUpSkin: Embed(source="darkroom.swf", symbol="NumericStepperUpArrow_upSkin");
+	cornerRadius:0;
+	borderThickness:1;
+	borderStyle:inset;
+	borderColor:#000000;
+	fontFamily: "Myriad Pro";
+	fontWeight: normal;
+	fontSize:11;
+	backgroundColor:#666666;
+	color:#eeeeee;
+	textRollOverColor:#ffffff;
+}
+
+/*
+//------------------------------
+//  Panel
+//------------------------------
+*/
+Panel
+{
+
+	closeButtonDisabledSkin: Embed(source="darkroom.swf",symbol="Panel_closeButtonDisabledSkin");
+	closeButtonDownSkin: Embed(source="darkroom.swf",symbol="Panel_closeButtonDownSkin");
+	closeButtonOverSkin: Embed(source="darkroom.swf",symbol="Panel_closeButtonOverSkin");
+	closeButtonUpSkin: Embed(source="darkroom.swf",symbol="Panel_closeButtonUpSkin");
+	borderSkin: Embed(source="darkroom.swf", symbol="Panel_borderSkin");
+	/*titleBackgroundSkin: Embed(source="empty.swf", symbol="Panel_titleBackgroundSkin");*/
+	borderThicknessLeft: 10;
+	borderThicknessRight: 11;
+	borderThicknessTop: 0;
+	borderThicknessBottom: 3;
+	headerHeight: 30;
+	cornerRadius:0;
+	titleStyleName: "panelTitle";
+}
+
+.panelTitle {
+	paddingTop:6;
+	textAlign: left;
+	fontSize: 10;
+	color: #ffffff;
+	borderStyle: none;
+	borderThickness:0;
+	/*fontWeight: bold;*/
+}
+
+/*
+//------------------------------
+//  Panel ControlBar
+//------------------------------
+*/
+ControlBar
+{
+	borderSkin: Embed(source="darkroom.swf", symbol="Panel_controlBarBackgroundSkin");
+	themeColor:#000000;
+}
+
+ApplicationControlBar
+{
+	borderSkin: Embed(source="darkroom.swf", symbol="app_controlBarBackgroundSkin");
+}
+
+/*
+//------------------------------
+//  PopUpButton
+//------------------------------
+*/
+PopUpButton
+{
+
+	disabledSkin: Embed(source="darkroom.swf", symbol="PopUpButton_disabledSkin");
+	downSkin: Embed(source="darkroom.swf", symbol="PopUpButton_downLeftSkin");
+	overSkin: Embed(source="darkroom.swf", symbol="PopUpButton_overLeftSkin");	
+	popUpDownSkin: Embed(source="darkroom.swf", symbol="PopUpButton_downRightSkin");
+	popUpOverSkin: Embed(source="darkroom.swf", symbol="PopUpButton_overRightSkin");
+	upSkin: Embed(source="darkroom.swf", symbol="PopUpButton_upSkin");
+	color: #cccccc;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #1e1e1e;
+	dropDownStyleName: "dropDown";
+	fontSize:11;
+	fontWeight:normal;
+	fontFamily: "Myriad Pro";
+	arrowButtonWidth:12;
+	paddingRight:0;
+	paddingLeft:0;
+}
+
+/*
+//------------------------------
+//  PopUpMenuButton
+//------------------------------
+*/
+PopUpMenuButton
+{
+
+	disabledSkin: Embed(source="darkroom.swf", symbol="PopUpButton_disabledSkin");
+	downSkin: Embed(source="darkroom.swf", symbol="PopUpButton_downLeftSkin");
+	overSkin: Embed(source="darkroom.swf", symbol="PopUpButton_overLeftSkin");	
+	popUpDownSkin: Embed(source="darkroom.swf", symbol="PopUpButton_downRightSkin");
+	popUpOverSkin: Embed(source="darkroom.swf", symbol="PopUpButton_overRightSkin");
+	upSkin: Embed(source="darkroom.swf", symbol="PopUpButton_upSkin");
+	color: #cccccc;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	textDisabledColor: #1e1e1e;
+	fontSize:11;
+	fontWeight:normal;
+	fontFamily: "Myriad Pro";
+	arrowButtonWidth:12;
+	paddingRight:0;
+	paddingLeft:0;
+	
+}
+
+
+/*
+//------------------------------
+//  ProgressBar
+//------------------------------
+*/
+ProgressBar
+{
+
+	barSkin: Embed(source="darkroom.swf", symbol="ProgressBarSkin");
+	indeterminateSkin: Embed(source="darkroom.swf", symbol="ProgressIndeterminateSkin");
+	trackSkin: Embed(source="darkroom.swf", symbol="ProgressTrackSkin");
+
+}
+
+/*
+//------------------------------
+//  RadioButton
+//------------------------------
+*/
+RadioButton
+{
+
+	disabledIcon: Embed(source="darkroom.swf", symbol="RadioButton_disabledIcon");
+	downIcon: Embed(source="darkroom.swf", symbol="RadioButton_downIcon");
+	overIcon: Embed(source="darkroom.swf", symbol="RadioButton_overIcon");
+	selectedDisabledIcon: Embed(source="darkroom.swf", symbol="RadioButtonSelected_disabledIcon");
+	selectedDownIcon: Embed(source="darkroom.swf", symbol="RadioButtonSelected_downIcon");
+	selectedOverIcon: Embed(source="darkroom.swf", symbol="RadioButtonSelected_overIcon");
+	selectedUpIcon: Embed(source="darkroom.swf", symbol="RadioButtonSelected_upIcon");
+	upIcon: Embed(source="darkroom.swf", symbol="RadioButton_upIcon");
+	color: #cccccc;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#ffffff;
+	disabledColor: #1e1e1e;
+	dropDownStyleName: "dropDown";
+	fontSize:11;
+	fontWeight:normal;
+	fontFamily: "Myriad Pro";
+	horizontalGap:0;
+}
+
+/*
+//------------------------------
+//  Rich Text Editor
+//------------------------------
+*/
+
+RichTextEditor
+{
+	borderSkin: Embed(source="darkroom.swf", symbol="darkGrey_Bg");
+	textAreaStyleName: "textArea";
+}
+
+.textArea
+{
+	fontFamily:"";
+}
+
+/*
+//------------------------------
+//  Rules
+//------------------------------
+*/
+
+HRule
+{
+	strokeColor:#000000;
+	strokeWidth:2;
+	shadowColor:#333333;
+}
+
+VRule
+{
+	strokeColor:#000000;
+	strokeWidth:2;
+	shadowColor:#333333;
+}
+
+/*
+//------------------------------
+//  ScrollBars
+//------------------------------
+*/
+ScrollBar
+{
+
+	downArrowDisabledSkin: Embed(source="darkroom.swf", symbol="ScrollArrowDown_disabledSkin");
+	downArrowDownSkin: Embed(source="darkroom.swf", symbol="ScrollArrowDown_downSkin");
+	downArrowOverSkin: Embed(source="darkroom.swf", symbol="ScrollArrowDown_overSkin");
+	downArrowUpSkin: Embed(source="darkroom.swf", symbol="ScrollArrowDown_upSkin");
+	thumbDownSkin: Embed(source="darkroom.swf", symbol="ScrollThumb_downSkin");
+	thumbIcon: Embed(source="darkroom.swf", symbol="ScrollBar_thumbIcon");
+	thumbOverSkin: Embed(source="darkroom.swf", symbol="ScrollThumb_overSkin");
+	thumbUpSkin: Embed(source="darkroom.swf", symbol="ScrollThumb_upSkin");
+	trackSkin: Embed(source="darkroom.swf", symbol="ScrollTrack_Skin");
+	upArrowDisabledSkin: Embed(source="darkroom.swf", symbol="ScrollArrowUp_disabledSkin");
+	upArrowDownSkin: Embed(source="darkroom.swf", symbol="ScrollArrowUp_downSkin");
+	upArrowOverSkin: Embed(source="darkroom.swf", symbol="ScrollArrowUp_overSkin");
+	upArrowUpSkin: Embed(source="darkroom.swf", symbol="ScrollArrowUp_upSkin");
+
+}
+
+.trayScrollBar
+{
+
+	downArrowDisabledSkin: Embed(source="darkroom.swf", symbol="clearPixel");
+	downArrowDownSkin: Embed(source="darkroom.swf", symbol="clearPixel");
+	downArrowOverSkin: Embed(source="darkroom.swf", symbol="clearPixel");
+	downArrowUpSkin: Embed(source="darkroom.swf", symbol="clearPixel");
+	thumbDownSkin: Embed(source="darkroom.swf", symbol="trayThumb_Over");
+	thumbIcon: Embed(source="darkroom.swf", symbol="ScrollBar_thumbIcon");
+	thumbOverSkin: Embed(source="darkroom.swf", symbol="trayThumb_Over");
+	thumbUpSkin: Embed(source="darkroom.swf", symbol="trayThumb_Up");
+	trackSkin: Embed(source="darkroom.swf", symbol="trayTrackSkin");
+	upArrowDisabledSkin: Embed(source="darkroom.swf", symbol="clearPixel");
+	upArrowDownSkin: Embed(source="darkroom.swf", symbol="clearPixel");
+	upArrowOverSkin: Embed(source="darkroom.swf", symbol="clearPixel");
+	upArrowUpSkin: Embed(source="darkroom.swf", symbol="clearPixel");
+
+}
+
+/*
+//------------------------------
+//  Sliders
+//------------------------------
+*/
+
+HSlider, VSlider
+{
+	thumbDisabledSkin: Embed(source="darkroom.swf", symbol="SliderThumb_disabledSkin");
+	thumbDownSkin: Embed(source="darkroom.swf", symbol="SliderThumb_downSkin");
+	thumbOverSkin: Embed(source="darkroom.swf", symbol="SliderThumb_overSkin");
+	thumbUpSkin: Embed(source="darkroom.swf", symbol="SliderThumb_upSkin");
+	trackHighlightSkin: Embed(source="darkroom.swf", symbol="SliderHighlight_Skin");
+	trackSkin: Embed(source="darkroom.swf", symbol="SliderTrack_Skin");
+	tickColor:#262626;
+	tickWidth:3;
+	tickOffset:-1;
+	tickInterval:1;
+	tickThickness:1;
+}
+
+/*
+//------------------------------
+//  Tab
+//------------------------------
+*/
+TabBar
+{
+	firstButtonStyleName: "tabStyle";
+	firstTabStyleName: "tabStyle";
+	tabStyleName: "tabStyle";
+	buttonStyleName: "tabStyle";
+	lastButtonStyleName: "tabStyle";
+	lastTabStyleName: "tabStyle";
+	selectedTabTextStyleName: "selectedTabText";
+	color: #aaaaaa;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#444444;
+	disabledColor:#111111;
+}
+
+.tabStyle {
+	disabledSkin: Embed(source="darkroom.swf", symbol="Tab_disabledSkin");
+	downSkin: Embed(source="darkroom.swf", symbol="Tab_downSkin");
+	overSkin: Embed(source="darkroom.swf", symbol="Tab_overSkin");
+	selectedDisabledSkin: Embed(source="darkroom.swf", symbol="TabSelected_disabledSkin");
+	selectedDownSkin: Embed(source="darkroom.swf", symbol="TabSelected_upSkin");
+	selectedOverSkin: Embed(source="darkroom.swf", symbol="TabSelected_upSkin");
+	selectedUpSkin: Embed(source="darkroom.swf", symbol="TabSelected_upSkin");
+	upSkin: Embed(source="darkroom.swf", symbol="Tab_upSkin");
+	color:#aaaaaa;
+	textRollOverColor:#ffffff;
+	textSelectedColor:#ffffff;
+}
+
+.selectedTabText {
+	color: #ffffff;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#aaaaaa;
+	disabledColor:#111111;
+}
+
+/*
+//------------------------------
+//  Tab Navigator
+//------------------------------
+*/
+TabNavigator
+{
+	borderStyle:solid;
+	borderColor:#000000;
+	borderThickness:1;
+	backgroundColor:#3e3e3e;
+	fontWeight:normal;
+	fontSize:11;
+	borderSkin: Embed(source="darkroom.swf", symbol="tabNav_bg");
+	color: #aaaaaa;
+	textRollOverColor: #ffffff;
+	textSelectedColor:#444444;
+	disabledColor:#111111;
+}
+
+/*
+//------------------------------
+//  Text Styling
+//------------------------------
+*/
+.appTitle
+{
+	fontFamily: "Myriad Pro";
+	fontWight: "normal";
+	fontSize:20;
+	color:#999999;
+	
+}
+
+/*
+//------------------------------
+//  TextInput
+//------------------------------
+*/
+TextInput
+{
+	color:#000000;
+	fontFamily:"Myriad Pro";
+}
+
+/*
+//------------------------------
+//  TextArea
+//------------------------------
+*/
+TextArea
+{
+	color: #000000;
+	fontFamily:"Myriad Pro";
+}		
+
+/*
+//------------------------------
+//  ToolTip
+//------------------------------
+*/
+ToolTip
+{
+
+	borderSkin: Embed(source="darkroom.swf", symbol="ToolTip_borderSkin");
+	color:#333333;
+}
+
+/*
+//------------------------------
+//  Tree
+//------------------------------
+*/
+Tree
+{
+	defaultLeafIcon: Embed(source="darkroom.swf",symbol="Tree_defaultLeafIcon");
+	disclosureClosedIcon: Embed(source="darkroom.swf",symbol="Tree_disclosureClosedIcon");
+	disclosureOpenIcon: Embed(source="darkroom.swf",symbol="Tree_disclosureOpenIcon");
+	folderClosedIcon: Embed(source="darkroom.swf",symbol="Tree_folderClosedIcon");
+	folderOpenIcon: Embed(source="darkroom.swf",symbol="Tree_folderOpenIcon");
+	/*borderSkin: Embed(source="darkroom.swf",symbol="lightGrey_Bg");*/
+	backgroundAlpha:0;
+	paddingTop:6;
+	paddingLeft:6;
+	borderThickness:0;
+	color:#aaaaaa;
+	rollOverColor: #333333;
+	selectionColor: #333333;
+	disabledColor: #1e1e1e;
+	textRollOverColor:#ffffff;
+	textSelectedColor:#ffffff;
+	selectiondDisabledColor: #1e1e1e;
+}
+
+/*
+//------------------------------
+//  TitleWindow
+//------------------------------
+*/
+TitleWindow
+{
+	closeButtonDisabledSkin: Embed(source="darkroom.swf",symbol="Panel_closeButtonDisabledSkin");
+	closeButtonDownSkin: Embed(source="darkroom.swf",symbol="Panel_closeButtonDownSkin");
+	closeButtonOverSkin: Embed(source="darkroom.swf",symbol="Panel_closeButtonOverSkin");
+	closeButtonUpSkin: Embed(source="darkroom.swf",symbol="Panel_closeButtonUpSkin");
+	titleStyleName: "windowTitle";
+	cornerRadius:0;
+	borderStyle: none;
+	borderThickness:0;
+	headerHeight:36;
+	controlBarStyleName: "windowControlBar";
+	borderThicknessRight:0;
+	borderThicknessLeft:0;
+	borderThicknessBottom:0;
+}
+
+.windowTitle {
+	textAlign: left;
+	fontSize: 10;
+	verticalAlign:middle;
+	color: #ffffff;
+	/*fontWeight: bold;*/
+}
+
+.windowControlBar {
+	backgroundImage: Embed(source="darkroom.swf",symbol="Panel_controlBarBackgroundSkin");
+	backgroundSize:"100%";
+}
+
+/*
+//------------------------------
+//  View Stack
+//------------------------------
+*/
+ViewStack
+{
+	/*borderStyle:solid;
+	borderColor:#000000;
+	borderThickness:1;
+	backgroundColor:#3e3e3e;
+	fontWeight:normal;
+	fontSize:11;
+	borderSkin: Embed(source="darkroom.swf",symbol="lightGrey_Bg");*/
+}
+	
+	

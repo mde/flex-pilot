@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" >
+	
+	
+	
+	<mx:Script>
+		<![CDATA[
+			
+			
+			import mx.collections.*;
+			
+			
+			/*  Collapse : Expand Top Panel */
+			
+
+			
+			/*  Collapse : Expand Left Panel */
+			public function sizeLeftPanel():void
+			{
+				if (leftPanel.width<=0) {
+					leftPanel.width=246;
+				}
+				else if (leftPanel.width>=0){
+					leftPanel.width=0;
+				}
+			}
+
+
+
+
+			
+		]]>
+	</mx:Script>
+
+	<mx:HDividedBox width="100%" height="100%" borderStyle="solid" borderThickness="1" borderColor="#666666" dividerAlpha="0" horizontalGap="2" backgroundColor="#000000" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2">
+		
+		<!-- Start Left Panel Area -->
+		
+		<mx:HBox id="leftPanel" width="246" height="100%" horizontalGap="0" resizeEffect="Resize">
+			
+
+
+				<mx:VBox width="9" height="100%" styleName="linesBg"/>
+
+			
+			<mx:VBox width="100%" height="100%" styleName="darkGreyShadowBg" paddingBottom="0" paddingLeft="6" paddingRight="0" paddingTop="6" borderStyle="none" borderThickness="2" verticalGap="0">
+				
+				
+
+				
+				<mx:Canvas id="bottomBoxHolder" width="100%" height="100%" verticalScrollPolicy="on" verticalScrollBarStyleName="trayScrollBar">
+					<mx:VBox id="bottomBoxGroup" width="{bottomBoxHolder.width-16}" verticalScrollPolicy="off" verticalGap="0">
+						
+						
+
+						<mx:LinkBar direction="vertical" dataProvider="{middleStack}"  styleName="sectionLink" width="100%" fontSize="14" textAlign="center"/>
+							
+
+						
+						<mx:VBox width="100%" horizontalAlign="center" paddingTop="10">
+							<mx:Image horizontalAlign="center">
+								<mx:source>@Embed(source='../style/darkroom.swf',symbol='finial')</mx:source>
+							</mx:Image>
+						</mx:VBox>
+						
+					</mx:VBox>
+				</mx:Canvas>
+				
+				
+				
+				
+
+				
+			</mx:VBox>
+			
+			
+		</mx:HBox>
+		
+		
+		
+		<!-- End Left Panel Area -->
+		
+		<!-- Start Middle Panel Area -->
+		
+		<mx:VBox height="100%" width="100%" styleName="centerLightGreyBg" verticalGap="0">
+			
+			<mx:ViewStack id="middleStack" width="100%" height="100%" backgroundAlpha="0">
+				
+				<mx:VBox id="largeImage" label="About Flex-Pilot" width="100%" height="100%" paddingBottom="20" paddingLeft="20" paddingRight="20" paddingTop="20" styleName="darkGreyBg" horizontalAlign="center">
+					<mx:Image source="images/logo.png" horizontalCenter="-20" top="20" scaleContent="false" width="140" height="138"/>
+					<mx:Label text="About Flex-Pilot"  styleName="appTitle" fontStyle="bold" fontWeight="normal" fontFamily="Georgia" fontSize="26"/>
+
+					<mx:Text text="A library for doing easy testing automation of Flash and Flex applications. Includes a locator/lookup mechanism, eventing , and an AS3 test-runner." width="700" height="100%" fontSize="15"/>
+					
+					<mx:Label text="Important Links"  styleName="appTitle" fontStyle="bold" fontWeight="bold"  fontFamily="Georgia" fontSize="18" textAlign="left" />
+					
+					
+					
+					<mx:Text textAlign="left" fontSize="15" width="700">
+						<mx:htmlText>
+							<![CDATA[
+							<ul>
+							<li>Get Started!: <a href="http://wiki.github.com/mde/flex-pilot/getting-started">http://wiki.github.com/mde/flex-pilot/getting-started</a></li>
+							<li>Example Project: <a href="http://github.com/downloads/mde/flex-pilot/fp_demo.zip">http://github.com/downloads/mde/flex-pilot/fp_demo.zip</a></li>
+							<li>Selenium <span class="caps">IDE</span> Extension: <a href="http://github.com/admc/flex-pilot-x">http://github.com/admc/flex-pilot-x</a></li>
+							</ul>
+							<ul>
+							<li>Mailing List: <a href="http://groups.google.com/group/flex-pilot">http://groups.google.com/group/flex-pilot</a></li>
+							<li>Issues: <a href="http://github.com/mde/flex-pilot/issues">http://github.com/mde/flex-pilot/issues</a></li>
+							<li>Downloads: <a href="http://github.com/mde/flex-pilot/downloads">http://github.com/mde/flex-pilot/downloads</a></li>
+							</ul>
+
+							]]>
+						</mx:htmlText>
+					</mx:Text>
+						
+					
+				</mx:VBox>
+				
+				
+				<mx:VBox label="Setup Flex-Pilot" width="100%" height="100%" paddingBottom="20" paddingLeft="20" paddingRight="20" paddingTop="20" styleName="darkGreyBg" horizontalAlign="center">
+					
+					
+					<mx:Label text="Setup Notes"  styleName="appTitle" fontStyle="bold" fontWeight="normal" fontFamily="Georgia" fontSize="26"/>
+					
+					<mx:Text width="700" text="Following are the step by step instructions to get Flex-Pilot installed and working ." fontSize="14"/>
+					<mx:Text width="700" fontSize="14">
+						<mx:htmlText>
+							<![CDATA[flexstore has been used as the sample application which can be downloaded from <a href="http://www.adobe.com/devnet/flex/samples/flex_store/">http://www.adobe.com/devnet/flex/samples/flex_store/</a>
+							<br/>Download the source code for flexstore and Flex-Pilot . Also download the binary for FlexPilot from <a href="http://github.com/downloads/mde/flex-pilot/FlexPilot.swf">http://github.com/downloads/mde/flex-pilot/FlexPilot.swf</a> ino flexstore directory .
+							<br/>Extracted the demo app to my desktop, in a folder named ‘flexstore’ .
+							<br/>Open main mxml file, flexstore.mxml in an editor .
+							<br/>Add the <code>applicationComplete="init();"</code> to the mx:Application tag .
+							<br/>Add import for FlexPilot bootstrapper : <code>import org.flex_pilot.FPBootstrap;</code>
+							<br/>Add the following lines of code :
+							<br/><pre><code>private function init():void {
+							FPBootstrap.flex_pilotLibPath = 'FlexPilot.swf';
+							FPBootstrap.init(stage);
+							}
+							</code></pre>
+							<br/>Build it .
+							<br/>FlexPilot happens to have a build script which I modified, but I tested it by running the following on the command line: <code>mxmlc -source-path=. -source-path+=../flex-pilot/src flexstore.mxml</code>
+							<br/>Keep in mind that the -source-path stuff just tells the compiler to look in that flex-pilot directory on the desktop to find the import of the boot strapper that we added.
+							]]>
+						</mx:htmlText>
+					</mx:Text>	
+					
+					
+						</mx:VBox>
+				
+				
+				
+			</mx:ViewStack>
+			
+			<mx:HRule width="100%" strokeWidth="1" strokeColor="#000000" shadowColor="#000000"/>
+			
+			<mx:Spacer height="1"  width="100%"/>
+			<mx:HRule width="100%" strokeWidth="1" strokeColor="#000000" shadowColor="#000000"/>
+			<mx:Spacer height="1"  width="100%"/>
+
+		</mx:VBox>
+		
+
+		
+	</mx:HDividedBox>	
+	
+	
+
+	
+	
+</mx:HBox>

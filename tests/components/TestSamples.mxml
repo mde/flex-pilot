@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" >
+	
+	
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.*;
+			
+			import org.flex_pilot.FPController;
+			
+			
+			/*  Collapse : Expand Top Panel */
+			
+			
+			
+			/*  Collapse : Expand Left Panel */
+			public function sizeLeftPanel():void
+			{
+				if (leftPanel.width<=0) {
+					leftPanel.width=246;
+				}
+				else if (leftPanel.width>=0){
+					leftPanel.width=0;
+				}
+			}
+			
+			
+			
+			
+			
+		]]>
+	</mx:Script>
+	
+	<mx:HDividedBox width="100%" height="100%" borderStyle="solid" borderThickness="1" borderColor="#666666" dividerAlpha="0" horizontalGap="2" backgroundColor="#000000" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2">
+		
+		<!-- Start Left Panel Area -->
+		
+		<mx:HBox id="leftPanel" width="246" height="100%" horizontalGap="0" resizeEffect="Resize">
+			
+			
+			
+			<mx:VBox width="9" height="100%" styleName="linesBg"/>
+			
+			
+			<mx:VBox width="100%" height="100%" styleName="darkGreyShadowBg" paddingBottom="0" paddingLeft="6" paddingRight="0" paddingTop="6" borderStyle="none" borderThickness="2" verticalGap="0">
+				
+				
+				
+				
+				<mx:Canvas id="bottomBoxHolder" width="100%" height="100%" verticalScrollPolicy="on" verticalScrollBarStyleName="trayScrollBar">
+					<mx:VBox id="bottomBoxGroup" width="{bottomBoxHolder.width-16}" verticalScrollPolicy="off" verticalGap="0">
+						
+						
+						
+						<mx:LinkBar direction="vertical" dataProvider="{middleStack}"  styleName="sectionLink" width="100%" fontSize="14" textAlign="center"/>
+						
+						
+						
+						<mx:VBox width="100%" horizontalAlign="center" paddingTop="10">
+							<mx:Image horizontalAlign="center">
+								<mx:source>@Embed(source='../style/darkroom.swf',symbol='finial')</mx:source>
+							</mx:Image>
+						</mx:VBox>
+						
+					</mx:VBox>
+				</mx:Canvas>
+				
+				
+				
+				
+				
+				
+			</mx:VBox>
+			
+			
+		</mx:HBox>
+		
+		
+		
+		<!-- End Left Panel Area -->
+		
+		<!-- Start Middle Panel Area -->
+		
+		<mx:VBox height="100%" width="100%" styleName="centerLightGreyBg" verticalGap="0">
+			
+			<mx:ViewStack id="middleStack" width="100%" height="100%" backgroundAlpha="0">
+				
+				<mx:VBox label="Test Select" width="100%" height="100%" paddingBottom="20" paddingLeft="20" paddingRight="20" paddingTop="20" styleName="darkGreyBg" horizontalAlign="center">
+					<mx:DataGrid id="srcgrid2" 
+								 allowMultipleSelection="true" 
+								 dragEnabled="true" 
+								 dropEnabled="true" 
+								 dragMoveEnabled="true" creationComplete="{
+								 srcgrid2.dataProvider = new ArrayCollection([
+								 {Artist:'Carole King', Album:'Tapestry', Price:11.99},
+								 {Artist:'Paul Simon', Album:'Graceland', Price:10.99},
+								 {Artist:'Original Cast', Album:'Camelot', Price:12.99},
+								 {Artist:'The Beatles', Album:'The White Album', Price:11.99}
+								 ]);
+								 
+								 
+								 }" editable="false" borderStyle="solid" borderColor="#000000" borderThickness="1" fontSize="15">
+						<mx:columns>
+							<mx:DataGridColumn dataField="Artist"/>
+							<mx:DataGridColumn dataField="Album"/>
+							<mx:DataGridColumn dataField="Price" />
+						</mx:columns>    
+					</mx:DataGrid>
+					
+					<mx:HBox>
+						
+						<mx:Button label="Play the below test" click="{
+								   
+								   var params:Object={
+								   id:'srcgrid2' ,
+								   selectedItem : {Artist:'Original Cast', Album:'Camelot', Price:12.99},
+								   timeout: 2000
+								   } ;
+								   FPController.select(params);
+								   
+								   }"  width="200" fontSize="14"/>
+						<mx:Button label="Reset" click="{
+								   srcgrid2.dataProvider=new ArrayCollection([
+								   {Artist:'Carole King', Album:'Tapestry', Price:11.99},
+								   {Artist:'Paul Simon', Album:'Graceland', Price:10.99},
+								   {Artist:'Original Cast', Album:'Camelot', Price:12.99},
+								   {Artist:'The Beatles', Album:'The White Album', Price:11.99}
+								   ]);
+								   }" width="200" fontSize="14"/>
+						
+					</mx:HBox>
+					
+					<mx:Spacer height="30" />
+					
+					<mx:Label styleName="appTitle" fontSize="20" text="Sample Test Code" />
+					<mx:Text width="700" fontSize="14">
+						<mx:htmlText>
+							<![CDATA[
+							var params:Object={
+							id:'srcgrid2' ,
+							selectedItem : {Artist:'Original Cast', Album:'Camelot', Price:12.99},
+							timeout: 2000
+							}
+							]]>
+						</mx:htmlText>
+					</mx:Text>
+					
+					
+				</mx:VBox>
+				
+				<mx:VBox label="Test Date Change" width="100%" height="100%" paddingBottom="20" paddingLeft="20" paddingRight="20" paddingTop="20" styleName="darkGreyBg" horizontalAlign="center">
+					
+					<mx:Label text=" selected date : {dateChooser2.selectedDate}" styleName="windowTitle" fontSize="13"/>
+					<mx:HBox>
+						<mx:DateChooser id="dateChooser2" fontSize="14" initialize="{dateChooser2.selectedDate=new Date;}"/>
+						
+					</mx:HBox>
+					
+					<mx:HBox>
+						
+						<mx:Button label="Play the below test"  click="{
+								   var dat:Date=new Date; 
+								   dat.setMonth(7);
+								   var params:Object={
+								   id:'dateChooser2' ,
+								   value : dat
+								   };
+								   FPController.dateChange(params);
+								   }" width="200" fontSize="14"/>
+						<mx:Button label="Reset"  width="200" fontSize="14" click="{
+								   dateChooser2.selectedDate=new Date;}"/>
+						
+					</mx:HBox>
+					
+					<mx:Label styleName="appTitle" fontSize="20" text="Sample Test Code" />
+					<mx:Text width="700" fontSize="14">
+						<mx:htmlText>
+							<![CDATA[
+							var dat:Date=new Date;
+							// a sample test changing the today's day in the month of August for the same year . .
+							dat.setMonth(7);    
+							var params:Object={
+							id:'dateChooser2' ,
+							value : dat
+							}
+							]]>
+						</mx:htmlText>
+					</mx:Text>
+					
+					
+				
+				</mx:VBox>
+				
+				<mx:VBox label="Test Slider Value Change" width="100%" height="100%" paddingBottom="20" paddingLeft="20" paddingRight="20" paddingTop="20" styleName="darkGreyBg" horizontalAlign="center">
+					
+					
+					<mx:HBox width="100%">
+						<mx:HSlider id="hslid2" width="200" maximum="100"/>
+						<mx:Label text="selected value : {hslid2.value}"  styleName="windowTitle" fontSize="13"/>
+					</mx:HBox>
+					
+					
+					<mx:HBox>
+						
+						<mx:Button label="Play the below test"  click="{
+								   var params:Object={
+								   id:'hslid2' ,
+								   value : 50
+								   };
+								   FPController.sliderChange(params);
+								   }" width="200" fontSize="14"/>
+						
+					</mx:HBox>
+					
+					<mx:Label styleName="appTitle" fontSize="20" text="Sample Test Code" />
+					<mx:Text width="700" fontSize="14">
+						<mx:htmlText>
+							<![CDATA[
+							id:'hslid2' ,
+							value : 50
+							]]>
+						</mx:htmlText>
+					</mx:Text>
+					
+					
+				</mx:VBox>
+				
+				
+				<mx:VBox label="Test DataGrid Column Stretch" width="100%" height="100%" paddingBottom="20" paddingLeft="20" paddingRight="20" paddingTop="20" styleName="darkGreyBg" horizontalAlign="center">
+					
+					
+					<mx:HBox width="100%">
+						<mx:DataGrid id="srcgrid3" 
+									 allowMultipleSelection="true" 
+									 dragEnabled="true" 
+									 dropEnabled="true" 
+									 dragMoveEnabled="true" creationComplete="{
+									 srcgrid3.dataProvider = new ArrayCollection([
+									 {Artist:'Carole King', Album:'Tapestry', Price:11.99},
+									 {Artist:'Paul Simon', Album:'Graceland', Price:10.99},
+									 {Artist:'Original Cast', Album:'Camelot', Price:12.99},
+									 {Artist:'The Beatles', Album:'The White Album', Price:11.99}
+									 ]);
+									 
+									 
+									 }" editable="false" borderStyle="solid" borderColor="#000000" borderThickness="1" fontSize="15">
+							<mx:columns>
+								<mx:DataGridColumn dataField="Artist"/>
+								<mx:DataGridColumn dataField="Album"/>
+								<mx:DataGridColumn dataField="Price" />
+							</mx:columns>    
+						</mx:DataGrid>
+					</mx:HBox>
+					
+					
+					<mx:HBox>
+						
+						<mx:Button label="Play the below test"  click="{
+								   var params:Object={
+								   id:'srcgrid3' ,
+								   columnIndex : 1 ,
+								   localX : 130 
+								   };
+								   FPController.dgColumnStretch(params);
+								   }" width="200" fontSize="14"/>
+						
+					</mx:HBox>
+					
+					<mx:Label styleName="appTitle" fontSize="20" text="Sample Test Code" />
+					<mx:Text width="700" fontSize="14">
+						<mx:htmlText>
+							<![CDATA[
+							id:'srcgrid3' ,
+							columnIndex : 1 ,
+							localX : 100 
+							]]>
+						</mx:htmlText>
+					</mx:Text>
+					
+					
+				</mx:VBox>
+				
+				
+				<mx:VBox label="Test DataGrid Header Release" width="100%" height="100%" paddingBottom="20" paddingLeft="20" paddingRight="20" paddingTop="20" styleName="darkGreyBg" horizontalAlign="center">
+					
+					
+					<mx:HBox width="100%">
+						<mx:DataGrid id="srcgrid4" 
+									 allowMultipleSelection="true" 
+									 dragEnabled="true" 
+									 dropEnabled="true" 
+									 dragMoveEnabled="true" creationComplete="{
+									 srcgrid4.dataProvider = new ArrayCollection([
+									 {Artist:'Carole King', Album:'Tapestry', Price:11.99},
+									 {Artist:'Paul Simon', Album:'Graceland', Price:10.99},
+									 {Artist:'Original Cast', Album:'Camelot', Price:12.99},
+									 {Artist:'The Beatles', Album:'The White Album', Price:11.99}
+									 ]);
+									 
+									 
+									 }" editable="false" borderStyle="solid" borderColor="#000000" borderThickness="1" fontSize="15">
+							<mx:columns>
+								<mx:DataGridColumn dataField="Artist"/>
+								<mx:DataGridColumn dataField="Album"/>
+								<mx:DataGridColumn dataField="Price" />
+							</mx:columns>    
+						</mx:DataGrid>
+					</mx:HBox>
+					
+					
+					<mx:HBox>
+						
+						<mx:Button label="Play the below test"  click="{
+								   var params:Object={
+								   id:'srcgrid4' ,
+								   columnIndex : 1 ,
+								   caseSensitivity : false
+								   };
+								   FPController.dgHeaderRelease(params);
+								   }" width="200" fontSize="14"/>
+						
+					</mx:HBox>
+					
+					<mx:Label styleName="appTitle" fontSize="20" text="Sample Test Code" />
+					<mx:Text width="700" fontSize="14">
+						<mx:htmlText>
+							<![CDATA[
+							id:'srcgrid4' ,
+							columnIndex : 1 ,
+							caseSensitivity : false
+							]]>
+						</mx:htmlText>
+					</mx:Text>
+					
+					
+				</mx:VBox>
+				
+				
+				<mx:VBox label="Test DataGrid Item Edit" width="100%" height="100%" paddingBottom="20" paddingLeft="20" paddingRight="20" paddingTop="20" styleName="darkGreyBg" horizontalAlign="center">
+					
+					
+					<mx:HBox width="100%">
+						<mx:DataGrid id="srcgrid5" 
+									 allowMultipleSelection="true" 
+									 dragEnabled="true" 
+									 dropEnabled="true" 
+									 dragMoveEnabled="true" creationComplete="{
+									 srcgrid5.dataProvider = new ArrayCollection([
+									 {Artist:'Carole King', Album:'Tapestry', Price:11.99},
+									 {Artist:'Paul Simon', Album:'Graceland', Price:10.99},
+									 {Artist:'Original Cast', Album:'Camelot', Price:12.99},
+									 {Artist:'The Beatles', Album:'The White Album', Price:11.99}
+									 ]);
+									 
+									 
+									 }" editable="false" borderStyle="solid" borderColor="#000000" borderThickness="1" fontSize="15">
+							<mx:columns>
+								<mx:DataGridColumn dataField="Artist"/>
+								<mx:DataGridColumn dataField="Album"/>
+								<mx:DataGridColumn dataField="Price" />
+							</mx:columns>    
+						</mx:DataGrid>
+					</mx:HBox>
+					
+					
+					<mx:HBox>
+						
+						<mx:Button label="Play the below test"  click="{
+								   var params:Object={
+								   id:'srcgrid5' ,
+								   rowIndex : 2 ,
+								   newValue : 'NewValue' ,
+								   dataField : 'Price'
+								   };
+								   FPController.dgItemEdit(params);
+								   }" width="200" fontSize="14"/>
+						
+					</mx:HBox>
+					
+					<mx:Label styleName="appTitle" fontSize="20" text="Sample Test Code" />
+					<mx:Text width="700" fontSize="14">
+						<mx:htmlText>
+							<![CDATA[
+							id:'srcgrid4' ,
+							columnIndex : 1 ,
+							caseSensitivity : false
+							]]>
+						</mx:htmlText>
+					</mx:Text>
+					
+					
+				</mx:VBox>
+					
+				
+				
+				
+				<mx:VBox label="DataGrid Items Drag and Drop" width="100%" height="100%" paddingBottom="20" paddingLeft="20" paddingRight="20" paddingTop="20" styleName="darkGreyBg" horizontalAlign="center">
+					
+				
+				
+				<mx:HBox borderThickness="1" borderStyle="solid" width="100%" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+					
+					<mx:DataGrid id="srcgrid6" 
+								 allowMultipleSelection="true" 
+								 dragEnabled="true" 
+								 dropEnabled="true" 
+								 dragMoveEnabled="true" creationComplete="{
+								 srcgrid6.dataProvider = new ArrayCollection([
+								 {Artist:'Carole King', Album:'Tapestry', Price:11.99},
+								 {Artist:'Paul Simon', Album:'Graceland', Price:10.99},
+								 {Artist:'Original Cast', Album:'Camelot', Price:12.99},
+								 {Artist:'The Beatles', Album:'The White Album', Price:11.99}
+								 ]);
+								 
+								 }" editable="true"  >
+						<mx:columns>
+							<mx:DataGridColumn dataField="Artist"/>
+							<mx:DataGridColumn dataField="Album"/>
+							<mx:DataGridColumn dataField="Price" editable="true"/>
+						</mx:columns>    
+					</mx:DataGrid>
+					
+					
+					<mx:DataGrid id="destgrid6" 
+								 allowMultipleSelection="true" 
+								 dragEnabled="true" 
+								 dropEnabled="true" 
+								 creationComplete="{
+								 destgrid6.dataProvider=new ArrayCollection;}" >
+						<mx:columns>
+							<mx:DataGridColumn dataField="Artist"/>
+							<mx:DataGridColumn dataField="Album"/>
+							<mx:DataGridColumn dataField="Price"/>
+						</mx:columns>    
+					</mx:DataGrid>
+					
+				</mx:HBox>
+				
+				
+				
+					
+					
+					
+					<mx:HBox>
+						
+						<mx:Button label="Play the below test"  click="{
+								   var params:Object={
+								   id:'destgrid6' ,
+								   stageX : 702 ,
+								   stageY : 136 ,
+								   ctrlKey :true,
+								   start :{
+								   id: 'srcgrid6' ,
+								   params:{
+								   stageX : 452 ,
+								   stageY : 136 ,
+								   selectedIndices : [1 , 2] 
+								   }
+								   }
+								   };
+								   FPController.dragDrop(params);
+								   }" width="200" fontSize="14"/>
+						
+						<mx:Button label="Reset"   width="200" fontSize="14" click="{
+								   
+								   srcgrid6.dataProvider = new ArrayCollection([
+								   {Artist:'Carole King', Album:'Tapestry', Price:11.99},
+								   {Artist:'Paul Simon', Album:'Graceland', Price:10.99},
+								   {Artist:'Original Cast', Album:'Camelot', Price:12.99},
+								   {Artist:'The Beatles', Album:'The White Album', Price:11.99}
+								   ]);
+								   
+								   destgrid6.dataProvider = new ArrayCollection([]);
+								   
+								   
+								   
+								   }"/>
+						
+						
+						
+					</mx:HBox>
+					
+					<mx:Label styleName="appTitle" fontSize="20" text="Sample Test Code" />
+					<mx:Text width="700" fontSize="14">
+						<mx:htmlText>
+							<![CDATA[
+							id:'destgrid6' ,
+							stageX : 702 ,
+							stageY : 136 ,
+							ctrlKey :true,
+							start :{
+							id: 'srcgrid6' ,
+							params:{
+							stageX : 452 ,
+							stageY : 136 ,
+							selectedIndices : [1 , 2] 
+							}
+							}
+							
+							]]>
+						</mx:htmlText>
+					</mx:Text>
+					
+					
+					
+					
+			</mx:VBox>
+				
+				
+			</mx:ViewStack>
+			
+			<mx:HRule width="100%" strokeWidth="1" strokeColor="#000000" shadowColor="#000000"/>
+			
+			<mx:Spacer height="1"  width="100%"/>
+			<mx:HRule width="100%" strokeWidth="1" strokeColor="#000000" shadowColor="#000000"/>
+			<mx:Spacer height="1"  width="100%"/>
+			
+		</mx:VBox>
+		
+		
+		
+	</mx:HDividedBox>	
+	
+	
+	
+	
+	
+</mx:HBox>

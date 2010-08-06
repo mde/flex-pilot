@@ -22,7 +22,7 @@ package org.flex_pilot {
       TRACE: 'trace',
       BROWSER: 'browser'
     };
-    public static var mode:String = modes.BROWSER;
+    public static var mode:String = modes.TRACE;
     public static function log(msg:*):void {
       if (FPLogger.mode == modes.BROWSER) {
         ExternalInterface.call("console.log", msg);
