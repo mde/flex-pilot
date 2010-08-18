@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" applicationComplete="init();">
+        <mx:Script>
+            <![CDATA[
+              import org.flex_pilot.FPBootstrap;
+              private function init():void {
+                FPBootstrap.flex_pilotLibPath = 'FlexPilot.swf';
+                FPBootstrap.init(stage);
+              }
+            ]]>
+        </mx:Script>
+		<mx:HBox borderThickness="1" borderStyle="solid" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+			<mx:HBox borderThickness="1" borderStyle="solid" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000"></mx:HBox>
+			<mx:HBox borderThickness="1" borderStyle="solid" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+				<mx:VBox borderThickness="1" borderStyle="solid" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+					<mx:HBox borderThickness="1" borderStyle="solid" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+						<mx:Button id="backButton" 
+			                label="Back"/>
+			            <mx:Button id="nextButton" 
+			                label="Next"/> 
+					</mx:HBox>
+				</mx:VBox>
+				<mx:VBox borderThickness="1" borderStyle="solid" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+					<mx:HBox borderThickness="1" borderStyle="solid" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+						<mx:TextInput/>
+					</mx:HBox>
+				</mx:VBox>
+				<mx:VBox borderThickness="1" borderStyle="solid" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+					<mx:HBox borderThickness="1" borderStyle="solid" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000">
+						<mx:Button id="backButton1" 
+			                label="Back"/> 
+			            <mx:Button id="nextButton1" 
+			                label="Next"/>
+					</mx:HBox>
+				</mx:VBox>
+			</mx:HBox>
+			<mx:HBox borderThickness="1" borderStyle="solid" paddingBottom="3" paddingLeft="3" paddingRight="3" paddingTop="3" borderColor="#000000"></mx:HBox>
+		</mx:HBox>
+</mx:Application>

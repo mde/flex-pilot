@@ -20,6 +20,11 @@ def accordion():
     cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestAccordion.mxml -o ./TestAccordion.swf'
     print cmd
     os.system(cmd)
+    
+def wildcards():
+    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestWildcards.mxml -o ./TestWildcards.swf'
+    print cmd
+    os.system(cmd)
 
 def fptestapp():
     cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./FlexPilotTest.mxml -o ./FlexPilotTest.swf'
@@ -51,7 +56,7 @@ def parse_opts():
     parser = optparse.OptionParser()
     parser.add_option('-t', '--target', dest='target',
             help='build TARGET (tests/app/all/clean, default is all)',
-            metavar='TARGET', choices=('tests', 'app', 'all', 'clean'), default='all')
+            metavar='TARGET', choices=('tests', 'app', 'all', 'clean', 'accordion', 'wildcards'), default='all')
     opts, args = parser.parse_args()
     return opts, args
 
@@ -65,10 +70,13 @@ def main(o, a):
         app()
     elif target == 'accordion':
         accordion()
+    elif target == 'wildcards':
+        wildcards()    
     # Build everything, natch
     elif target == 'all':
         app()
         accordion()
+        wildcards()
         fptestapp()
         tests()
     # Clean out any swfs in the directory
