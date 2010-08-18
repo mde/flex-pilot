@@ -108,6 +108,14 @@ package org.flex_pilot {
       var dest:* = FPLocator.lookupDisplayObject(destParams);
       var destCoords:Point = new Point(0, 0);
       destCoords = dest.localToGlobal(destCoords);
+
+      if (params.offsetx) {
+        destCoords.x = destCoords.x + Number(params.offsetx);
+      }
+      if (params.offsety) {
+        destCoords.y = destCoords.y + Number(params.offsety);
+      }
+
       params.coords = '(' + destCoords.x + ',' + destCoords.y + ')';
       dragDropToCoords(params);
     }

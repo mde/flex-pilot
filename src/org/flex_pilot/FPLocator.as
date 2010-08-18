@@ -76,6 +76,10 @@ package org.flex_pilot {
           res = lookupDisplayObjectForContext(params, FlexPilot.getStage());
         }
 
+        if (!res){
+          var str:String = normalizeFPLocator(params);
+          throw new Error("The chain '" + str +"' was not found.")
+        }
         return res;
     }
 
@@ -142,7 +146,6 @@ package org.flex_pilot {
           return res;
         }
       }
-      throw new Error("The chain '" + str +"' was not found.")
       return null;
     }
 
