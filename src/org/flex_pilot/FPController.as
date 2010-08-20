@@ -49,7 +49,7 @@ package org.flex_pilot {
 
     public static function click(params:Object):void {
       var obj:* = FPLocator.lookupDisplayObject(params);
-
+        
       //Figure out what kind of displayObj were dealing with
       var classInfo:XML = describeType(obj);
       classInfo =  describeType(obj);
