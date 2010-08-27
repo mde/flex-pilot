@@ -716,39 +716,43 @@ package org.flex_pilot {
               break;
             case 'select':
               var sel:* = targ.selectedItem;
-                var labelField:String;
-                FP::complete  { 
-                    if (targ is AdvancedDataGridBase || targ is DataGridBase) {
-                      try {
-                        res.selectedItem=targ.dataProvider[targ.selectedIndex];
-                      }
-                      catch(e:Error) {
-                        trace(e);
-                      }
-                      res.selectedIndex=targ.selectedIndex;  
-                    }
-                    else {
-                        labelField = targ.labelField ?
-                            targ.labelField : 'label';
-                        params.label = sel[labelField];
-                    }
+              var labelField:String;
+              FP::complete  { 
+                if (targ is AdvancedDataGridBase || targ is DataGridBase) {
+                  try {
+                    res.selectedItem=targ.dataProvider[targ.selectedIndex];
                   }
-                  if (!FP::complete)  {
-                      if (targ is DataGridBase) {
-                          try {
-                            res.selectedItem=targ.dataProvider[targ.selectedIndex];
-                          }
-                          catch(e:Error) {
-                            trace(e);
-                          }
-                          res.selectedIndex=targ.selectedIndex;  
-                      }
-                      else {
-                          labelField = targ.labelField ?
-                              targ.labelField : 'label';
-                          params.label = sel[labelField];
-                      }
-                    }
+                  catch(e:Error) {
+                    trace(e);
+                  }
+                  res.selectedIndex=targ.selectedIndex;  
+                }
+                else {
+                  labelField = targ.labelField ?
+                    targ.labelField : 'label';
+                  params.label = sel[labelField];
+                }
+              }
+                
+              if (!FP::complete)  {
+                if (targ is DataGridBase) {
+                  try {
+                    res.selectedItem=targ.dataProvider[targ.selectedIndex];
+                  }
+                  catch(e:Error) {
+                    trace(e);
+                  }
+                  res.selectedIndex=targ.selectedIndex;  
+                }
+                else {
+                  try {
+                    labelField = targ.labelField ?
+                      targ.labelField : 'label';
+                    params.label = sel[labelField];
+                  }
+                  catch (e:Error) {}
+                }
+              }
               break;
             case 'type':
               break;
