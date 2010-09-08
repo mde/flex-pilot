@@ -32,7 +32,7 @@ def controlbar():
     os.system(cmd)
 
 def fptestapp():
-    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestControlBar.mxml -o ./TestControlBar.swf'
+    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./FlexPilotTest.mxml -o ./FlexPilotTest.swf'
     print cmd
     os.system(cmd)
 
@@ -61,7 +61,7 @@ def parse_opts():
     parser = optparse.OptionParser()
     parser.add_option('-t', '--target', dest='target',
             help='build TARGET (tests/app/all/clean, default is all)',
-            metavar='TARGET', choices=('tests', 'app', 'all', 'clean', 'accordion', 'wildcards'), default='all')
+            metavar='TARGET', choices=('tests', 'app', 'all', 'clean', 'accordion', 'wildcards', 'controlbar'), default='all')
     opts, args = parser.parse_args()
     return opts, args
 
