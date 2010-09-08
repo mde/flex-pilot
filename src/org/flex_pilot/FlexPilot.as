@@ -100,12 +100,12 @@ package org.flex_pilot {
       var genExtFunc:Function = function (func:Function):Function {
         return function (...args):* {
           try {
-            for (var arg:* in args){
+            for (var arg:* in args) {
               // Terrible hack working around half baked
               // ExternalInterface support provided by
               // Safari on Windows
               // takes json strings and turns them into objects
-              if (args[arg] is String){
+              if (args[arg] is String) {
                 var o : Object = JSON.decode(args[arg]);
                 args[arg] = o;
               }
@@ -113,6 +113,9 @@ package org.flex_pilot {
             return func.apply(null, args);
           }
           catch (e:Error) {
+            if (e.errorID == 1009){
+              e.message = "There was a problem with your parameters, " + JSON.encode(args);
+            }
             return e;
           }
         }

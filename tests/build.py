@@ -26,8 +26,13 @@ def wildcards():
     print cmd
     os.system(cmd)
 
+def controlbar():
+    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestControlBar.mxml -o ./TestControlBar.swf'
+    print cmd
+    os.system(cmd)
+
 def fptestapp():
-    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./FlexPilotTest.mxml -o ./FlexPilotTest.swf'
+    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestControlBar.mxml -o ./TestControlBar.swf'
     print cmd
     os.system(cmd)
 
@@ -71,13 +76,16 @@ def main(o, a):
     elif target == 'accordion':
         accordion()
     elif target == 'wildcards':
-        wildcards()    
+        wildcards()
+    elif target == 'controlbar':
+        controlbar()  
     # Build everything, natch
     elif target == 'all':
         app()
         accordion()
         wildcards()
         fptestapp()
+        controlbar()
         tests()
     # Clean out any swfs in the directory
     elif target == 'clean':

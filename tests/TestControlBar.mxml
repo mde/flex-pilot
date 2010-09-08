@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!-- containers\navigators\AccordionButtonNav.mxml -->
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" applicationComplete="init();">
+
+    <mx:Script>
+        <![CDATA[
+          	import org.flex_pilot.FPBootstrap;
+            private function init():void {
+              FPBootstrap.flex_pilotLibPath = 'FlexPilot.swf';
+              FPBootstrap.init(stage);
+            }
+            private function addToCart():void {
+                // Handle event.
+				trace("Add to cart, success");
+            }
+        ]]>
+    </mx:Script>
+
+    <mx:Panel title="My Application" 
+        paddingTop="10" paddingBottom="10" 
+        paddingLeft="10" paddingRight="10">
+
+        <mx:HBox width="250" height="200">
+            <!-- Area for your catalog. -->
+        </mx:HBox>
+    
+        <mx:ControlBar width="250">
+            <mx:Label text="Quantity"/>
+            <mx:NumericStepper/>
+            <!-- Use Spacer to push Button control to the right. -->
+            <mx:Spacer width="100%"/>
+            <mx:Button label="Add to Cart"
+                click="addToCart();"/>
+        </mx:ControlBar>
+    </mx:Panel>
+</mx:Application>

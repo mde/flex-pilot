@@ -650,11 +650,10 @@ package org.flex_pilot {
       var indentString:String = " ";
       var output:String = "";
       trace ("-- Starting UI Dump Output --");
-      function traceDisplayList(container:DisplayObjectContainer,                                                indentString:String = ""):void
-      {
+      function traceDisplayList(container:DisplayObjectContainer,
+          indentString:String = ""):void {
           var child:DisplayObject;
-          for (var i:uint=0; i < container.numChildren; i++)
-          {
+          for (var i:uint=0; i < container.numChildren; i++) {
               child = container.getChildAt(i);
               var idx:int = container.getChildIndex(child);
               try {
@@ -665,8 +664,7 @@ package org.flex_pilot {
                 trace(indentString, " -- ", "Child Index: "+idx, "Obj: "+ child, "Name: "+ child.name);
                 output += indentString+" -- Child Index: "+idx+" Obj: "+ child + " Name: "+ child.name;
               }
-              if (container.getChildAt(i) is DisplayObjectContainer)
-              {
+              if (container.getChildAt(i) is DisplayObjectContainer){
                   traceDisplayList(DisplayObjectContainer(child), indentString + "    ")
               }
           }
