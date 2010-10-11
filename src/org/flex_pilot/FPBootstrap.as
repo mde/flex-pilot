@@ -31,6 +31,8 @@ package org.flex_pilot {
       var url:String = FPBootstrap.flex_pilotLibPath;
       var req:URLRequest = new URLRequest(url);
 	  
+	  
+	  
 	  //FlexPilot.init({ context: context, domains: domains });
 	  
 	  

@@ -16,16 +16,13 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
 
 package org.flex_pilot.events {
   import flash.events.*;
+  import flash.utils.getDefinitionByName;
   
-  
-  import mx.controls.DataGrid;
-  import mx.controls.dataGridClasses.DataGridColumn;
   import mx.core.DragSource;
   import mx.core.mx_internal;
   import mx.events.*;
   
   import org.flex_pilot.events.*;
-  
   
   import util.DataGridUtil;
   import util.IndexChangeUtil;
@@ -199,6 +196,7 @@ package org.flex_pilot.events {
 		var p:Object = Events.normalizeParams(defaults, args);
 		var ev:FPSliderEvent=new FPSliderEvent(type, p.bubbles, p.cancelable, p.thumbIndex, p.value, p.triggerEvent, p.clickTarget, p.keyCode);
 		obj.dispatchEvent(ev);
+		
 			
 	}
 	
@@ -378,6 +376,38 @@ package org.flex_pilot.events {
 		var ev:FPIndexChangedEvent = new FPIndexChangedEvent(type , p.bubbles , p.cancelable , p.relatedObject , p.oldIndex , p.newIndex , p.triggerEvent);
 		
 		IndexChangeUtil.headerShift(obj , p.oldIndex , p.newIndex);
+		
+		obj.dispatchEvent(ev);
+	}
+	
+	public static function triggerIndexChangeEvent(obj:* , type:String , ...args):void{
+		
+		var defaults:Array = [
+			['bubbles' , false] , 
+			['cancelable' , false] ,
+			['oldIndex' , -1] ,
+			['newIndex' , -1] , 
+		];
+		
+		var p:Object=Events.normalizeParams(defaults, args);
+		var fpIndxChngEvt:*=getDefinitionByName('org.flex_pilot.events.FPIndexChangeEvent');
+		var ev:* = new fpIndxChngEvt(type , p.bubbles , p.cancelable ,p.oldIndex , p.newIndex );
+		
+		
+		
+		obj.dispatchEvent(ev);
+	}
+	
+	public static function triggerEventEvent(obj:* , type:String , ...args):void{
+		
+		var defaults:Array = [
+			['bubbles' , false] , 
+			['cancelable' , false] ,
+		];
+		
+		var p:Object=Events.normalizeParams(defaults, args);
+		
+		var ev:FPEvent = new FPEvent(type , p.bubbles , p.cancelable );
 		
 		obj.dispatchEvent(ev);
 	}

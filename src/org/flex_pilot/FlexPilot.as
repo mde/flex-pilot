@@ -15,18 +15,23 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
 */
 
 package org.flex_pilot {
-  import org.flex_pilot.astest.ASTest;
-  import org.flex_pilot.FPLocator;
-  import org.flex_pilot.FPController;
-  import org.flex_pilot.FPAssert;
-  import flash.utils.*;
-  import mx.core.Application;
-  import flash.system.Security;
+  import com.adobe.serialization.json.JSON;
+  
+  import flash.display.DisplayObject;
   import flash.display.Sprite;
   import flash.display.Stage;
-  import flash.display.DisplayObject;
   import flash.external.ExternalInterface;
-  import com.adobe.serialization.json.JSON;
+  import flash.system.ApplicationDomain;
+  import flash.system.Security;
+  import flash.utils.*;
+  
+  import mx.core.Application;
+  
+  import org.flex_pilot.FPAssert;
+  import org.flex_pilot.FPController;
+  import org.flex_pilot.FPLocator;
+  import org.flex_pilot.astest.ASTest;
+  
 
   public class FlexPilot extends Sprite {
     public static var config:Object = {
@@ -73,7 +78,27 @@ package org.flex_pilot {
       // A reference to the Stage
       // ----------------
       if (!(params.context is Stage || params.context is Application)) {
-        throw new Error('FlexPilot.config.context must be a reference to the Application or Stage.');
+		  
+		  //  Can't access the namespace variable mx_internal::VERSION from outside the application to get the flex sdk version , so had to do it as shown below
+		  
+		  
+		  var sparkApplication:*;
+		  
+		  try{
+			sparkApplication=ApplicationDomain.currentDomain.getDefinition('spark.components.Application');
+			if(!params.context is sparkApplication){
+				throw new Error('spark match failed');
+			}
+			
+			
+		  }
+		  catch(e:Error){
+			  trace(e);
+			  throw new Error('FlexPilot.config.context must be a reference to the Application or Stage.');
+		  }
+			
+		  
+        
       }
       config.context = params.context;
 
@@ -183,7 +208,9 @@ package org.flex_pilot {
     }
 
     public static function contextIsApplication():Boolean {
-      return (config.context is Application);
+		
+	  var sparkApplication:*=ApplicationDomain.currentDomain.getDefinition('spark.components.Application')
+      return ( config.context is Application || config.context is sparkApplication );
     }
 
     public static function getContext():* {
