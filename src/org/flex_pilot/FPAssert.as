@@ -235,6 +235,10 @@ package org.flex_pilot {
             }
           }
         }
+        // Do any preprocessing of the value to check
+        if (opts.preMatchProcess) {
+          attrVal = opts.preMatchProcess(attrVal);
+        }		
       }
       // Attr name is passed as part of the validator using
       // the pipe syntax:
@@ -265,22 +269,38 @@ package org.flex_pilot {
             attrVal = attrVal[attrName];
           }
           else {
-            throw new Error('"' + key +
-                '" attribute does not exist on this object.');
+            var styleResult:* = attrVal.getStyle(attrName);
+            if (styleResult == undefined) {
+              throw new Error('"' + key +
+                  '" attribute does not exist on this object.');
+            } else {
+              attrVal = styleResult as Object;
+            }
+
           }
         }
       }
 
       // Do any preprocessing of the value to check
-      if (opts.preMatchProcess) {
-        attrVal = opts.preMatchProcess(attrVal);
+      if (opts && opts.preMatchProcess) {
+          attrVal = opts.preMatchProcess(attrVal);
       }
 
       // Check for a match
       var ret:Boolean = false;
       var errMsg:String;
       if (matchType == FPAssert.matchTypes.EXACT) {
-        ret = attrVal == expectedVal;
+        if(attrVal is uint)
+        {
+          var pattern:RegExp = /^#/;
+          var newExpectedVal:String = expectedVal.replace(pattern, '0x');
+          //Convert both to numbers with base 10
+          ret = (attrVal.toString() == parseInt(newExpectedVal))
+        }
+        else
+        {
+          ret = (attrVal.toString() == expectedVal);
+        }
         errMsg = 'Expected "' + expectedVal + '", got "' + attrVal + '"';
       }
       else if (matchType == FPAssert.matchTypes.CONTAINS) {
