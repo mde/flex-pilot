@@ -278,8 +278,8 @@ package org.flex_pilot {
       }
 
       // Do any preprocessing of the value to check
-      if (opts.preMatchProcess) {
-        attrVal = opts.preMatchProcess(attrVal);
+      if (opts && opts.preMatchProcess) {
+          attrVal = opts.preMatchProcess(attrVal);
       }
 
       // Check for a match
