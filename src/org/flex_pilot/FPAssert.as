@@ -234,11 +234,7 @@ package org.flex_pilot {
               break;
             }
           }
-        }
-        // Do any preprocessing of the value to check
-        if (opts.preMatchProcess) {
-          attrVal = opts.preMatchProcess(attrVal);
-        }		
+        }	
       }
       // Attr name is passed as part of the validator using
       // the pipe syntax:
