@@ -19,6 +19,7 @@ package org.flex_pilot {
   import org.flex_pilot.FPLogger;
   import org.flex_pilot.FPStrip;
   import flash.utils.getQualifiedClassName;
+  import mx.utils.ObjectUtil;  
 
   public dynamic class FPAssert {
 
@@ -237,7 +238,7 @@ package org.flex_pilot {
         }
         // Do any preprocessing of the value to check
         if (opts.preMatchProcess) {
-			attrVal = opts.preMatchProcess(attrVal);
+          attrVal = opts.preMatchProcess(attrVal);
         }		
       }
       // Attr name is passed as part of the validator using
@@ -279,7 +280,7 @@ package org.flex_pilot {
       var ret:Boolean = false;
       var errMsg:String;
       if (matchType == FPAssert.matchTypes.EXACT) {
-        ret = attrVal == expectedVal;
+        ret = ObjectUtil.toString(attrVal) === expectedVal;
         errMsg = 'Expected "' + expectedVal + '", got "' + attrVal + '"';
       }
       else if (matchType == FPAssert.matchTypes.CONTAINS) {
