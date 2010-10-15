@@ -286,7 +286,17 @@ package org.flex_pilot {
       var ret:Boolean = false;
       var errMsg:String;
       if (matchType == FPAssert.matchTypes.EXACT) {
-        ret = attrVal == expectedVal;
+        if(attrVal is uint)
+        {
+          var pattern:RegExp = /^#/;
+          var newExpectedVal:String = expectedVal.replace(pattern, '0x');
+          //Convert both to numbers with base 10
+          ret = (attrVal.toString() == parseInt(newExpectedVal))
+        }
+        else
+        {
+          ret = (attrVal.toString() == expectedVal);
+        }
         errMsg = 'Expected "' + expectedVal + '", got "' + attrVal + '"';
       }
       else if (matchType == FPAssert.matchTypes.CONTAINS) {
