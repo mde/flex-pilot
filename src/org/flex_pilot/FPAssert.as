@@ -269,8 +269,14 @@ package org.flex_pilot {
             attrVal = attrVal[attrName];
           }
           else {
-            throw new Error('"' + key +
-                '" attribute does not exist on this object.');
+            var styleResult:* = attrVal.getStyle(attrName);
+            if (styleResult == undefined) {
+              throw new Error('"' + key +
+                  '" attribute does not exist on this object.');
+            } else {
+              attrVal = styleResult as Object;
+            }
+
           }
         }
       }
