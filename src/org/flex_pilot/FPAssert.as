@@ -235,6 +235,10 @@ package org.flex_pilot {
             }
           }
         }
+        // Do any preprocessing of the value to check
+        if (opts.preMatchProcess) {
+			attrVal = opts.preMatchProcess(attrVal);
+        }		
       }
       // Attr name is passed as part of the validator using
       // the pipe syntax:
@@ -269,11 +273,6 @@ package org.flex_pilot {
                 '" attribute does not exist on this object.');
           }
         }
-      }
-
-      // Do any preprocessing of the value to check
-      if (opts.preMatchProcess) {
-        attrVal = opts.preMatchProcess(attrVal);
       }
 
       // Check for a match
