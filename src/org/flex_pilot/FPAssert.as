@@ -19,7 +19,6 @@ package org.flex_pilot {
   import org.flex_pilot.FPLogger;
   import org.flex_pilot.FPStrip;
   import flash.utils.getQualifiedClassName;
-  import mx.utils.ObjectUtil;  
 
   public dynamic class FPAssert {
 
@@ -280,7 +279,7 @@ package org.flex_pilot {
       var ret:Boolean = false;
       var errMsg:String;
       if (matchType == FPAssert.matchTypes.EXACT) {
-        ret = ObjectUtil.toString(attrVal) === expectedVal;
+        ret = String(attrVal) === expectedVal;
         errMsg = 'Expected "' + expectedVal + '", got "' + attrVal + '"';
       }
       else if (matchType == FPAssert.matchTypes.CONTAINS) {
