@@ -208,9 +208,16 @@ package org.flex_pilot {
     }
 
     public static function contextIsApplication():Boolean {
-		
-	  var sparkApplication:*=ApplicationDomain.currentDomain.getDefinition('spark.components.Application')
-      return ( config.context is Application || config.context is sparkApplication );
+	    //In flex 4 you want to try the sparks.components.Application
+	    var returnValue:Boolean;
+	    try {
+	      var sparkApplication:*= ApplicationDomain.currentDomain.getDefinition('spark.components.Application')
+        returnValue = ( config.context is Application || config.context is sparkApplication );
+      }
+      catch(e:Error) {
+        returnValue = (config.context is Application);
+      }
+      return returnValue;
     }
 
     public static function getContext():* {

@@ -403,8 +403,7 @@ package org.flex_pilot {
           _this.generateAction('itemDragDrop', targ , opts);      
           break;
         case (((e is ListEvent 
-        || e is IndexChangedEvent 
-        || e is eventMap[IndexChangedEvent])
+        || e is IndexChangedEvent)
         && ( targ is ComboBox 
           || targ is componentMap[ComboBox] 
           || targ is ListBase 
@@ -601,11 +600,11 @@ package org.flex_pilot {
         test=res;
       }
 
-      var r:* = ExternalInterface.call('fp_recorderAction', res);
       if (t=='select'){
         test=res;
       }
-  
+      
+      var r:* = ExternalInterface.call('fp_recorderAction', res);
       if (!r) {
         FPLogger.log(res);
         FPLogger.log('(FlexPilot Flash bridge not found.)');
