@@ -305,6 +305,7 @@ package org.flex_pilot {
     }
 
     // Generates a chained-locator expression for the clicked-on item
+    // Generates a chained-locator expression for the clicked-on item
     public static function generateLocator(item:*, ...args):String {
       var strictLocators:Boolean = FlexPilot.config.strictLocators;
       if (args.length) {
@@ -326,24 +327,12 @@ package org.flex_pilot {
           var par:* = item.parent;
           var count:int = 0;
           if (par is DisplayObjectContainer) {
-            if (par is IRawChildrenContainer) {
-              count = par.rawChildren.numChildren;
-            }
-            else {
-              count = par.numChildren;
-            }
+            count = par.numChildren;
           }
           if (count > 0) {
             var index:int = 0;
             while (index < count) {
-              var kid:DisplayObject;
-              if (par is IRawChildrenContainer) {
-                kid = par.rawChildren.getChildAt(index);
-              }
-              else {
-                kid = par.getChildAt(index);
-              }
-              
+              var kid:DisplayObject = par.getChildAt(index);
               if (kid == item) {
                 winner = true;
                 break;
@@ -387,7 +376,7 @@ package org.flex_pilot {
         // Try looking up a value for each attribute in order
         // of preference
         for each (attr in locatorPriority) {
-          // If we find one of the lookup keys, we may have a winner
+          // If we find one of the lookuup keys, we may have a winner
           if (weHaveAWinner(item, attr)) {
             // Prepend onto the locator expression, then check to
             // see if the chain still results in a valid lookup
