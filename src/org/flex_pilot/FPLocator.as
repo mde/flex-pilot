@@ -32,7 +32,8 @@ package org.flex_pilot {
       ['link', FPLocator.findLink],
       ['label', null],
       ['htmlText', FPLocator.findHTML],
-      ['automationName', null]
+      ['automationName', null],
+      ['child', null]
     ];
     private static var locatorMapObj:Object = {};
     private static var locatorMapCreated:Boolean = false;
@@ -46,7 +47,8 @@ package org.flex_pilot {
       'id',
       'name',
       'label',
-      'htmlText'
+      'htmlText',
+      'child'
     ];
 
     public static function init():void {
@@ -185,11 +187,34 @@ package org.flex_pilot {
     // Default locator for all basic key/val attr matches
     private static function findBySimpleAttr(
         obj:*, attr:String, val:*):Boolean {
+      //check to see if a childIndex is specified
+      var childIndexReg:RegExp = new RegExp("\\[.*\\]", "g");
+      var childIndex:String = childIndexReg.exec(val);
+      //do we have an child index constraint
+      if (childIndex != null) {
+        //remove it so it doesn't mess up further matching
+        val = val.replace(childIndexReg, "");
+        childIndex = childIndex.replace("[","");
+        childIndex = childIndex.replace("]","");
+        var childIndexInt:int = Number(childIndex);
+        //If this node matches the provided child index
+        var par:* = obj.parent;
+        if (par is DisplayObjectContainer) {
+          var realObjIndex:int = par.getChildIndex(obj);
+          //if we were given a childIndex, make sure this passes that req
+          if (childIndexInt != realObjIndex) {
+            return false;
+          }
+          else if (val == ""){
+            return true;
+          }
+        }
+      }
       //if we receive a simple attr with an asterix
       //we create a regex allowing for wildcard strings
       if (val.indexOf("*") != -1) {
         if (attr in obj) {
-          //repalce wildcards with any character match
+          //replace wildcards with any character match
           var valRegExp:String = val.replace(new RegExp("\\*", "g"), "(.*)");
           //force a beginning and end
           valRegExp = "^"+valRegExp +"$";
