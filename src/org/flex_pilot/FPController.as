@@ -18,17 +18,19 @@ package org.flex_pilot {
   import org.flex_pilot.events.*;
   import org.flex_pilot.FPLocator;
   import flash.events.*
-  import mx.events.*
   import flash.utils.*;
   import flash.geom.Point;
+  import flash.display.DisplayObject;
+  import flash.display.DisplayObjectContainer;
+  import mx.events.*
 
   public class FPController {
     public function FPController():void {}
-    
-  public static function mouseOver(params:Object):void {
-      var obj:* = FPLocator.lookupDisplayObject(params);
-      Events.triggerMouseEvent(obj, MouseEvent.MOUSE_OVER);
-      Events.triggerMouseEvent(obj, MouseEvent.ROLL_OVER);
+
+    public static function mouseOver(params:Object):void {
+        var obj:* = FPLocator.lookupDisplayObject(params);
+        Events.triggerMouseEvent(obj, MouseEvent.MOUSE_OVER);
+        Events.triggerMouseEvent(obj, MouseEvent.ROLL_OVER);
     }
 
     public static function mouseOut(params:Object):void {
@@ -197,7 +199,7 @@ package org.flex_pilot {
 
     public static function doubleClick(params:Object):void {
       var obj:* = FPLocator.lookupDisplayObject(params);
-      
+
       //Figure out what kind of displayObj were dealing with
       var classInfo:XML = describeType(obj);
       classInfo =  describeType(obj);
@@ -323,48 +325,81 @@ package org.flex_pilot {
           // Do nothing
       }
     }
+
     public static function getTextValue(params:Object):String {
       // Look up the item where we want to get the property
-        var obj:* = FPLocator.lookupDisplayObject(params);
-        var attrs:Object=['htmlText', 'label'];
-        var res:String = 'undefined';
-        var attr:String;
-        for each (attr in attrs){
-            res = obj[attr];
-            if (res != 'undefined'){
-                break;
-            }
-        }
-        return res;
+      var obj:* = FPLocator.lookupDisplayObject(params);
+      var attrs:Object=['htmlText', 'label'];
+      var res:String = 'undefined';
+      var attr:String;
+      for each (attr in attrs){
+          res = obj[attr];
+          if (res != 'undefined'){
+              break;
+          }
       }
-      
+      return res;
+    }
+
     public static function getPropertyValue(params:Object, opts:Object = null):String {
       // Look up the item where we want to get the property
-        var obj:* = FPLocator.lookupDisplayObject(params);
-        var attrName:String;
-        var attrVal:String = 'undefined';
-        if (opts){
-            if (opts.attrName is String) {
-            attrName = opts.attrName;
-            attrVal = obj[attrName];
-            }
-        }
-        else {
-            if (params.attrName is String) {
-            attrName = params.attrName;
-            attrVal = obj[attrName];
-            }
-        }
-        return String(attrVal);
+      var obj:* = FPLocator.lookupDisplayObject(params);
+      var attrName:String;
+      var attrVal:String = 'undefined';
+      if (opts){
+          if (opts.attrName is String) {
+          attrName = opts.attrName;
+          attrVal = obj[attrName];
+          }
       }
-      
+      else {
+          if (params.attrName is String) {
+          attrName = params.attrName;
+          attrVal = obj[attrName];
+          }
+      }
+      return String(attrVal);
+    }
+
     public static function getObjectCoords(params:Object):String {
-        // Look up the item which coords we want to get
-        var obj:* = FPLocator.lookupDisplayObject(params);
-        var destCoords:Point = new Point(0, 0);
-        destCoords = obj.localToGlobal(destCoords);
-        var coords:String = '(' + String(destCoords.x) + ',' + String(destCoords.y) + ')';
-        return coords;
+      // Look up the item which coords we want to get
+      var obj:* = FPLocator.lookupDisplayObject(params);
+      var destCoords:Point = new Point(0, 0);
+      destCoords = obj.localToGlobal(destCoords);
+      var coords:String = '(' + String(destCoords.x) + ',' + String(destCoords.y) + ')';
+      return coords;
+    }
+
+    //Dumping the child structure of node and traversing
+    //for child test building purposes
+    public static function dump(params:Object):String {
+      var obj:* = FPLocator.lookupDisplayObject(params);
+
+      var indentString:String = " ";
+      var output:String = "";
+      trace ("-- Starting UI Dump Output --");
+      function traceDisplayList (container:DisplayObjectContainer,
+                                indentString:String = ""):void {
+          var child:DisplayObject;
+          for (var i:uint=0; i < container.numChildren; i++) {
+              child = container.getChildAt(i);
+              var idx:int = container.getChildIndex(child);
+              try {
+                trace(indentString, " -- ", "Child Index: "+idx, "Obj: "+ child, "ID: "+ child['id'], "Name: "+ child.name);
+                output += indentString+" -- Child Index: "+idx+" Obj: "+ child +" ID: "+ child['id']+ " Name: "+ child.name;
+              }
+              catch(e:Error) {
+                trace(indentString, " -- ", "Child Index: "+idx, "Obj: "+ child, "Name: "+ child.name);
+                output += indentString+" -- Child Index: "+idx+" Obj: "+ child + " Name: "+ child.name;
+              }
+              if (container.getChildAt(i) is DisplayObjectContainer) {
+                  traceDisplayList(DisplayObjectContainer(child), indentString + "    ")
+              }
+          }
+      }
+      traceDisplayList(obj);
+      trace ("-- Finished UI Dump Output --");
+      return output;
     }
   }
 }
