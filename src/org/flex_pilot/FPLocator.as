@@ -19,6 +19,7 @@ package org.flex_pilot {
   import org.flex_pilot.FPLogger;
   import flash.display.DisplayObject;
   import flash.display.DisplayObjectContainer;
+  import mx.core.IRawChildrenContainer;
   import flash.utils.*;
 
   public class FPLocator {
@@ -76,7 +77,6 @@ package org.flex_pilot {
         if (!res && FlexPilot.contextIsApplication()) {
           res = lookupDisplayObjectForContext(params, FlexPilot.getStage());
         }
-
         return res;
     }
 
@@ -103,12 +103,23 @@ package org.flex_pilot {
           // the locator chain
           var count:int = 0;
           if (item is DisplayObjectContainer) {
-            count = item.numChildren;
+            if (item is IRawChildrenContainer) {
+              count = item.rawChildren.numChildren;
+            }
+            else {
+              count = item.numChildren;
+            }
           }
           if (count > 0) {
             var index:int = 0;
             while (index < count) {
-              var kid:DisplayObject = item.getChildAt(index);
+              var kid:DisplayObject;
+              if (item is IRawChildrenContainer) {
+                kid = item.rawChildren.getChildAt(index);
+              }
+              else {
+                kid = item.getChildAt(index);
+              }
               var res:DisplayObject = checkFPLocatorChain(kid, next);
               if (res) {
                 return res;
@@ -122,17 +133,28 @@ package org.flex_pilot {
 
       var str:String = normalizeFPLocator(params);
       locators = parseFPLocatorChainExpresson(str);
-
       queue.push(obj);
       while (queue.length) {
         // Otherwise grab the next item in the queue
         var item:* = queue.shift();
         // Append any kids to the end of the queue
         if (item is DisplayObjectContainer) {
-          var count:int = item.numChildren;
+          var count:int = 0;
+          if (item is IRawChildrenContainer) {
+            count = item.rawChildren.numChildren;
+          }
+          else {
+            count = item.numChildren;
+          }
           var index:int = 0;
           while (index < count) {
-            var kid:DisplayObject = item.getChildAt(index);
+            var kid:DisplayObject
+            if (item is IRawChildrenContainer) {
+              kid = item.rawChildren.getChildAt(index);
+            }
+            else {
+              kid = item.getChildAt(index);
+            }
             queue.push(kid);
             index++;
           }
@@ -143,7 +165,6 @@ package org.flex_pilot {
           return res;
         }
       }
-      throw new Error("The chain '" + str +"' was not found.")
       return null;
     }
 
@@ -200,7 +221,13 @@ package org.flex_pilot {
         //If this node matches the provided child index
         var par:* = obj.parent;
         if (par is DisplayObjectContainer) {
-          var realObjIndex:int = par.getChildIndex(obj);
+          var realObjIndex:int;
+          if (par is IRawChildrenContainer) {
+            realObjIndex = par.rawChildren.getChildIndex(obj);
+          }
+          else {
+            realObjIndex = par.getChildIndex(obj);
+          }
           //if we were given a childIndex, make sure this passes that req
           if (childIndexInt != realObjIndex) {
             return false;
@@ -292,22 +319,32 @@ package org.flex_pilot {
         var winner:Boolean = false;
         // Get an attribute that actually has a value
         if (usableAttr(item, attr)) {
-          // Make sure that the parent can actually see
-          // this item in its list of children
-          var par:* = item.parent;
-          var count:int = 0;
-          if (par is DisplayObjectContainer) {
-            count = par.numChildren;
+          //If its a raw child container
+          if (par is IRawChildrenContainer) {
+            if (par.rawChildren.contains(item)){
+              winner = true;
+            }
           }
-          if (count > 0) {
-            var index:int = 0;
-            while (index < count) {
-              var kid:DisplayObject = par.getChildAt(index);
-              if (kid == item) {
-                winner = true;
-                break;
+          else {
+            // Make sure that the parent can actually see
+            // this item in its list of children
+            var par:* = item.parent;
+            var count:int = 0;
+            if (par is DisplayObjectContainer) {
+                count = par.numChildren;
+            }
+            if (count > 0) {
+              var index:int = 0;
+              while (index < count) {
+                var kid:DisplayObject;
+                kid = par.getChildAt(index);
+
+                if (kid == item) {
+                  winner = true;
+                  break;
+                }
+                index++;
               }
-              index++;
             }
           }
         }
@@ -346,7 +383,7 @@ package org.flex_pilot {
         // Try looking up a value for each attribute in order
         // of preference
         for each (attr in locatorPriority) {
-          // If we find one of the lookuup keys, we may have a winner
+          // If we find one of the lookup keys, we may have a winner
           if (weHaveAWinner(item, attr)) {
             // Prepend onto the locator expression, then check to
             // see if the chain still results in a valid lookup

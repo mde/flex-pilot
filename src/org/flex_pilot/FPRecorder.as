@@ -26,10 +26,11 @@ package org.flex_pilot {
   import flash.events.MouseEvent;
   import flash.events.TextEvent;
   import flash.events.KeyboardEvent;
+  import flash.external.ExternalInterface;
   import mx.events.ListEvent;
   import mx.controls.ComboBox;
   import mx.controls.List;
-  import flash.external.ExternalInterface;
+  import mx.core.IRawChildrenContainer;
 
   public class FPRecorder {
     // Remember the last event type so we know when to
@@ -69,12 +70,23 @@ package org.flex_pilot {
           item.addEventListener(ListEvent.CHANGE, FPRecorder.handleEvent);
         }
         if (item is DisplayObjectContainer) {
-          count = item.numChildren;
+          if (item is IRawChildrenContainer) {
+            count = item.rawChildren.numChildren;
+          }
+          else {
+            count = item.numChildren;
+          }
         }
         if (count > 0) {
           var index:int = 0;
           while (index < count) {
-            var kid:DisplayObject = item.getChildAt(index);
+            var kid:DisplayObject;
+            if (item is IRawChildrenContainer) {
+              kid = item.rawChildren.getChildAt(index);
+            }
+            else {
+              kid = item.getChildAt(index);
+            }
             var res:DisplayObject = recurseAttach(kid);
             index++;
           }

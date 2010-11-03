@@ -113,6 +113,9 @@ package org.flex_pilot {
             return func.apply(null, args);
           }
           catch (e:Error) {
+            if (e.errorID == 1009){
+              e.message = "There was a problem with your parameters, " + JSON.encode(args);
+            }
             return e;
           }
         }
