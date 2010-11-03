@@ -15,25 +15,29 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
 */
 
 package org.flex_pilot {
+  import com.adobe.serialization.json.JSON;
+
   import org.flex_pilot.astest.ASTest;
   import org.flex_pilot.FPLocator;
   import org.flex_pilot.FPController;
   import org.flex_pilot.FPAssert;
+
   import flash.utils.*;
-  import mx.core.Application;
   import flash.system.Security;
   import flash.display.Sprite;
   import flash.display.Stage;
   import flash.display.DisplayObject;
   import flash.external.ExternalInterface;
-  import com.adobe.serialization.json.JSON;
+  import flash.system.ApplicationDomain;
+
+  import mx.core.Application;
 
   public class FlexPilot extends Sprite {
     public static var config:Object = {
       context: null, // Ref to the Stage or Application
       timeout: 20000, // Default timeout for waits
       domains: [],
-      strictLocators: false 
+      strictLocators: false
     };
     public static var controllerMethods:Array = [];
     public static var assertMethods:Array = [];
@@ -70,10 +74,21 @@ package org.flex_pilot {
       var methodName:String;
       var item:*;
       var descr:XML;
+      var sparkApplication:*;
+
       // A reference to the Stage
       // ----------------
       if (!(params.context is Stage || params.context is Application)) {
-        throw new Error('FlexPilot.config.context must be a reference to the Application or Stage.');
+        // See if we have a flex 4 app
+        try {
+          sparkApplication = ApplicationDomain.currentDomain.getDefinition('spark.components.Application');
+          if (!params.context is sparkApplication) {
+            throw new Error('spark match failed');
+          }
+        }
+        catch (e:Error) {
+          throw new Error('FlexPilot.config.context must be a reference to the Application or Stage.');
+        }
       }
       config.context = params.context;
 
@@ -183,7 +198,16 @@ package org.flex_pilot {
     }
 
     public static function contextIsApplication():Boolean {
-      return (config.context is Application);
+      //In flex 4 you want to try the sparks.components.Application
+      var retVal:Boolean;
+      try {
+        var sparkApplication:*= ApplicationDomain.currentDomain.getDefinition('spark.components.Application')
+        retVal = ( config.context is Application || config.context is sparkApplication );
+      }
+      catch(e:Error) {
+        retVal = (config.context is Application);
+      }
+      return retVal;
     }
 
     public static function getContext():* {
