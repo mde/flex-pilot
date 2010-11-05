@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+    applicationComplete="onApplicaitonComplete()"
+	layout="absolute">
+
+	<mx:Script>
+	<![CDATA[
+	import mx.managers.PopUpManager;
+	import mx.managers.PopUpManagerChildList;
+	import org.flex_pilot.FPBootstrap;
+	
+	//http://hqdt079.ad.ofoto.com/TestProj/PreservationBooks/Concept2/fptest.html
+	//document.getElementById('fptest').fp_click
+	//document.getElementById('fptest').fp_click({chain:"id:fptest/id:views/id:c1/automationName:testButton"})
+	//document.getElementById('fptest').fp_click({chain:"automationName:testAlert/automationName:okButton"})
+	
+	/* portBooks
+	document.getElementById('PortBooks').fp_explorerStart() 
+	document.getElementById('PortBooks').fp_click({chain:'automationName:portBooks/automationName:mainView/id:photoThemeTray/automationName:autoFillButton'})
+    document.getElementById('PortBooks').fp_click({chain:'automationName:portBooks/automationName:mainView/automationName:headerPanel/id:save'})	
+	
+	document.getElementById('booksApp').fp_click({chain:'automationName:portBooks/automationName:mainView/id:photoThemeTray/automationName:autoFillButton'})
+	booksApp
+   */
+
+	
+	private function onApplicaitonComplete() : void
+	{
+		try
+		{
+			Security.allowDomain("*");
+			FPBootstrap.flex_pilotLibPath = "FlexPilot.swf";
+    	    FPBootstrap.init(stage) //"http://hqdt079.ad.ofoto.com"); 
+			trace("FlexPilot initialized.");	
+		}
+		catch (e:Error)
+		{
+			trace("flex pilot error: " + e.toString());	
+		}			
+	}
+	
+	protected function onClickTestPopUp(event:Event) : void
+	{
+		//var tp:testAlert = new testAlert();
+		//tp.setBraemarAlertData("PopUp Test","FlexPilot PopUp Test","OK");			
+		//PopUpManager.addPopUp(tp, DisplayObject( this ),true,PopUpManagerChildList.APPLICATION);	
+		var g1:GetDocumentName = new GetDocumentName(this);
+		g1.ShowPopUp();	
+	} 
+
+	protected function changeView(event:Event) : void
+	{
+		var vnum:int=0;
+		if (views.selectedIndex == 0) vnum = 1;
+		else vnum = 0;
+		
+		views.selectedIndex = vnum;
+	} 
+		
+
+	]]>
+	</mx:Script>
+	
+	<mx:ViewStack x="10" y="0" id="views" width="500" height="250"> 
+		<mx:Canvas id="c1">
+			<mx:Button id="b1" label="test" x="50" y="50" width="70" height="24" click="{t1.text='I was clicked'}"  automationName="testButton"/>
+			<mx:Button id="testPopUp" x="50" y="85" width="70" label="PopUp" click="onClickTestPopUp(event)" />		
+			<mx:TextArea id="t1" y="75" x="125" width="100" height="50" />
+		</mx:Canvas>
+		<mx:Canvas id="c2">
+			<mx:Button id="b2" label="test 2" x="50" y="50" width="70" height="24" click="{t2.text='I was clicked by button 2'}"  automationName="testButton"/>
+			<mx:Button id="testPopUp2" x="50" y="85" width="70" label="PopUp 2" click="onClickTestPopUp(event)" />		
+			<mx:TextArea id="t2" y="75" x="125" width="100" height="50" />
+		</mx:Canvas>
+	</mx:ViewStack>
+
+	<mx:Button id="v1" label="Change View" x="10" y="200" width="100" height="24" click="changeView(event)"  automationName="viewButton"/>
+	
+
+	
+</mx:Application>

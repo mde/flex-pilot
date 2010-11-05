@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>TestBasic</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TestBasic</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/TestBasic.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForFlexReady</td>
+	<td>id=testApp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>flexClick</td>
+	<td>id=testApp</td>
+	<td>chain=name:testTextArea/name:UITextField18</td>
+</tr>
+<tr>
+	<td>flexType</td>
+	<td>id=testApp</td>
+	<td>text=testing,chain=name:testTextArea/name:UITextField18</td>
+</tr>
+<tr>
+	<td>flexClick</td>
+	<td>id=testApp</td>
+	<td>chain=id:howdyButton</td>
+</tr>
+<tr>
+	<td>flexType</td>
+	<td>id=testApp</td>
+	<td>text=smaller box,chain=name:testTextInput/name:UITextField23</td>
+</tr>
+<tr>
+	<td>flexClick</td>
+	<td>id=testApp</td>
+	<td>chain=name:comboTest/name:Button36</td>
+</tr>
+<tr>
+	<td>flexSelect</td>
+	<td>id=testApp</td>
+	<td>label=Geddy,chain=name:comboTest</td>
+</tr>
+<tr>
+	<td>flexDragDropElemToElem</td>
+	<td>id=testApp</td>
+	<td>chain=name:dragSprite, optchain=id:howdyButton</td>
+</tr>
+<tr>
+	<td>flexClick</td>
+	<td>id=testApp</td>
+	<td>chain=name:comboTest/name:Button36</td>
+</tr>
+<tr>
+	<td>flexSelect</td>
+	<td>id=testApp</td>
+	<td>label=Alex,chain=name:comboTest</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

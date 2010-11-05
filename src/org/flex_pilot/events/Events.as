@@ -146,6 +146,7 @@ package org.flex_pilot.events {
           p.ctrlKey, p.altKey, p.shiftKey);
       obj.dispatchEvent(ev);
     }
+    
     public static function triggerListEvent(obj:*, type:String,
         ...args):void {
       // AS3 Object keys don't iterate in insertion order
@@ -161,6 +162,20 @@ package org.flex_pilot.events {
       var ev:FPListEvent = new FPListEvent(type, p.bubbles,
           p.cancelable, p.columnIndex, p.rowIndex, p.reason,
           p.itemRenderer);
+      obj.dispatchEvent(ev);
+    }
+    
+    public static function triggerCalendarLayoutChangeEvent(obj:*,
+        ...args):void {
+      var defaults:Array = [
+        ['bubbles', false], // Don't override -- the real one doesn't bubble
+        ['cancelable', false],
+        ['newDate', null],
+        ['triggerEvent', new Event("change")]
+      ];
+      var p:Object = Events.normalizeParams(defaults, args);
+      var ev:CalendarLayoutChangeEvent = new CalendarLayoutChangeEvent("change",
+        p.bubbles, p.cancelable, p.newDate, p.triggerEvent);
       obj.dispatchEvent(ev);
     }
   }

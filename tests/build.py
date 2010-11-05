@@ -12,12 +12,22 @@ MXMLC_PATH = 'mxmlc -debug -verbose-stacktraces -incremental=true -compiler.stri
 as_re = re.compile('\.as$|\.mxml$')
 
 def app():
-    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestApp.mxml -o ./TestApp.swf'
+    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestBasic.mxml -o ./TestBasic.swf'
     print cmd
     os.system(cmd)
 
 def accordion():
     cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestAccordion.mxml -o ./TestAccordion.swf'
+    print cmd
+    os.system(cmd)
+
+def calendar():
+    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestCalendar.mxml -o ./TestCalendar.swf'
+    print cmd
+    os.system(cmd)
+    
+def raw():
+    cmd = MXMLC_PATH + ' -source-path=. -source-path+=../src ./TestRaw.mxml -o ./TestRaw.swf'
     print cmd
     os.system(cmd)
 
@@ -36,7 +46,7 @@ def tests():
 def clean():
     for root, dirs, file_list in os.walk('./'):
         for file in file_list:
-            if file.endswith('.swf') or file.endswith('.swc'):
+            if file.endswith('.swf') or file.endswith('.swc') or file.endswith('.swf.cache'): 
                 path = root + '/' + file
                 cmd = 'rm ' + path
                 #print cmd
@@ -64,6 +74,8 @@ def main(o, a):
     elif target == 'all':
         app()
         accordion()
+        calendar()
+        raw()
         tests()
     # Clean out any swfs in the directory
     elif target == 'clean':

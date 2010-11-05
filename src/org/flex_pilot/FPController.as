@@ -23,6 +23,7 @@ package org.flex_pilot {
   import flash.display.DisplayObject;
   import flash.display.DisplayObjectContainer;
   import mx.events.*
+  import mx.controls.DateField;
 
   public class FPController {
     public function FPController():void {}
@@ -325,7 +326,14 @@ package org.flex_pilot {
           // Do nothing
       }
     }
-
+    
+    public static function date(params:Object):void {
+      // Look up the item to write to
+      var obj:* = FPLocator.lookupDisplayObject(params);
+      obj.selectedDate = DateField.stringToDate(params.date, "MM/DD/YYYY");
+      Events.triggerCalendarLayoutChangeEvent(obj);
+    }
+    
     public static function getTextValue(params:Object):String {
       // Look up the item where we want to get the property
       var obj:* = FPLocator.lookupDisplayObject(params);

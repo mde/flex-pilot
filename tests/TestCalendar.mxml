@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- controls\date\DateFieldFormat.mxml -->
+<mx:Application  xmlns:mx="http://www.adobe.com/2006/mxml" applicationComplete="init();">
+	<mx:Script>
+      <![CDATA[
+        import org.flex_pilot.FPBootstrap;
+        private function init():void {
+          FPBootstrap.flex_pilotLibPath = 'FlexPilot.swf';
+          FPBootstrap.init(stage);
+        }
+      ]]>
+  </mx:Script>
+    <mx:HBox>
+        <mx:ComboBox id="cb1">
+          <mx:ArrayCollection>
+             <mx:String>MM/DD/YY</mx:String>
+             <mx:String>MM/DD/YYYY</mx:String>
+             <mx:String>DD/MM/YY</mx:String>
+             <mx:String>DD/MM/YYYY</mx:String>
+             <mx:String>DD MM, YYYY</mx:String>
+          </mx:ArrayCollection>     
+        </mx:ComboBox>
+    
+        <mx:DateField id="date2" 
+            editable="true" 
+            width="100" 
+            formatString="{cb1.selectedItem}"
+        />      
+    </mx:HBox>        
+</mx:Application>

@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache">
+    <title>
+    </title>
+    <script type="text/javascript">
+      var testApp;
+      function init() {
+        var html = '';
+        var swfName = 'TestBasic.swf';
+        if (document.all) {
+          html = '<object type="application/x-shockwave-flash"' +
+          '    width="100%" height="100%" id="testApp">' +
+          '  <param name="movie" value="' + swfName + '">' +
+          '  <param name="quality" value="high">' +
+          '  <param name="bgcolor" value="#ffffff">' +
+          '</object>';
+        }
+        else {
+          html = '<embed id="testApp" height="100%" width="100%"' +
+          '    name="testApp" src="' + swfName + '"' +
+          '    type="application/x-shockwave-flash"/>';
+        }
+        document.getElementById('testAppContainer').innerHTML = html;
+        testApp = document.getElementById('testApp')
+      }
+      function wmClick(p) {
+        testApp.wm_click(p);
+      }
+      window.onload = init;
+  </script>
+  <style type="text/css">
+    body {
+      overflow: hidden;
+    }
+  </style>
+  </head>
+  <body>
+    <div style="width: 280px;">
+      <h2>Testin' Flash</h2>
+      <form>
+        <div>Here's a text input</div>
+        <div><input type="text" id="htmlTextInput" name="htmlTextInput" value=""/></div>
+        <div>&nbsp;</div>
+        <div>Here's a select</div>
+        <div>
+          <select id="htmlSelect" name="htmlSelect">
+            <option>(Select a value)</option>
+            <option value="selectGeddy">Geddy Lee</option>
+            <option value="selectNeil">Neil Peart</option>
+            <option value="selectAlex">Alex Lifeson</option>
+          </select>
+        </div>
+        <div>&nbsp;</div>
+        <div>Here are some radio buttons</div>
+        <div>
+          <input type="radio" id="radioGeddy" value="radioGeddy"/>&nbsp;Geddy
+          <input type="radio" id="radioNeil" value="radioNeil"/>&nbsp;Neil
+          <input type="radio" id="radioAlex" value="radioAlex"/>&nbsp;Alex
+        </div>
+      </form>
+    </div>
+    <div id="testAppContainer" style="width: 760px;
+        height: 340px; border: 1px solid #ccc;">
+    </div>
+  </body>
+</html>

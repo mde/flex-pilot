@@ -28,8 +28,10 @@ package org.flex_pilot {
   import flash.events.KeyboardEvent;
   import flash.external.ExternalInterface;
   import mx.events.ListEvent;
+  import mx.events.CalendarLayoutChangeEvent;
   import mx.controls.ComboBox;
   import mx.controls.List;
+  import mx.controls.DateField;
   import mx.core.IRawChildrenContainer;
 
   public class FPRecorder {
@@ -69,6 +71,10 @@ package org.flex_pilot {
           FPRecorder.listItems.push(item);
           item.addEventListener(ListEvent.CHANGE, FPRecorder.handleEvent);
         }
+        if (item is DateField) {
+          FPRecorder.listItems.push(item);
+          item.addEventListener(CalendarLayoutChangeEvent.CHANGE, FPRecorder.handleEvent);
+        }
         if (item is DisplayObjectContainer) {
           if (item is IRawChildrenContainer) {
             count = item.rawChildren.numChildren;
@@ -98,7 +104,6 @@ package org.flex_pilot {
       stage.addEventListener(MouseEvent.DOUBLE_CLICK, FPRecorder.handleEvent);
       stage.addEventListener(TextEvent.LINK, FPRecorder.handleEvent);
       stage.addEventListener(KeyboardEvent.KEY_DOWN, FPRecorder.handleEvent);
-
       FPRecorder.running = true;
     }
 
@@ -109,17 +114,28 @@ package org.flex_pilot {
       stage.removeEventListener(MouseEvent.DOUBLE_CLICK, FPRecorder.handleEvent);
       stage.removeEventListener(TextEvent.LINK, FPRecorder.handleEvent);
       stage.removeEventListener(KeyboardEvent.KEY_DOWN, FPRecorder.handleEvent);
+      
       var list:Array = FPRecorder.listItems;
       for each (var item:* in list) {
-        item.removeEventListener(ListEvent.CHANGE, FPRecorder.handleEvent);
+        if (item is ComboBox || item is List) {
+          item.removeEventListener(ListEvent.CHANGE, FPRecorder.handleEvent);
+        }
+        if (item is DateField) {
+          item.removeEventListener(CalendarLayoutChangeEvent.CHANGE, FPRecorder.handleEvent);
+        }
       }
     }
 
     private static function handleEvent(e:*):void {
+      if (!FPRecorder.running) { return; }
       var targ:* = e.target;
       var _this:* = FPRecorder;
       var chain:String = FPLocator.generateLocator(targ);
-
+      
+      if (e.target is DateField) {
+        _this.generateAction("date", targ, {date: DateField.dateToString(e.newDate, "MM/DD/YYYY")});
+        return;
+      }
       switch (e.type) {
         // Keyboard input -- append to the stored string reference
         case KeyboardEvent.KEY_DOWN:
@@ -239,9 +255,15 @@ package org.flex_pilot {
         case 'select':
           var sel:* = targ.selectedItem;
           // Can set a custom label field via labelField attr
-          var labelField:String = targ.labelField ?
-              targ.labelField : 'label';
-          params.label = sel[labelField];
+          try {
+            var labelField:String = targ.labelField ?
+                targ.labelField : 'label';
+            params.label = sel[labelField];
+          }
+          catch (e:Error) {
+            var idx:* = targ.selectedIndex;
+            params.index = idx;
+          }
           break;
         case 'type':
           break;
