@@ -37,6 +37,11 @@
 	<td>label=2. Billing Address,chain=id:testApp/id:accordion1</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>flexClick</td>
 	<td>id=testApp</td>
 	<td>chain=id:backButton</td>
