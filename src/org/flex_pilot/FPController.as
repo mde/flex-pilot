@@ -28,6 +28,10 @@ package org.flex_pilot {
   public class FPController {
     public function FPController():void {}
 
+    public static function getVersion():String {
+      return "FlexPilot (Stable): v0.9";
+    }
+
     public static function mouseOver(params:Object):void {
         var obj:* = FPLocator.lookupDisplayObject(params);
         Events.triggerMouseEvent(obj, MouseEvent.MOUSE_OVER);
