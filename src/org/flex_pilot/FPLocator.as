@@ -63,7 +63,7 @@ package org.flex_pilot {
         params:Object):Boolean {
 
         var res:DisplayObject;
-        res = FPLocator.lookupDisplayObject(params);
+        res = FPLocator.lookupDisplayObject(params, false);
         if (res){
           return true;
         }
@@ -71,11 +71,15 @@ package org.flex_pilot {
     }
 
     public static function lookupDisplayObject(
-        params:Object):DisplayObject {
+        params:Object, throwIfNotFound:Boolean = true):DisplayObject {
         var res:DisplayObject;
         res = lookupDisplayObjectForContext(params, FlexPilot.getContext());
         if (!res && FlexPilot.contextIsApplication()) {
           res = lookupDisplayObjectForContext(params, FlexPilot.getStage());
+        }
+        if (!res && throwIfNotFound) {
+          const chain:String = normalizeFPLocator(params);
+          throw new Error("The chain '" + chain +"' was not found.");
         }
         return res;
     }
