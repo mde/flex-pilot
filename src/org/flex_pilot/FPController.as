@@ -291,12 +291,21 @@ package org.flex_pilot {
       var item:*;
       // Give the item focus
       Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
+      function selectByIndex(idx:*):void {
+        obj.selectedIndex = idx;
+      }
+      function selectByItem(item:*):void {
+        obj.selectedItem = item;
+      }
+      function setComboboxSelection(setter:Function, newValue:*):void {
+        setter(newValue);
+        Events.triggerListEvent(obj, ListEvent.CHANGE);
+      }
       // Set by index
       switch (true) {
         case ('index' in params):
           if (obj.selectedIndex != params.index) {
-            Events.triggerListEvent(obj, ListEvent.CHANGE);
-            obj.selectedIndex = params.index;
+            setComboboxSelection(selectByIndex, params.index);
           }
           break;
         case ('label' in params):
@@ -306,10 +315,9 @@ package org.flex_pilot {
           var labelField:String = obj.labelField ?
               obj.labelField : 'label';
           if (sel[labelField] != targetLabel) {
-            Events.triggerListEvent(obj, ListEvent.CHANGE);
             for each (item in obj.dataProvider) {
               if (item[labelField] == targetLabel) {
-                obj.selectedItem = item;
+                setComboboxSelection(selectByItem, item);
               }
             }
           }
@@ -318,10 +326,9 @@ package org.flex_pilot {
         case ('value' in params):
           var targetData:String = params.data || params.value;
           if (sel.data != targetData) {
-            Events.triggerListEvent(obj, ListEvent.CHANGE);
             for each (item in obj.dataProvider) {
               if (item.data == targetData) {
-                obj.selectedItem = item;
+                setComboboxSelection(selectByItem, item);
               }
             }
           }
