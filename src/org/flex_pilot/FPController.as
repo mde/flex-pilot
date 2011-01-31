@@ -15,15 +15,17 @@ Copyright 2009, Matthew Eernisse (mde@fleegix.org) and Slide, Inc.
 */
 
 package org.flex_pilot {
-  import org.flex_pilot.events.*;
-  import org.flex_pilot.FPLocator;
-  import flash.events.*
-  import flash.utils.*;
-  import flash.geom.Point;
   import flash.display.DisplayObject;
   import flash.display.DisplayObjectContainer;
-  import mx.events.*
+  import flash.events.*;
+  import flash.geom.Point;
+  import flash.utils.*;
+  
   import mx.controls.DateField;
+  import mx.events.*;
+  
+  import org.flex_pilot.FPLocator;
+  import org.flex_pilot.events.*;
 
   public class FPController {
     public function FPController():void {}
@@ -283,7 +285,10 @@ package org.flex_pilot {
           charCode: currCode });
       }
     }
-
+    public static function focusOut(params:Object):void {
+        var obj:* = FPLocator.lookupDisplayObject(params);
+        Events.triggerFocusEvent(obj, FocusEvent.FOCUS_OUT);
+    }
     public static function select(params:Object):void {
       // Look up the item to write to
       var obj:* = FPLocator.lookupDisplayObject(params);
@@ -291,21 +296,12 @@ package org.flex_pilot {
       var item:*;
       // Give the item focus
       Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
-      function selectByIndex(idx:*):void {
-        obj.selectedIndex = idx;
-      }
-      function selectByItem(item:*):void {
-        obj.selectedItem = item;
-      }
-      function setComboboxSelection(setter:Function, newValue:*):void {
-        setter(newValue);
-        Events.triggerListEvent(obj, ListEvent.CHANGE);
-      }
       // Set by index
       switch (true) {
         case ('index' in params):
           if (obj.selectedIndex != params.index) {
-            setComboboxSelection(selectByIndex, params.index);
+            obj.selectedIndex = params.index;
+			Events.triggerListEvent(obj, ListEvent.CHANGE);
           }
           break;
         case ('label' in params):
@@ -317,9 +313,10 @@ package org.flex_pilot {
           if (sel[labelField] != targetLabel) {
             for each (item in obj.dataProvider) {
               if (item[labelField] == targetLabel) {
-                setComboboxSelection(selectByItem, item);
+                obj.selectedItem = item;
               }
             }
+			Events.triggerListEvent(obj, ListEvent.CHANGE);
           }
           break;
         case ('data' in params):
@@ -328,9 +325,10 @@ package org.flex_pilot {
           if (sel.data != targetData) {
             for each (item in obj.dataProvider) {
               if (item.data == targetData) {
-                setComboboxSelection(selectByItem, item);
+                obj.selectedItem = item;
               }
             }
+			Events.triggerListEvent(obj, ListEvent.CHANGE);
           }
           break;
         default:
