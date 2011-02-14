@@ -13,7 +13,7 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/TestAccordion.html</td>
+	<td>/apps/basic/TestAccordion.html</td>
 	<td></td>
 </tr>
 <tr>
@@ -61,7 +61,6 @@
 	<td>id=testApp</td>
 	<td>label=1. Shipping Address,chain=id:testApp/id:accordion1</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

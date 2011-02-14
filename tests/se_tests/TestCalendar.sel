@@ -13,7 +13,7 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/TestCalendar.html</td>
+	<td>/apps/basic/TestCalendar.html</td>
 	<td></td>
 </tr>
 <tr>
@@ -77,11 +77,15 @@
 	<td>date=11/26/2010,chain=id:date2</td>
 </tr>
 <tr>
+	<td>waitForFlexObject</td>
+	<td>id=testApp</td>
+	<td>chain=id:date2/name:Button*</td>
+</tr>
+<tr>
 	<td>flexClick</td>
 	<td>id=testApp</td>
 	<td>chain=id:date2/name:Button*</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

@@ -13,7 +13,7 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/TestBasic.html</td>
+	<td>/apps/basic/TestBasic.html</td>
 	<td></td>
 </tr>
 <tr>
@@ -22,14 +22,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>flexClick</td>
-	<td>id=testApp</td>
-	<td>chain=name:testTextArea/name:UITextField18</td>
-</tr>
-<tr>
 	<td>flexType</td>
 	<td>id=testApp</td>
-	<td>text=testing,chain=name:testTextArea/name:UITextField18</td>
+	<td>text=testing,chain=name:testTextArea</td>
 </tr>
 <tr>
 	<td>flexClick</td>
@@ -39,12 +34,12 @@
 <tr>
 	<td>flexType</td>
 	<td>id=testApp</td>
-	<td>text=smaller box,chain=name:testTextInput/name:UITextField23</td>
+	<td>text=smaller box,chain=name:testTextInput</td>
 </tr>
 <tr>
 	<td>flexClick</td>
 	<td>id=testApp</td>
-	<td>chain=name:comboTest/name:Button36</td>
+	<td>chain=name:comboTest</td>
 </tr>
 <tr>
 	<td>flexSelect</td>
@@ -59,14 +54,13 @@
 <tr>
 	<td>flexClick</td>
 	<td>id=testApp</td>
-	<td>chain=name:comboTest/name:Button36</td>
+	<td>chain=name:comboTest</td>
 </tr>
 <tr>
 	<td>flexSelect</td>
 	<td>id=testApp</td>
 	<td>label=Alex,chain=name:comboTest</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>
