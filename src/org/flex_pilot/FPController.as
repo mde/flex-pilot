@@ -46,6 +46,16 @@ package org.flex_pilot {
       Events.triggerMouseEvent(obj, MouseEvent.ROLL_OUT);
     }
 
+    public static function mouseUp(params:Object):void {
+      var obj:* = FPLocator.lookupDisplayObject(params);
+      Events.triggerMouseEvent(obj, MouseEvent.MOUSE_UP);
+    }
+
+    public static function mouseDown(params:Object):void {
+      var obj:* = FPLocator.lookupDisplayObject(params);
+      Events.triggerMouseEvent(obj, MouseEvent.MOUSE_DOWN);
+    }
+
     public static function click(params:Object):void {
       var obj:* = FPLocator.lookupDisplayObject(params);
 
@@ -90,6 +100,18 @@ package org.flex_pilot {
     }
     public static function radio(params:Object):void {
       return FPController.click(params);
+    }
+
+    public static function rightClick(params:Object):void {
+      var obj:* = FPLocator.lookupDisplayObject(params);
+      var contextMenuIndex:int = 0;
+      if (params['contextMenuIndex']) {
+        contextMenuIndex = int(params['contextMenuIndex']);
+      }
+      var ev:ContextMenuEvent = new ContextMenuEvent(ContextMenuEvent.MENU_ITEM_SELECT);
+      if (contextMenuIndex < obj.contextMenu.customItems.length) {
+        obj.contextMenu.customItems[contextMenuIndex].dispatchEvent(ev);
+      }
     }
 
     public static function dragDropElemToElem(params:Object):void {
