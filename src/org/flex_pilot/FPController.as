@@ -26,6 +26,9 @@ package org.flex_pilot {
   
   import org.flex_pilot.FPLocator;
   import org.flex_pilot.events.*;
+  
+  import spark.components.supportClasses.ListBase;
+  import spark.events.IndexChangeEvent;
 
   public class FPController {
     public function FPController():void {}
@@ -307,57 +310,93 @@ package org.flex_pilot {
           charCode: currCode });
       }
     }
+
     public static function focusOut(params:Object):void {
         var obj:* = FPLocator.lookupDisplayObject(params);
         Events.triggerFocusEvent(obj, FocusEvent.FOCUS_OUT);
     }
+
     public static function select(params:Object):void {
       // Look up the item to write to
       var obj:* = FPLocator.lookupDisplayObject(params);
       var sel:* = obj.selectedItem;
+
+      var target:String;
+      var param:String;
       var item:*;
+
+      var found:Boolean = false;
+
       // Give the item focus
       Events.triggerFocusEvent(obj, FocusEvent.FOCUS_IN);
       // Set by index
       switch (true) {
         case ('index' in params):
-          if (obj.selectedIndex != params.index) {
+          param = "index";
+          if (!isNaN(Number(params.index)) && obj.selectedIndex != params.index) {
             obj.selectedIndex = params.index;
-			Events.triggerListEvent(obj, ListEvent.CHANGE);
+            found = true;
           }
           break;
         case ('label' in params):
         case ('text' in params):
-          var targetLabel:String = params.label || params.text;
+          param = ('label' in params) ? "label" : "text";
+          target = params.label || params.text;
           // Can set a custom label field via labelField attr
           var labelField:String = obj.labelField ?
               obj.labelField : 'label';
-          if (sel[labelField] != targetLabel) {
+          if (sel[labelField] != target) {
             for each (item in obj.dataProvider) {
-              if (item[labelField] == targetLabel) {
+              if (item[labelField] == target) {
                 obj.selectedItem = item;
+                found = true;
               }
             }
-			Events.triggerListEvent(obj, ListEvent.CHANGE);
           }
           break;
         case ('data' in params):
         case ('value' in params):
-          var targetData:String = params.data || params.value;
-          if (sel.data != targetData) {
+          param = "value";
+          target = params.value;
+          if (sel.value != target) {
             for each (item in obj.dataProvider) {
-              if (item.data == targetData) {
+              if (item.value == target) {
                 obj.selectedItem = item;
+                found = true;
               }
             }
-			Events.triggerListEvent(obj, ListEvent.CHANGE);
+          }
+          break;
+        case ('toString' in params):
+          param = "toString";
+          target = params.toString;
+          if (sel.toString() != target) {
+            for each (item in obj.dataProvider) {
+              if (item.toString() == target) {
+                obj.selectedItem = item;
+                found = true;
+              }
+            }
           }
           break;
         default:
           // Do nothing
       }
+
+      if (!found) {
+          const normalizedParam:String = param != "toString" ? params[param] : params.toString;
+          throw new Error("No data for " + param + " '" + normalizedParam +"' was not found.");
+      }
+
+      if (found) {
+        if (obj is ListBase) {
+          obj.dispatchEvent(new IndexChangeEvent(IndexChangeEvent.CHANGE, false, false, -1, obj.selectedIndex));
+        } else if (found) {
+          Events.triggerListEvent(obj, ListEvent.CHANGE);
+        }
+      }
     }
-    
+
     public static function date(params:Object):void {
       // Look up the item to write to
       var obj:* = FPLocator.lookupDisplayObject(params);
